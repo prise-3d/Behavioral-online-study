@@ -1,0 +1,8 @@
+Django
+numpy
+Pillow
+questplus
+pandas
+requests
+docker-compose
+ipfml

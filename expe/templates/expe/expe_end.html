@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Expe {{ expe_name }}
+{% endblock %}
+
+{% block content %}
+
+    <div id="parent-vertical">
+         {% if timeout %}
+             <h2> {{end_text | linebreaks}} </h2>
+         {% elif reject %}
+             <h2> {{end_text | linebreaks}} </h2>
+         {% else %}
+
+            <br/>
+
+            <h2> {{reward}}</h2>
+    
+    
+            <br/>
+            <br/>
+    
+            <div id="child-vertical">
+                <h3>{{end_text|linebreaks}}</h3>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %} 
+       
+{% endblock %}
+

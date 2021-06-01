@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+    webexpe:
+        container_name: webexpeinstance
+        image: .
+        restart: always
+        volumes:
+            - "./media:/usr/src/app/media" # get access to media files
+        ports:
+           - "${PORT:-8000}:8000"

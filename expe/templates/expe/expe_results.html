@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load apptags %}
+
+{% block title %}
+    Expe {{ expe_name }}
+{% endblock %}
+
+{% block content %}
+    
+    {% if not expe %}
+        <h3>Results files of experiments</h3>
+        <br />
+    {% endif %}
+
+    <div class="results-expe">
+
+        {% if expe %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading"><strong>Experience:</strong> {{expe}}</h4>
+                <hr>
+                <p><strong>Question:</strong> {{infos_question}} </p>
+                <p class="mb-0"><strong>Indication:</strong> {{infos_indication | safe}} </p>
+            </div>
+           <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading"><strong>Color legend</strong></h4>
+                <hr>
+                {% for name, color in colors.items %} 
+                    <p class="mb-0"><strong><font color="{{color}}">{{name}}</font></strong></p>
+                {% endfor %}
+            </div>
+            <br/>
+            {% if folders %}
+
+
+                <ul class="list-group">
+
+                    <!-- List of items which has identifier when user pass experiment -->
+                    <li class="list-group-item">
+                                    
+                        <div class="row">
+                            <div class="col-md-10"><h3>By experiment identifier</h3></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                        </div>
+
+                        <ul class="list-group" style="display: none">
+                            {% with folders|get_value_from_dict:'expeId' as id_folder %}
+
+                                {% for id_name, id in id_folder.items %} 
+                                                    
+                                    <li class="list-group-item">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-10">{{id_name}} </div>
+                                            <div class="col-md-1 download-list" data-download-path="expeId/{{expe}}/{{id_name}}"><i class="fas fa-download"></i></div>
+                                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                        </div>
+                                        
+                                        <ul class="list-group files-list" style="display: none">
+
+                                            <hr />
+                                            
+                                            {% for day_name, day in id.items %} 
+                                                
+                                                <li class="list-group-item">
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-10">{{day_name}} </div>
+                                                        <div class="col-md-1 download-list" data-download-path="expeId/{{expe}}/{{id_name}}/{{day_name}}"><i class="fas fa-download"></i></div>
+                                                        <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                    </div>
+                                                    
+                                                    <ul class="list-group files-list" style="display: none">
+
+                                                        <hr />
+                                                        
+                                                        {% for user_name, user in day.items %}
+
+                                                        <li class="list-group-item">
+
+                                                                <div class="row">
+                                                                    <div class="col-md-10"><strong>User: </strong>{{user_name}} </div>
+                                                                    <div class="col-md-1 download-list" data-download-path="expeId/{{expe}}/{{id_name}}/{{day_name}}/{{user_name}}"><i class="fas fa-download"></i></div>
+                                                                    <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                                </div>
+                                                                
+
+                                                                <ul class="list-group files-list" style="display: none">
+
+                                                                    <hr />
+                                                                    {% for file, color in user.items %}
+
+                                                                        <li class="list-group-item">
+                                                                        
+                                                                            <div class="row">
+                                                                                <div class="col-md-11"><font color="{{color}}">{{file}}</font></div>
+                                                                                <div class="col-md-1 download-list" data-download-path="expeId/{{expe}}/{{id_name}}/{{day_name}}/{{user_name}}/{{file}}"><i class="fas fa-download"></i></div>
+                                                                            </div>
+                                                                                    
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                
+                                                                </ul>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                            {% endfor %} 
+
+                                            </ul>
+                                        </li>
+                                    {% endfor %} 
+                            {% endwith %}
+                        </ul>
+                    </li>
+
+
+                    <!-- List of items which does not have identifier when user pass experiment -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-10"><h3>By date</h3></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                        </div>
+
+                        <ul class="list-group" style="display: none">
+                        
+                            {% with folders|get_value_from_dict:'date' as date_folder %}
+                                {% for day_name, day in date_folder.items %} 
+                                    
+                                        <li class="list-group-item">
+                                            
+                                            <div class="row">
+                                                <div class="col-md-10">{{day_name}} </div>
+                                                <div class="col-md-1 download-list" data-download-path="date/{{expe}}/{{day_name}}"><i class="fas fa-download"></i></div>
+                                                <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                            </div>
+                                            
+                                            <ul class="list-group files-list" style="display: none">
+
+                                                <hr />
+                                                
+                                                {% for user_name, user in day.items %}
+
+                                                <li class="list-group-item">
+
+                                                        <div class="row">
+                                                            <div class="col-md-10"><strong>User: </strong>{{user_name}} </div>
+                                                            <div class="col-md-1 download-list" data-download-path="date/{{expe}}/{{day_name}}/{{user_name}}"><i class="fas fa-download"></i></div>
+                                                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                        </div>
+                                                        
+
+                                                        <ul class="list-group files-list" style="display: none">
+
+                                                            <hr />
+                                                            {% for file, color in user.items %}
+
+                                                                <li class="list-group-item">
+                                                                
+                                                                    <div class="row">
+                                                                        <div class="col-md-11"><font color="{{color}}">{{file}}</font></div>
+                                                                        <div class="col-md-1 download-list" data-download-path="date/{{expe}}/{{day_name}}/{{user_name}}/{{file}}"><i class="fas fa-download"></i></div>
+                                                                    </div>
+                                                                            
+                                                                </li>
+                                                            {% endfor %}
+                                                        
+                                                        </ul>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                {% endfor %} 
+                            {% endwith %}
+
+                        </ul>
+                    </li>
+
+                    <!-- List of experiment result for each user -->
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-10"><h3>By user identifier</h3></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                        </div>
+                    
+                        <ul class="list-group" style="display: none">
+
+                            {% with folders|get_value_from_dict:'users' as users_folder %}
+
+                                {% for user_name, user in users_folder.items %} 
+
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-10">{{user_name}} </div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                        </div>
+                                        
+                                        <ul class="list-group files-list" style="display: none">
+                                            
+                                            {% with user|get_value_from_dict:'date' as date_folder %}
+
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-md-10">By date</div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                    </div>
+
+                                                    <ul class="list-group files-list" style="display: none">
+
+                                                        <hr />
+                                                        
+                                                        {% for day_name, day in date_folder.items %}
+
+                                                            <li class="list-group-item">
+
+                                                                <div class="row">
+                                                                    <div class="col-md-10"><strong>{{day_name}}</strong></div>
+                                                                    <div class="col-md-1"></div>
+                                                                    <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                                </div>
+                                                                
+
+                                                                <ul class="list-group files-list" style="display: none">
+
+                                                                    <hr />
+                                                                    {% for file, color in day.items %}
+
+                                                                        <li class="list-group-item">
+                                                                        
+                                                                            <div class="row">
+                                                                                <div class="col-md-11"><font color="{{color}}">{{file}}</font></div>
+                                                                                <div class="col-md-1 download-list" data-download-path="date/{{expe}}/{{day_name}}/{{user_name}}/{{file}}"><i class="fas fa-download"></i></div>
+                                                                            </div>
+                                                                                    
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                
+                                                                </ul>
+
+                                                            </li>
+                                                            
+                                                        {% endfor %} 
+                                                    </ul>
+                                                </li>
+
+                                            {% endwith %}
+
+                                            {% with user|get_value_from_dict:'expeid' as expeid_folder %}
+
+
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-md-10">By experiment identifier</div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                    </div>
+
+                                                    <ul class="list-group files-list" style="display: none">
+
+                                                        <hr />
+                                                        
+                                                        {% for expe_name, expe_id in expeid_folder.items %}
+
+                                                            <li class="list-group-item">
+
+                                                                <div class="row">
+                                                                    <div class="col-md-10"><strong>{{expe_name}}</strong></div>
+                                                                    <div class="col-md-1"></div>
+                                                                    <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                                </div>
+
+                                                                <ul class="list-group files-list" style="display: none">
+
+                                                                    <hr />
+                                                                    
+                                                                    {% for day_name, day in expe_id.items %}
+
+                                                                        <li class="list-group-item">
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-10"><strong>{{day_name}}</strong></div>
+                                                                                <div class="col-md-1"></div>
+                                                                                <div class="col-md-1 date-folder-list"><i class="fas fa-arrow-circle-right"></i></div>
+                                                                            </div>
+                                                                            
+
+                                                                            <ul class="list-group files-list" style="display: none">
+
+                                                                                <hr />
+                                                                                {% for file, color in day.items %}
+
+                                                                                    <li class="list-group-item">
+                                                                                    
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-11"><font color="{{color}}">{{file}}</font></div>
+                                                                                            <div class="col-md-1 download-list" data-download-path="expeId/{{expe}}/{{expe_name}}/{{day_name}}/{{user_name}}/{{file}}"><i class="fas fa-download"></i></div>
+                                                                                        </div>
+                                                                                                
+                                                                                    </li>
+                                                                                {% endfor %}
+                                                                            
+                                                                            </ul>
+
+                                                                        </li>
+                                                            
+                                                                    {% endfor %} 
+                                                                </ul>
+                                                            </li>
+                                                        {% endfor %} 
+                                                    </ul>
+                                                </li>
+                                            {% endwith %}
+
+                                        </ul>
+
+                                    </li>
+                                    
+                                {% endfor %} 
+                            {% endwith %}
+                        </ul>
+                    </li>
+                </ul>
+
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    <i>Expe folder is empty</i>
+                </div>
+            {% endif %}
+        {% else %}
+             {% for f in folders %}
+                <ul class="list-group">
+                    <a href="{% url 'expe:results_expe' expe=f %}">
+                        <li class="list-group-item">{{f}}</li>
+                    </a>
+                </ul>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript"> 
+        // Utils informations
+        var expe_name = "{{expe}}"
+    </script>
+    <script src="{% static "js/results.js" %}"></script>
+    <script src="{% static "js/FileSaver.js" %}"></script>
+{% endblock %}
