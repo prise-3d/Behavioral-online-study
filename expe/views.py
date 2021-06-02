@@ -36,12 +36,17 @@ from .utils import functions
 from . import config as cfg
 
 def get_base_data(expe_name=None):
-    '''
-    Used to store default data to send for each view
-    '''
+    """Get required data to store into request (for each request)
+
+    Args:
+        expe_name ([str], optional): Experiment name. Defaults to None.
+
+    Returns:
+        [dict]: required data to add into request
+    """
     data = {}
 
-    # if expe name is used
+    # if expe name is used include required Javascript file from configuration
     if expe_name is not None:
         data['javascript'] = cfg.expes_configuration[expe_name]['javascript']
 
@@ -49,12 +54,22 @@ def get_base_data(expe_name=None):
 
     # expe data
     data['expes'] = expes
+
+    # Display experiment names for Django to Javascript transmission
     data['expes_names'] = json.dumps(expes)
 
     return data
 
 
 def update_session_user_id(request):
+    """Update user identifier
+
+    Args:
+        request ([Request]): Django request object
+
+    Returns:
+        [HttpResponse]: Http response message
+    """
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
 
@@ -63,6 +78,15 @@ def update_session_user_id(request):
 
 
 def update_session_user_expes(request):
+    """Update user experiment data
+    This function can be use to store into `user_expes` all required data you want
+
+    Args:
+        request ([Request]): Django request object
+
+    Returns:
+        [HttpResponse]: Http response message
+    """
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
 
@@ -71,6 +95,14 @@ def update_session_user_expes(request):
 
 
 def expe_list(request):
+    """Default home page with experiment list option
+
+    Args:
+        request ([Request]): Django request instance
+
+    Returns:
+        [Template]: new page to render with data
+    """
 
     # by default user restart expe
     request.session['expe_started'] = False
@@ -79,7 +111,7 @@ def expe_list(request):
     if 'results_folder' in request.session:
         del request.session['results_folder']
     
-    # get base data
+    # always get base data
     data = get_base_data()
 
     data['choice']  = cfg.label_expe_list
@@ -92,8 +124,9 @@ def presentation(request):
     # get param 
     expe_name = request.GET.get('expe')
     
-    # get base data
+    # always get base data
     data = get_base_data()
+    
     data['expe_name'] = expe_name
     data['pres_text'] = cfg.expes_configuration[expe_name]['text']['presentation']
     data['next'] = cfg.expes_configuration[expe_name]['text']['next']
@@ -110,9 +143,7 @@ def expe(request):
     if 'id' not in request.session:
         request.session['id'] = functions.uniqueID()
 
-    print(request.session['id'])
-
-    # first time expe is launched add expe information
+    # first time expe is launched add expe information into session
     if 'expe' not in request.session or expe_name != request.session.get('expe'):
         refresh_data(request, expe_name)
 
@@ -130,7 +161,6 @@ def expe(request):
     else:
         results_folder = request.session.get('results_folder')
     
-    print(results_folder)
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
 
@@ -253,41 +283,13 @@ def expe_end(request):
     data['userId'] = request.session.get('id')    
     data['end_text'] = request.session.get('end_text')
     data['expe_name'] = expe_name
+
+    print('End of experiment =>', request.session)
     
     results_folder = request.session.get('results_folder')
     result_filename = request.session.get('timestamp') +".csv"
     results_filepath = os.path.join(results_folder, result_filename)
-    
-    function_name = 'eval_' + expe_name
-    try:
-        eval_func = getattr(run_expe, function_name)
-    except AttributeError:
-        raise NotImplementedError("Run expe method `{}` not implement `{}`".format(run_expe.__name__, function_name))
 
-    #eval_data = eval_func(request, results_filepath)
-    
-    # if eval_data == False:
-    #     result_structure = request.session.get('result_structure')
-    #     metadata = {}
-    #     with open(result_structure, 'r', encoding='utf-8') as f:
-    #         metadata = json.load(f)
-    #     metadata['terminated'] = True
-    #     metadata['timeout'] = False
-    #     metadata['reject'] = True
-    #     with open(result_structure, 'w', encoding='utf-8') as f:
-    #         json.dump(metadata, f, ensure_ascii=False, indent=4)
-            
-    # else:
-    #     result_structure = request.session.get('result_structure')
-    #     metadata = {}
-    #     with open(result_structure, 'r', encoding='utf-8') as f:
-    #         metadata = json.load(f)
-    #     metadata['terminated'] = True
-    #     metadata['timeout'] = False
-    #     metadata['reject'] = False
-    #     with open(result_structure, 'w', encoding='utf-8') as f:
-    #         json.dump(metadata, f, ensure_ascii=False, indent=4)
-            
     # reinit session as default value
     # here generic expe params
     if 'expe' in request.session:

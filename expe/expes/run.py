@@ -12,7 +12,7 @@ from datetime import datetime
 from django.conf import settings
 
 # module imports
-from .. import config as cfg
+from .. import config as cfg # get config experiments parameters
 
 # expe imports
 from .classes.quest_plus import QuestPlus
@@ -24,68 +24,94 @@ from pprint import pprint
 
 from PIL import Image, ImageDraw
 
-lang = settings.LANGUAGE_CODE
-    
 def run_quest_example(request, model_filepath, output_file):
+    """Run the experiment expected iteration process when client answer
+    Saved data (Quest+ instance and output data) use the unique client ID
 
-    # 1. get session parameters
+    Args:
+        request [Request]: django request param
+        model_filepath [str]: filetpath expected for the output Quest model linked to current client (where the model is saved)
+        output_file [file buffer]: output file buffer of current client where new collected data line are saved
+
+    Returns:
+        [dict]: dictionnary of the experiment data state based on experiment process
+    """
+
+    print(f'Process experiment iteration for user id: {request.session.get("id")}')
+
+    ##########
+    # STEP 1. get session experiment name and static parameters
+    ##########
+
     expe_name = request.session.get('expe')
+    max_iterations = cfg.expes_configuration[expe_name]['params']['max_iterations']
+    min_iterations = cfg.expes_configuration[expe_name]['params']['min_iterations']
     
-    # Check if values are correct:
-    if 'expe_started' in request.session and request.session.get('expe_started') == True:
-        def isint(s):
-            try: 
-                int(s)
-                return True
-            except ValueError:
-                return False
+    ##########
+    # STEP 2. Check if values are correct:
+    ##########
+
+    if 'expe_started' in request.session and request.session.get('expe_started'):
     
         data_expe = request.session['expe_data']
+        
 
-        if not 'iteration' in request.GET or isint(request.GET.get('iteration')) == False:
+        if not 'iteration' in request.GET or not request.GET.get('iteration').isdigit():
             return data_expe
         
-        if not 'answer' in request.GET or \
-           isint(request.GET.get('answer')) == False or \
-           (int(request.GET.get('answer')) != 0 and int(request.GET.get('answer')) != 1):
-               return data_expe
-           
-        if not 'check' in request.GET or \
-           (request.GET.get('check') != "true" and request.GET.get('check') != "false"):
-               return data_expe
-        
-    checked = request.GET.get('check')
+        # Check expected answer value
+        if not 'answer' in request.GET \
+            or not request.GET.get('answer').isdigit() \
+            or (int(request.GET.get('answer')) not in [0, 1]):
 
-    # by default
+            return data_expe
+           
+    # Retrieve current iteration value
     iteration = 0
 
-    # used to stop when necessary
+    # Iteration is used for experiment stopping criterion (see `max_iterations` from `expe/config.py` file)
     if 'iteration' in request.GET:
         iteration = int(request.GET.get('iteration'))
     else:
         request.session['expe_started'] = False
 
-    # 2. Get expe information if started
-    # first time only init `quest`
-    # if experiments is started we can save data
+    ##########
+    # STEP 3. Get expe information if started
+    ##########
+
     if request.session.get('expe_started'):
 
-         # does not change expe parameters
-        if request.session['expe_data']['expe_previous_iteration']+1 != iteration:
+        previous_iteration = None
+        if 'expe_previous_iteration' in request.session['expe_data']:
+            previous_iteration = request.session['expe_data']['expe_previous_iteration']
+
+        print(f'previous iteration', previous_iteration)
+
+        # Keep same experiment data (just client page refresh)
+        if previous_iteration is not None and previous_iteration + 1 != iteration:
             data_expe = request.session['expe_data']
             return data_expe
-        elif iteration > cfg.expes_configuration[expe_name]['params']['max_iterations']:
+
+        # bad number of iteration
+        elif iteration > max_iterations:
             return None
+
+        # get current experiment data
+        # if experiments is started we can save data
         else:
+            # TODO : get another way to compute experiment time
             current_expe_data = request.session['expe_data']
             answer = int(request.GET.get('answer'))
             expe_answer_time = time.time() - current_expe_data['expe_answer_time']
             previous_stim = current_expe_data['expe_stim']
-
             print("Answer time is ", expe_answer_time)
 
-    # 3. Load or create Quest instance
-    # default params
+    ##########
+    # STEP 4. Load or create Quest instance
+    ##########
+
+    # model instance with default params
+    # TODO : replace with your expected Quest+ params (`stimulus space` and `slopes`)
     stim_space = np.arange(50, 20000, 100) 
     stim_space = np.append(stim_space, 20000)
     
@@ -96,35 +122,35 @@ def run_quest_example(request, model_filepath, output_file):
         print('Creation of `qp` model')
         qp = QuestPlus(stim_space, [stim_space, slopes], function=psychometric_fun)
 
+    # if model exists, just necessary to load its binary state 
     else:
         print('Load `qp` model')
         filehandler = open(model_filepath, 'rb') 
         qp = pickle.load(filehandler)
         pprint(qp)
     
-    #initialize entropy
+    # Initialize and get experiment configuration parameters
     entropy = np.inf
     last_entropy = 0
+
     crit_entropy = cfg.expes_configuration[expe_name]['params']['entropy']
-    min_iter = cfg.expes_configuration[expe_name]['params']['min_iterations']
-    max_iter = cfg.expes_configuration[expe_name]['params']['max_iterations']
     
-    # 4. If expe started update and save experiments information and model
+    ##########
+    # STEP 5. If expe started update, save experiments information and model
+    ##########
+
     # if experiments is already began
     if request.session.get('expe_started'):
 
-        # TODO : update norm slopes
-        #previous_stim_norm = (int(previous_stim) - stim_space.min()) / (stim_space.max() - stim_space.min() + sys.float_info.epsilon)
-
-        print(previous_stim)
-        #print(previous_stim_norm)
-
+        # update model using client answer
         qp.update(int(previous_stim), answer) 
         threshold = qp.get_fit_params(select='mode')[0]
         
+        # get new entropy
         entropy = qp.get_entropy()
-        print('chosen entropy', entropy)
+        print(f'Quest+ model updated: chosen entropy {entropy} and threshold {threshold}')
 
+        # log trace of current model updates
         line = str(previous_stim)
         line += ";" + str(answer) 
         line += ";" + str(expe_answer_time) 
@@ -134,46 +160,54 @@ def run_quest_example(request, model_filepath, output_file):
         output_file.write(line)
         output_file.flush()
         
-        entropies = np.loadtxt(output_file.name, delimiter=";", usecols=3, skiprows=1)
-
-        if len(entropies.shape) > 0 and entropies.shape[0] >= 11:
-            last_entropy = entropies[-11]
-        else:
-            last_entropy = np.nan
-
-    # check time
+    ##########
+    # STEP 6. check experiment timeout
+    ##########
     current_time = datetime.utcnow()
     current_time = time.mktime(current_time.timetuple())
     started_time = request.session.get('timestamp')
     started_time = time.mktime(datetime.strptime(started_time, "%Y-%m-%d_%Hh%Mm%Ss").timetuple())
+    
     max_time = cfg.expes_configuration[expe_name]['params']['max_time'] * 60
+
     if current_time - started_time >= max_time:
         request.session['expe_finished'] = True
-        timeout = { 'timeout' : True }
-        return timeout
+        return { 'timeout' : True }
 
-    # 5. Get next image depending of Quest model state
-    # construct image 
-    if iteration < min_iter or ((last_entropy is np.nan or np.abs(entropy - last_entropy) >= crit_entropy) and iteration < max_iter):
+    ##########
+    # STEP 7. Get next image depending of Quest model state
+    ##########
+
+    # check Quest+ stopping criterion
+    if iteration < min_iterations \
+        or ((last_entropy is np.nan or np.abs(entropy - last_entropy) >= crit_entropy) and iteration < max_iterations):
+
         # process `quest`
         if iteration <= 4:
             next_stim_id = int(iteration * len(stim_space)/10)
             next_stim = stim_space[next_stim_id]
         else:
             next_stim = qp.next_contrast()
-        print(next_stim)
-        #next_stim_img = int(next_stim*(stim_space.max()-stim_space.min())+stim_space.min())
     
         print('-------------------------------------------------')
         print(f'Iteration {iteration}')
         print(next_stim)
-        #print('denorm', next_stim_img)
         print('-------------------------------------------------')
 
+        # TODO : add your new image to display depending of Quest+ state
+        # Here the current image is static
+        # TODO : add basic exemple of experiment
+        current_image = Image.open(os.path.join(settings.RELATIVE_STATIC_URL, 'images', 'example_1.png'))
 
+
+    # one stopping criterion reached, end of the experiment
     else:
         request.session['expe_finished'] = True
         return cfg.expes_configuration[expe_name]['text']['end_text']
+
+    ##########
+    # STEP 8. Prepare new image to display to client part (`current_image` PIL variable)
+    ##########
 
     # save image using user information
     # create output folder for tmp files if necessary
@@ -182,23 +216,25 @@ def run_quest_example(request, model_filepath, output_file):
     if not os.path.exists(tmp_folder):
         os.makedirs(tmp_folder)
 
-    print(f'User id: {request.session.get("id")}')
-    # generate tmp merged image (pass as BytesIO was complicated..)
-    filepath_img = os.path.join(tmp_folder, request.session.get('id') + '_' + expe_name + '.png')
-    
-    # replace img_merge if necessary (new iteration of expe)
-    current_image = Image.open(os.path.join(settings.RELATIVE_STATIC_URL, 'images', 'example_1.png'))
+    # generate tmp merged image
+    filepath_img = os.path.join(tmp_folder, f'{request.session.get("id")}_{expe_name}.png')
 
     if current_image is not None:
         current_image.save(filepath_img)
 
+    ##########
+    # STEP 8. Save new state of user Quest+ model instance
+    ##########
     # save qp model at each iteration
     file_pi = open(model_filepath, 'wb') 
     pickle.dump(qp, file_pi)
 
-    # 6. Prepare experiments data for current iteration and data for view
+
+    ##########
+    # STEP 9. Prepare experiments data for current iteration and data for view
+    ##########
     
-    # here you can save whatever you need for you experiments
+    # TODO: here you can save whatever you need for you experiments
     data_expe = {
         'image_path': filepath_img,
         'expe_answer_time': time.time(),
@@ -211,32 +247,3 @@ def run_quest_example(request, model_filepath, output_file):
     request.session['expe_started'] = True
 
     return data_expe
-
-def eval_quest_example(request, output_filename):
-    expe_name = request.session.get('expe')
-    lines = []
-    with open(output_filename, 'r') as output_file:
-        lines = output_file.readlines()
-  
-    iters = len(lines)-1
-    if iters < cfg.expes_configuration[expe_name]['params']['min_iterations']:
-        return False
-    
-    time=[]
-    checkbox=[]
-    nb_check=0
-    for i in range(1,len(lines)):
-        l = lines[i]
-        line_split = l.split(";")
-        time.append(float(line_split[6]))
-        checkbox.append(line_split[8])
-    time_total = np.sum(time)/60
-    for i in range(cfg.expes_configuration[expe_name]['checkbox']['frequency']-1,len(checkbox),cfg.expes_configuration[expe_name]['checkbox']['frequency']):
-        if checkbox[i]=='true\n':
-            nb_check = nb_check + 1
-    if nb_check < len(checkbox)/cfg.expes_configuration[expe_name]['checkbox']['frequency']:
-        return False
-    
-    if time_total<7.:
-        return False
-

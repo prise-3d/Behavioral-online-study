@@ -13,7 +13,6 @@ var keyUsed = false;
 
 const checkKey = e => {
 
-
    if (e.keyCode === KEYCODE_Q) {
       // `q` to quit expe
       console.log('`q` key is pressed')
@@ -58,7 +57,7 @@ const checkKey = e => {
          setTimeout(() => { keyUsed = false;  }, 15000);
 
          // construct url with params for experiments
-         const params = `?expe=${expe}&iteration=${iteration}&answer=${answer}&check=false`
+         const params = `?expe=${expe}&iteration=${iteration}&answer=${answer}`
          window.location = expeUrl + params
       }
    }
