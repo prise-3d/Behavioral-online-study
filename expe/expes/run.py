@@ -19,10 +19,9 @@ from .classes.quest_plus import QuestPlus
 from .classes.quest_plus import psychometric_fun
 
 # other imports 
-from ipfml import utils
 from pprint import pprint
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 def run_quest_example(request, model_filepath, output_file):
     """Run the experiment expected iteration process when client answer
@@ -170,8 +169,9 @@ def run_quest_example(request, model_filepath, output_file):
     
     max_time = cfg.expes_configuration[expe_name]['params']['max_time'] * 60
 
+    # return time out data if end of experiment
     if current_time - started_time >= max_time:
-        request.session['expe_finished'] = True
+        print('Timeout is reached')
         return { 'timeout' : True }
 
     ##########

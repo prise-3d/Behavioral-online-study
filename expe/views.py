@@ -31,7 +31,7 @@ import io
 from PIL import Image, ImageDraw
 
 # module imports
-from .utils import functions
+from . import utils # load utils fucntions 
 
 from . import config as cfg
 
@@ -94,7 +94,7 @@ def update_session_user_expes(request):
     return HttpResponse('`user_expes` session update done')
 
 
-def expe_list(request):
+def expe_list(request, data=None):
     """Default home page with experiment list option
 
     Args:
@@ -112,7 +112,10 @@ def expe_list(request):
         del request.session['results_folder']
     
     # always get base data
-    data = get_base_data()
+    if data is not None:
+        data = utils.merge_data(data, get_base_data())
+    else:
+        data = get_base_data()
 
     data['choice']  = cfg.label_expe_list
     data['submit']  = cfg.submit_button
@@ -121,6 +124,14 @@ def expe_list(request):
 
 
 def presentation(request):
+    """Add presentation of the example experiment
+
+    Args:
+        request ([Request]): Django request instance
+
+    Returns:
+        [Template]: new presentation page to render with data
+    """
     # get param 
     expe_name = request.GET.get('expe')
     
@@ -136,14 +147,22 @@ def presentation(request):
 # Create your views here.
 def expe(request):
     
-    # get param 
+    ######
+    # STEP 1. Get expe name param 
+    ######
     expe_name = request.GET.get('expe')
     
-    # unique user ID during session (user can launch multiple exeperiences)
-    if 'id' not in request.session:
-        request.session['id'] = functions.uniqueID()
+    #####
+    # STEP 2. Initialize experiment data for user
+    #####
 
-    # first time expe is launched add expe information into session
+    # Unique user ID during session (user can launch multiple exeperiences)
+    # Unique user ID is saved into local storage inside browser. The unique ID enable to know the current user even if new connexion
+    # See more information in: https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+    if 'id' not in request.session:
+        request.session['id'] = utils.uniqueID()
+
+    # First time expe is launched add expe information into session
     if 'expe' not in request.session or expe_name != request.session.get('expe'):
         refresh_data(request, expe_name)
 
@@ -152,32 +171,41 @@ def expe(request):
 
     user_identifier = request.session.get('id')
     
-    #check if it's the beginning
+    # Create if not exists custom result folder name depending of Experiment, Day, and User ID
     if 'results_folder' not in request.session:
         output_expe_folder = cfg.output_expe_folder_name_day.format(expe_name, current_day, user_identifier)
                 
         results_folder = os.path.join(settings.MEDIA_ROOT, output_expe_folder)
-        request.session['results_folder'] = results_folder
+        request.session['results_folder'] = results_folder # store into session
     else:
-        results_folder = request.session.get('results_folder')
+        results_folder = request.session.get('results_folder') # extract if already exists
     
+    #####
+    # STEP 3. Prepare log data for current experiment of user
+    #####
+
+    # create empty directory if not exists
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
 
+    # create data log of each answer of user
     result_filename = request.session.get('timestamp') +".csv"
     results_filepath = os.path.join(results_folder, result_filename)
     
+    # create json file with additional data from experiment
     result_structure = request.session.get('timestamp') +".json"
     result_structure = os.path.join(results_folder, result_structure)
     
     request.session['result_structure'] = result_structure
 
+    # create csv data file with header if necessary
     if not os.path.exists(results_filepath):
         output_file = open(results_filepath, 'w')
-        functions.write_header_expe(output_file, expe_name)
+        utils.write_header_expe(output_file, expe_name)
     else:
         output_file = open(results_filepath, 'a')
         
+    # log basic additional information into JSON 
     if not os.path.exists(result_structure):
         
         metadata = {
@@ -188,21 +216,29 @@ def expe(request):
             'terminated': False
         }
 
-        with open(result_structure, 'w', encoding='utf-8') as f:
-            json.dump(metadata, f, ensure_ascii=False, indent=4)
+        utils.update_json_file(result_structure, metadata)
     
+    #####
+    # STEP 4. Take care of where we save the Quest+ model instance
+    #####
 
-    # TODO : add crontab task to erase generated img and model data
     # create `quest` object if not exists    
-    models_folder = os.path.join(settings.MEDIA_ROOT, cfg.model_expe_folder.format(expe_name, current_day))
+    models_folder = os.path.join(settings.MEDIA_ROOT, cfg.model_expe_folder.format(expe_name, current_day, user_identifier))
 
     if not os.path.exists(models_folder):
         os.makedirs(models_folder)
 
+    # create model filepath
     model_filename = result_filename.replace('.csv', '.obj')
     model_filepath = os.path.join(models_folder, model_filename)
 
-    # run expe method using `expe_name`
+
+    #####
+    # STEP 5. Run of the iteration method of the current experiment
+    #         From `expe/expes/run.py`
+    #####
+
+    # run expe method using `expe_name` and dynamically call the model
     function_name = 'run_' + expe_name
 
     try:
@@ -210,92 +246,78 @@ def expe(request):
     except AttributeError:
         raise NotImplementedError("Run expe method `{}` not implement `{}`".format(run_expe.__name__, function_name))
 
+    # call the method
+    # - Pass the output expected model path
+    # - Pass the current output data buffer file
     expe_data = run_expe_method(request, model_filepath, output_file)
 
-    # set expe current data into session (replace only if experiments data changed)
+    # set new expe data obtained into session (replace only if experiments data changed)
     if expe_data is not None:
         request.session['expe_data'] = expe_data
 
-        # get base data
+    #####
+    # STEP 6. Prepare output data and check how the experiment has terminated
+    #         - Check if experiment end depending of timeout
+    #         - Check if experiment terminated as expected
+    #####
+
+    # get base data
     data = get_base_data(expe_name)
     
     # other experimentss information
     data['expe_name']   = expe_name
     data['userId']      = user_identifier
 
+    # depending of timeout or not prepare end text and/or redirection
     if expe_data is not None and 'timeout' in expe_data and expe_data['timeout'] == True:
+
+        print('Timeout detected')
         result_structure = request.session.get('result_structure')
         metadata = {}
         with open(result_structure, 'r', encoding='utf-8') as f:
             metadata = json.load(f)
-        metadata['timeout'] = True
-        metadata['terminated'] = True
-        metadata['reject'] = False
-        with open(result_structure, 'w', encoding='utf-8') as f:
-            json.dump(metadata, f, ensure_ascii=False, indent=4)
-        
-        data['timeout'] = True
-        data['end_text']  = cfg.expes_configuration[expe_name]['text']['end_text']['timeout']
-        clear_session(request)
-        return render(request, 'expe/expe_end.html', data)
 
-    else:
+        utils.update_json_file(result_structure, {'timeout': True, 'finished': False})
+
+        data['timeout'] = True
+
+
+        data['end_text']  = cfg.expes_configuration[expe_name]['text']['end_text']['timeout']
+        
+        # end of experiment, we can clear the experiment data
+        clear_session(request)
+
+        return expe_list(request, data)
+    
+    # clear also session if expe is finished normally
+    if 'expe_finished' in expe_data and expe_data['expe_finished'] == True:
+        clear_session(request)
+
+        utils.update_json_file(result_structure, {'finished': True})
+
         data['end_text'] = cfg.expes_configuration[expe_name]['text']['end_text']['classic']
-            
-    request.session['end_text'] = data['end_text']
+
+        return expe_list(request, data)
 
     return render(request, cfg.expes_configuration[expe_name]['template'], data)
 
+
 def clear_session(request):
+    """Clear the default session data added when experiment ended (and also experiment data added from `run` experiment session)
+    See `expe.expes.run.py` methods for further information
+
+    Args:
+        request ([Request]): Django request instance
+    """
     expe_name = request.session.get('expe')
 
     del request.session['expe']
     del request.session['timestamp']
-    del request.session['end_text']
     del request.session['results_folder']
 
     # specific current expe session params (see `config.py`)
     for key in cfg.expes_configuration[expe_name]['session_params']:
         del request.session[key]
-
-def expe_end(request):
-    expe_name = request.session.get('expe')
-    
-    # expe is ended before we can now reinit experiment
-    request.session['expe_finished'] = False
-    request.session['expe_started'] = False
-
-    result_structure = request.session.get('result_structure')
-    metadata = {}
-    with open(result_structure, 'r', encoding='utf-8') as f:
-        metadata = json.load(f)
-    
-    metadata['condition'] = request.GET.get('condition')
-    metadata['dark'] = request.GET.get('dark')
-    metadata['glasses'] = request.GET.get('glasses')
-    metadata['trust'] = request.GET.get('trust')
-    metadata['attention'] = request.GET.get('attention')
-    
-    with open(result_structure, 'w', encoding='utf-8') as f:
-        json.dump(metadata, f, ensure_ascii=False, indent=4)
-    
-    data = get_base_data()
-    data['userId'] = request.session.get('id')    
-    data['end_text'] = request.session.get('end_text')
-    data['expe_name'] = expe_name
-
-    print('End of experiment =>', request.session)
-    
-    results_folder = request.session.get('results_folder')
-    result_filename = request.session.get('timestamp') +".csv"
-    results_filepath = os.path.join(results_folder, result_filename)
-
-    # reinit session as default value
-    # here generic expe params
-    if 'expe' in request.session:
-        clear_session(request)
-
-    return render(request, 'expe/expe_end.html', data)
 
 
 @login_required(login_url="login/")
@@ -313,7 +335,7 @@ def list_results(request, expe=None):
             'timeout': timeout_color, 
             'rejected': reject_color, 
             'unterminated': unterm_color
-            }
+    }
 
     def create_file_color(filenames):
         files = {}
@@ -443,7 +465,7 @@ def list_results(request, expe=None):
     # get base data
     data = get_base_data()
     # expe parameters
-    data['colors'] = colors
+    data['colors']  = colors
     data['expe']    = expe
     data['folders'] = folders
     data['infos_question']   = cfg.expes_configuration[expe]['text']['question']
@@ -518,13 +540,17 @@ def download_result(request):
 
 
 def refresh_data(request, expe_name):
-    '''
-    Utils method to refresh data from session
-    '''
+    """Utils method to refresh data from session when new experiment is launched
+
+    Args:
+        request ([type]): [description]
+        expe_name ([str]): the expected experiment name
+    """
     request.session['expe'] = expe_name
 
+    # Set experiment as new experiment
     request.session['expe_started'] = False
     request.session['expe_finished'] = False
 
-    # update unique timestamp each time new experiments is launched
+    # update unique timestamp each time new experiment is launched
     request.session['timestamp'] = datetime.strftime(datetime.utcnow(), "%Y-%m-%d_%Hh%Mm%Ss")

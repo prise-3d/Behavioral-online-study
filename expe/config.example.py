@@ -3,7 +3,7 @@ import os
 
 # folder variables
 # TODO : dispatch into day and experiment ID
-model_expe_folder              = "expes_models/{0}/{1}"
+model_expe_folder              = "expes_models/{0}/{1}/{2}"
 output_expe_folder             = "expes_results"
 output_expe_folder_date        = "expes_results/date"
 output_expe_folder_id          = "expes_results/expeId"
