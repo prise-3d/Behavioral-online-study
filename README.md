@@ -2,7 +2,11 @@
 
 ## Description
 
-Web site which contains experimentss on synthesis images (perception of noise). 
+Django web application for psychophysical experiment with stimilus using Quest+ developed in Python.
+
+## Documentation
+
+The [DOCUMENTATION.md](DOCUMENTATION.md) file allows to understand how Django has been used for the creation of experiment. This document is intended to allow you to create your own experiments as well. This project is a proposal of how to use Django for online psychophysical experiment. We are open to any comments and/or suggestions for improvements, please feel free to contribute.
 
 ## Installation
 
@@ -22,6 +26,7 @@ Initialize the database with the following command :
 python manage.py migrate
 ```
 
+#### Credentials and configuration
 Add your own super user admin credentials:
 ```
 cp credentials.example.json credentials.json
@@ -40,7 +45,17 @@ Add your own configuration application:
 cp expe/config.example.py expe/config.py
 ```
 
-#### Run server
+#### Admin user creation
+
+Create your own admin user:
+```
+python manage.py createsuperuser
+```
+
+You can now access `/admin/results` route with your credentials in order to download experiments results.
+Note that the current proposed results page is an example.
+
+#### Run the web application
 
 Run the server :
 
@@ -56,7 +71,7 @@ python manage.py runserver 8080
 
 ### 2. Using docker (recommended)
 
-First, you need to add your own user admin credentials if you wished:
+First, you need to add your own user admin credentials wished:
 ```
 cp credentials.example.json credentials.json
 ```
@@ -83,34 +98,6 @@ You also have `stop`, `remove`, `clean` commands:
 - `stop`: stop current container instance if exists
 - `remove`: stop and remove container instance if exists
 - `clean`: remove docker image if exists
-
-## Configuration
-
-Create your own admin user:
-```
-python manage.py createsuperuser
-```
-
-You can now access `/admin/results` route with your credentials in order to download experiments results.
-
-<hr />
-
-Run the application:
-
-```
-python manage.py runserver
-```
-
-or using docker:
-
-```
-docker-compose up
-```
-
-
-## Create your experimentss
-
-See [DOCUMENTATION.md](DOCUMENTATION.md). This documentation explains how to create your own experiments.
 
 ## How to contribute ?
 

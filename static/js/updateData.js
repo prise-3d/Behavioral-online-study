@@ -1,13 +1,13 @@
 
 // Download endpoint response as a file using a POST request
-function updateSession(route, value){
+function updateSession(route, key, value){
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value
     const updateUrl = `/${route}`
 
     return fetch(updateUrl, {
         method: 'POST',
-        body: `value=${value}`,
+        body: `key=${key}&value=${value}`,
         headers: {
             'Content-type': 'application/x-www-form-urlencoded',
             'X-CSRFToken': csrfToken
@@ -23,7 +23,7 @@ function getData() {
     if(localStorage.getItem('p3d-user-id')){
         
         // update data into request.session object
-        updateSession('update_session_user_id', localStorage.getItem('p3d-user-id'))
+        updateSession('update_session_user', 'id', localStorage.getItem('p3d-user-id'))
             .then('User id updated')
     }
 

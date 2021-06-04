@@ -61,11 +61,11 @@ def get_base_data(expe_name=None):
     return data
 
 
-def update_session_user_id(request):
-    """Update user identifier
+def update_session_user(request):
+    """Update user session data
 
     Args:
-        request ([Request]): Django request object
+        request ([Request]): Django request object with expected key and value data
 
     Returns:
         [HttpResponse]: Http response message
@@ -73,26 +73,10 @@ def update_session_user_id(request):
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
 
-    request.session['id'] = request.POST.get('value')
-    return HttpResponse('`user_id` session update done')
+    key = request.POST.get('key')
 
-
-def update_session_user_expes(request):
-    """Update user experiment data
-    This function can be use to store into `user_expes` all required data you want
-
-    Args:
-        request ([Request]): Django request object
-
-    Returns:
-        [HttpResponse]: Http response message
-    """
-    if not request.method =='POST':
-        return HttpResponseNotAllowed(['POST'])
-    
-    request.session['user_expes'] = json.loads(request.POST.get('value'))
-    print(request.session['user_expes'])
-    return HttpResponse('`user_expes` session update done')
+    request.session[key] = request.POST.get('value')
+    return HttpResponse('session update done')
 
 
 def expe_list(request, data=None):
@@ -271,7 +255,7 @@ def expe(request):
     # get base data
     data = get_base_data(expe_name)
     
-    # other experimentss information
+    # other experiments information
     data['expe_name']   = expe_name
     data['userId']      = user_identifier
 

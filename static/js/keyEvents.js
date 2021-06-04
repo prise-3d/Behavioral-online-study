@@ -59,7 +59,7 @@ const checkKey = e => {
          }
          
          // Update session with answer time and then redirect
-         updateSession('update_session_user_expes', JSON.stringify({'expe_answer_time': answerTime}))
+         updateSession('update_session_user', 'expe_answer_time', answerTime)
             .then(_ => {
                // construct url with params for experiments
                const params = `?expe=${expe}&iteration=${iteration}&answer=${answer}`

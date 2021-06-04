@@ -108,7 +108,7 @@ def run_quest_example(request, model_filepath, output_file):
             answer = int(request.GET.get('answer'))
 
             # get answer time stored into session and computed from client front part 
-            expe_answer_time = request.session['user_expes']['expe_answer_time']
+            expe_answer_time = request.session['expe_answer_time']
 
             previous_stim = current_expe_data['expe_stim']
             print(f"Answer time is: {expe_answer_time}")
@@ -132,7 +132,6 @@ def run_quest_example(request, model_filepath, output_file):
         print('Load `qp` model')
         filehandler = open(model_filepath, 'rb') 
         qp = pickle.load(filehandler)
-        pprint(qp)
     
     # Initialize and get experiment configuration parameters
     entropy = np.inf

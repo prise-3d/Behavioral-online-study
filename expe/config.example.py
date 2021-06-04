@@ -34,7 +34,7 @@ expes_configuration            = {
         'text':{
             'next' : "Please press enter to continue",
             'presentation' : "This is an example of experiment for noise detection in synthesis images",
-            'question': "Do you think that you are viewing a single image with the same quality everywhere ?",
+            'question': "Do you think image still contains noise?",
             'indication': "Press the LEFT key (&#8592;) if you think the image is not noisy, or the RIGHT key (&#8594;) if you think the image is noisy.",
             'end_text': {
                 'classic': "Experience is finished. Thanks for your participation!",

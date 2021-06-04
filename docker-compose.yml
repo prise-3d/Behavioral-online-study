@@ -4,7 +4,7 @@ services:
 
     webexpe:
         container_name: webexpeinstance
-        image: .
+        image: djangowebexpe
         restart: always
         volumes:
             - "./media:/usr/src/app/media" # get access to media files

@@ -11,7 +11,7 @@ run:
 	@echo "----------------------------------------------------------------"
 	@echo "Process to run new instance"
 	@echo "----------------------------------------------------------------"
-	docker-compose up webexpe_$(WEBEXPE_LANG)
+	docker-compose up webexpe
 	@echo "----------------------------------------------------------------"
 	@echo "Your docker instance is now launched with name 'webexpeinstance'"
 	@echo "Your website is now accessible at http://localhost:8000"
@@ -21,7 +21,7 @@ stop:
 	@echo "----------------------------------------------------------------"
 	@echo "Process to stop current instance"
 	@echo "----------------------------------------------------------------"
-	docker stop webexpeinstance_$(WEBEXPE_LANG)
+	docker stop webexpeinstance
 	@echo "----------------------------------------------------------------"
 	@echo "App is now stopped"
 	@echo "----------------------------------------------------------------"
@@ -30,7 +30,7 @@ remove:
 	@echo "----------------------------------------------------------------"
 	@echo "Process to stop current instance"
 	@echo "----------------------------------------------------------------"
-	docker rm webexpeinstance_$(WEBEXPE_LANG)
+	docker rm webexpeinstance
 	@echo "----------------------------------------------------------------"
 	@echo "App is now stopped and removed"
 	@echo "----------------------------------------------------------------"
