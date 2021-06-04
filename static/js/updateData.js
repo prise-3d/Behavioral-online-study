@@ -5,15 +5,13 @@ function updateSession(route, value){
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value
     const updateUrl = `/${route}`
 
-    fetch(updateUrl, {
+    return fetch(updateUrl, {
         method: 'POST',
         body: `value=${value}`,
         headers: {
             'Content-type': 'application/x-www-form-urlencoded',
             'X-CSRFToken': csrfToken
         }
-    }).then(async res => {
-        console.log('success udpate')
     })
 }
 
@@ -26,6 +24,7 @@ function getData() {
         
         // update data into request.session object
         updateSession('update_session_user_id', localStorage.getItem('p3d-user-id'))
+            .then('User id updated')
     }
 
     // TODO : here you can update into session anything you want from client session to server

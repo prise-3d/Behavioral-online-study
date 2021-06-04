@@ -89,8 +89,9 @@ def update_session_user_expes(request):
     """
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
-
-    request.session['user_expes'] = request.POST.get('value')
+    
+    request.session['user_expes'] = json.loads(request.POST.get('value'))
+    print(request.session['user_expes'])
     return HttpResponse('`user_expes` session update done')
 
 
@@ -140,7 +141,13 @@ def presentation(request):
     
     data['expe_name'] = expe_name
     data['pres_text'] = cfg.expes_configuration[expe_name]['text']['presentation']
+    data['question'] = cfg.expes_configuration[expe_name]['text']['question']
+    data['indication'] = cfg.expes_configuration[expe_name]['text']['indication']
     data['next'] = cfg.expes_configuration[expe_name]['text']['next']
+
+    # First time expe is launched add expe information into session
+    # here we refresh the session as a new experiment
+    refresh_data(request, expe_name)
     
     return render(request, 'expe/expe_presentation.html', data)
     
@@ -162,9 +169,9 @@ def expe(request):
     if 'id' not in request.session:
         request.session['id'] = utils.uniqueID()
 
-    # First time expe is launched add expe information into session
+    # if experiment not began, by default redirect to home
     if 'expe' not in request.session or expe_name != request.session.get('expe'):
-        refresh_data(request, expe_name)
+        return expe_list(request, {})
 
     # create output folder for expe_result
     current_day = datetime.strftime(datetime.utcnow(), "%Y-%m-%d")
@@ -288,16 +295,21 @@ def expe(request):
         clear_session(request)
 
         return expe_list(request, data)
-    
+
     # clear also session if expe is finished normally
-    if 'expe_finished' in expe_data and expe_data['expe_finished'] == True:
+    if 'expe_finished' in request.session and request.session['expe_finished'] == True:
+        
         clear_session(request)
 
         utils.update_json_file(result_structure, {'finished': True})
 
-        data['end_text'] = cfg.expes_configuration[expe_name]['text']['end_text']['classic']
+        data['end_text'] = expe_data['end_text']
 
         return expe_list(request, data)
+
+    # by default indication and question
+    data['question']   = cfg.expes_configuration[expe_name]['text']['question']
+    data['indication'] = cfg.expes_configuration[expe_name]['text']['indication']
 
     return render(request, cfg.expes_configuration[expe_name]['template'], data)
 
@@ -325,45 +337,6 @@ def list_results(request, expe=None):
     """
     Return all results obtained from experiments
     """
-
-    valid_color = "green"
-    timeout_color = "blue"
-    unterm_color = "red"
-    reject_color = "magenta"
-    colors = {
-            'validated': valid_color, 
-            'timeout': timeout_color, 
-            'rejected': reject_color, 
-            'unterminated': unterm_color
-    }
-
-    def create_file_color(filenames):
-        files = {}
-        json_files = [f for f in filenames if f.endswith("json")]
-        for json_file in json_files:
-            csv_file = os.path.splitext(json_file)[0] + ".csv"
-
-            metadata = {}
-            with open(os.path.join(user_path, json_file), 'r', encoding='utf-8') as f:
-                metadata = json.load(f)
-
-            if 'terminated' not in metadata or metadata['terminated'] == False:
-                files[json_file] = unterm_color
-                files[csv_file] = unterm_color
-
-            elif metadata['timeout'] == True:
-                files[json_file] = timeout_color
-                files[csv_file] = timeout_color
-
-            elif metadata["reject"] == True:
-                files[json_file] = reject_color
-                files[csv_file] = reject_color
-
-            else:
-                files[json_file] = valid_color
-                files[csv_file] = valid_color      
-
-        return files
 
     if expe is None:
         folders = cfg.expe_name_list
@@ -398,7 +371,7 @@ def list_results(request, expe=None):
                         # add to date
                         user_path = os.path.join(day_path, user)
                         filenames = os.listdir(user_path)
-                        folders_user[user] = create_file_color(filenames)
+                        folders_user[user] = filenames
 
                         # add to userId
                         if user not in folder_user_id:
@@ -438,7 +411,7 @@ def list_results(request, expe=None):
 
                             user_path = os.path.join(day_path, user)
                             filenames = os.listdir(user_path)
-                            folders_user[user] = create_file_color(filenames)
+                            folders_user[user] = filenames
 
                             # add filepaths to user id
                             if user not in folder_user_id:
@@ -465,7 +438,6 @@ def list_results(request, expe=None):
     # get base data
     data = get_base_data()
     # expe parameters
-    data['colors']  = colors
     data['expe']    = expe
     data['folders'] = folders
     data['infos_question']   = cfg.expes_configuration[expe]['text']['question']
@@ -546,6 +518,8 @@ def refresh_data(request, expe_name):
         request ([type]): [description]
         expe_name ([str]): the expected experiment name
     """
+
+    print('New session data')
     request.session['expe'] = expe_name
 
     # Set experiment as new experiment

@@ -30,6 +30,12 @@ const checkKey = e => {
       if (BEGIN_EXPE && !END_EXPE) {
          let answer
 
+         // Get answer time and send it to django in order to store it into session
+         let answerTime = Date.now() - startAnswerTime
+         
+         console.log('Get data')
+         console.log('Answer took', answerTime)
+         
          // left arrow key
          if (e.keyCode === KEYCODE_LEFT_ARROW) {
             console.log('left arrow is pressed')
@@ -41,7 +47,7 @@ const checkKey = e => {
             console.log('right arrow is pressed')
             answer = '0'
          }
-
+         
          let iteration = 0
 
          // update of iteration if exists
@@ -52,13 +58,13 @@ const checkKey = e => {
             iteration++
          }
          
-         // check if checkbox is present
-         keyUsed = true;
-         setTimeout(() => { keyUsed = false;  }, 15000);
-
-         // construct url with params for experiments
-         const params = `?expe=${expe}&iteration=${iteration}&answer=${answer}`
-         window.location = expeUrl + params
+         // Update session with answer time and then redirect
+         updateSession('update_session_user_expes', JSON.stringify({'expe_answer_time': answerTime}))
+            .then(_ => {
+               // construct url with params for experiments
+               const params = `?expe=${expe}&iteration=${iteration}&answer=${answer}`
+               window.location = expeUrl + params
+            })
       }
    }
 }
@@ -70,6 +76,6 @@ document.addEventListener('DOMContentLoaded', e => {
 })
 
 // avoid back button return 30 times... (Need to improve this..)
-for (var i = 0; i < 30; i++){
-   window.history.pushState({isBackPage: false, }, document.title, location.href)
-}
+// for (var i = 0; i < 30; i++){
+//    window.history.pushState({isBackPage: false, }, document.title, location.href)
+// }

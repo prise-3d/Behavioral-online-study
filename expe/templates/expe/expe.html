@@ -14,7 +14,8 @@
     {% endif %}
 
     {% if not request.session.expe_finished %}
-        <p>{{indication | safe}}</p>
+        <h3>{{question | safe}}</h3>
+        <h5>{{indication | safe}}</h5>
         <img id="expeImg" src="{{request.session.expe_data|get_value_from_dict:'image_path'}}" data-img="{{request.session.img_merged}}"/>
         
         {% if checkbox %}

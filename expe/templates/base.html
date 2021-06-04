@@ -35,9 +35,7 @@
         const baseUrl         = location.protocol + '//' + host + '/'
 
         const expeUrl         = baseUrl + 'expe'  
-        const indicationsUrl  = baseUrl + 'indications'  
         const presentationUrl = baseUrl + 'presentation'
-        const endUrl          = baseUrl + 'expe_end'
 
         // EXPE variables parts
         // get access to django variables
@@ -51,13 +49,13 @@
         var expes = "{{expes_names}}"
     </script>
 
+    <!-- Update user data stored into localStorage -->
+    <script src="{% static 'js/updateData.js' %}"></script>
+    
     <!-- Custom Javascript file for experiments template is placed here -->
     {% block javascripts %}
         
     {% endblock %}
-
-    <!-- Update user data stored into localStorage -->
-    <script src="{% static 'js/updateData.js' %}"></script>
 
     <!-- Dynamically load JS file of experiments -->
     {% for file in javascript %}

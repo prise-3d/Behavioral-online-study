@@ -23,6 +23,17 @@ from pprint import pprint
 
 from PIL import Image
 
+def get_nsamples_image(filename):
+    """Specific method in order to get number of samples of image
+
+    Args:
+        filename ([str]): filename on expected image 
+
+    Returns:
+        [int]: number of samples
+    """
+    return int(filename.split('_')[-1].replace('.png', ''))
+
 def run_quest_example(request, model_filepath, output_file):
     """Run the experiment expected iteration process when client answer
     Saved data (Quest+ instance and output data) use the unique client ID
@@ -35,8 +46,6 @@ def run_quest_example(request, model_filepath, output_file):
     Returns:
         [dict]: dictionnary of the experiment data state based on experiment process
     """
-
-    print(f'Process experiment iteration for user id: {request.session.get("id")}')
 
     ##########
     # STEP 1. get session experiment name and static parameters
@@ -54,7 +63,6 @@ def run_quest_example(request, model_filepath, output_file):
     
         data_expe = request.session['expe_data']
         
-
         if not 'iteration' in request.GET or not request.GET.get('iteration').isdigit():
             return data_expe
         
@@ -87,34 +95,32 @@ def run_quest_example(request, model_filepath, output_file):
         print(f'previous iteration', previous_iteration)
 
         # Keep same experiment data (just client page refresh)
+        # based on previous iteration data
         if previous_iteration is not None and previous_iteration + 1 != iteration:
             data_expe = request.session['expe_data']
             return data_expe
 
-        # bad number of iteration
-        elif iteration > max_iterations:
-            return None
-
         # get current experiment data
         # if experiments is started we can save data
         else:
-            # TODO : get another way to compute experiment time
+
             current_expe_data = request.session['expe_data']
             answer = int(request.GET.get('answer'))
-            expe_answer_time = time.time() - current_expe_data['expe_answer_time']
+
+            # get answer time stored into session and computed from client front part 
+            expe_answer_time = request.session['user_expes']['expe_answer_time']
+
             previous_stim = current_expe_data['expe_stim']
-            print("Answer time is ", expe_answer_time)
+            print(f"Answer time is: {expe_answer_time}")
 
     ##########
     # STEP 4. Load or create Quest instance
     ##########
 
-    # model instance with default params
+    # model instance with default params (here cornel_box scene)
     # TODO : replace with your expected Quest+ params (`stimulus space` and `slopes`)
-    stim_space = np.arange(50, 20000, 100) 
-    stim_space = np.append(stim_space, 20000)
-    
-    slopes = np.arange(0.0001, 0.001, 0.00003)
+    stim_space = cfg.expes_configuration[expe_name]['scenes']['cornel_box']['stim']
+    slopes = cfg.expes_configuration[expe_name]['scenes']['cornel_box']['slopes']
 
     # check if necessary to construct `quest` object
     if not os.path.exists(model_filepath):
@@ -147,7 +153,7 @@ def run_quest_example(request, model_filepath, output_file):
         
         # get new entropy
         entropy = qp.get_entropy()
-        print(f'Quest+ model updated: chosen entropy {entropy} and threshold {threshold}')
+        print(f'Quest+ model updated: current entropy {entropy}')
 
         # log trace of current model updates
         line = str(previous_stim)
@@ -195,18 +201,23 @@ def run_quest_example(request, model_filepath, output_file):
         print('-------------------------------------------------')
 
         # TODO : add your new image to display depending of Quest+ state
-        # Here the current image is static
-        # TODO : add basic exemple of experiment
-        current_image = Image.open(os.path.join(settings.RELATIVE_STATIC_URL, 'images', 'example_1.png'))
+        # We can also define use of multiple scenes if needed
+        
+        # Here we load the image to display based on next stim
+        scene_path = os.path.join(settings.RELATIVE_STATIC_URL, 'images', 'cornel_box')
+
+        # get the next image based on stim from Quest+ (only the first element of the list)
+        next_image_path = [ img for img in os.listdir(scene_path) if get_nsamples_image(img) == next_stim ][0]
+        next_image = Image.open(os.path.join(scene_path, next_image_path))
 
 
     # one stopping criterion reached, end of the experiment
     else:
         request.session['expe_finished'] = True
-        return cfg.expes_configuration[expe_name]['text']['end_text']
+        return {'end_text': cfg.expes_configuration[expe_name]['text']['end_text']['classic']}
 
     ##########
-    # STEP 8. Prepare new image to display to client part (`current_image` PIL variable)
+    # STEP 8. Prepare new image to display to client part (`next_image` PIL variable)
     ##########
 
     # save image using user information
@@ -219,8 +230,8 @@ def run_quest_example(request, model_filepath, output_file):
     # generate tmp merged image
     filepath_img = os.path.join(tmp_folder, f'{request.session.get("id")}_{expe_name}.png')
 
-    if current_image is not None:
-        current_image.save(filepath_img)
+    if next_image is not None:
+        next_image.save(filepath_img)
 
     ##########
     # STEP 8. Save new state of user Quest+ model instance
@@ -237,7 +248,6 @@ def run_quest_example(request, model_filepath, output_file):
     # TODO: here you can save whatever you need for you experiments
     data_expe = {
         'image_path': filepath_img,
-        'expe_answer_time': time.time(),
         'expe_previous_iteration': iteration,
         'expe_stim': str(next_stim),
         'indication': cfg.expes_configuration[expe_name]['text']['indication']

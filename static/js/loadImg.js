@@ -1,4 +1,5 @@
 const delay = ms => new Promise(res => setTimeout(res, ms))
+var startAnswerTime = undefined;
 
 window.addEventListener('DOMContentLoaded', async () => {
     
@@ -6,8 +7,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (!END_EXPE) {
         var imgBlock = document.getElementById('expeImg')
         
-        imgBlock.onload = function() {
-            document.getElementById('expeImg').style.display = 'inline'
+        if (imgBlock !== null) {
+            imgBlock.onload = function() {
+                document.getElementById('expeImg').style.display = 'inline'
+
+                // Once image is loaded, the stimulus is then available we can measure the answer time
+                startAnswerTime = Date.now();
+            }
         }
     }
 })

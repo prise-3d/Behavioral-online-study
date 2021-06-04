@@ -8,9 +8,12 @@
 
 {% block content %}
     
-    <h3>{{pres_text|linebreaks}}</h3>
-
+    <h2>{{pres_text | linebreaks | safe}}</h2>
     <br/>
+    <h4><strong>Question :</strong> {{question | safe}}</h4>
+    <br />
+    <h5><strong>Indication :</strong> {{indication | safe}}<h5>
+    <br />
     <h3>{{next}}</h3>
     
     <form id="form01" method="GET" action="/expe">
