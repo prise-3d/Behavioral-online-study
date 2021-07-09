@@ -2,37 +2,37 @@
 
 ## Description
 
-This website can let you create and manage your own experiments using Python as backend. 
+This website allows you to create and manage your own psychophysical experiments using Python as a backend. 
 
-Why such application ? A lot of experimental development are done in Python, you can quickly include it and create your experiments.
+Why such an application? Many experimental developments are done in Python, you can quickly include libraries and/or features developed in Python to create your experiments.
 
-For a better understanding of this documentation, the user is invited to take a minimal knowledge of the use of the Django framework: [django documentation](https://docs.djangoproject.com/en/3.2/).
+For a better understanding of this documentation, the user is invited to have a minimal knowledge of the use of the Django : [Django documentation](https://docs.djangoproject.com/en/3.2/).
 
 ## Explanations
 
-The `expe` module is the django app created for managing experiments.
+The `expe` module is the Django app created for managing experiments.
 
 Main app folders:
-- `expe/config.py`: contains the main variables used by website, save experiments content and experiments configuration;
-- `expe/views.py`: is django app file used for enable routes of website;
+- `expe/config.py`: contains the main variables used by the website, to save the content of the experiments and the configuration of the experiments;
+- `expe/views.py`: is the Django application file used to activate the website routes;
 - `expe/expes/run.py`: contains **run_{expe_name}** functions in order to launch dynamically step of experiments;
-- `expe/expes/classes`: is folder which contains all the necessary Python classes for experiments;
-- `expe/expes/templates`: is folder which contains all `.html` template with Django scripting variables displayed;
-- `expe/expes/urls.py`: bind the url routes with `views.py` functions (POST or GET methods).
+- `expe/expes/classes`: contains **run_{expe_name}** functions to dynamically launch experimental steps;
+- `expe/expes/templates`: is the folder that contains all `.html' templates with Django script variables displayed;
+- `expe/expes/urls.py`: binds url routes with `views.py` functions (POST or GET methods).
 
 Other folders:
-- `static`: contains `css`, `js` and usefull static resources for website such as images;
-- `media`: generated experiment files such as log file, saved model Quest+ state binary file when users pass experiments.
+- `static`: contains static resources useful for the website, such as images, as well as "css" and "js" resources;
+- `media`: generated experiment files, such as the log file, the Quest+ model status binary file recorded when users pass experiments.
 
-**Note**: We will discuss in more detail the subtleties of using javascript and Django request and session variables.
+**Note**: We will discuss in more detail the subtleties of using javascript and Django's request and session variables.
 
 ## Create your own experiments
 
 ### 1. Experience configuration
 
-Let's start with the `expe/config.py` python file. As explained earlier, this file contains experiments configuration. The variable `expes_configuration` is the dictionnary which declares all information of experiments.
+Let's start with the python file `expe/config.py`. As explained earlier, this file contains the configuration of the experiments. The `expes_config` variable is the dictionary that declares all the information for the experiments.
 
-An overview of the `quest_example` key experiment configuration:
+An overview of the configuration of the `quest_example` experiment:
 
 ```python
 'quest_example':{
@@ -50,7 +50,7 @@ An overview of the `quest_example` key experiment configuration:
         'entropy': 0.05, # quest stopping criterion
     },
 
-    # if others custom session param are directly set for experiments
+    # if other custom session settings are directly defined for the experiments
     'session_params': [
         'expe_data',
     ],
@@ -68,47 +68,47 @@ An overview of the `quest_example` key experiment configuration:
 }
 ```
 
-The `params` section is where you put all your necessary information for your experiments.
+The `params` section is where you put all the necessary information for your experiments.
 
 ### 2. The experiments `expe` route
 
-The `expe/` route define by the `expe` function in `expe/views.py` is used for launching experiments. This route uses few parameters pass using `GET` method:
-- `expe`: the current experiment name to use
-- `iteration`: step of this experiments
-- `answer`: the answer of the user
+The `expe/` route defined by the `expe` function in `expe/views.py` is used to perform experiments. This route uses some parameters passed by the `GET` method:
+- `expe`: the current experiment name to use;
+- `iteration`: step of the experiment;
+- `answer`: the user's answer.
 
-Using this parameter, the route know which experiments to launch with specific scene and manage experiments steps.
+Thanks to this parameter, the route knows which experiments to launch with a specific scene and manages the stages of the experiments.
 
-**Note:** `answer` and `iteration` parameters are used into `js/keyEvents.js` file. This means the `answer` and `iteration` values are sent depending of user interactions. You can implement your own interaction by creating your own `js` file and add it into your experiments configuration declaration (see `expe/config.py`).
+**Note:** The `answer` and `iteration` parameters are used in the `js/keyEvents.js` file. This means that the `answer` and `iteration` values are sent based on the user's interactions. You can implement your own interaction by creating your own `js` file and adding it to the configuration statement of your experiments (see `expe/config.py`).
 
-### 3. The `run` experiments function
+### 3. The "run" function of an experiment
 
-Into the `expe` function in `expe/views.py`, the `run` method of your experiment is dynamically call based. Hence you need to implement into the `expe/expes/run.py` a function which follows this naming convention:
+In the `expe` function of `expe/views.py`, the `run` method of your experiment is based on a dynamic call. You must therefore implement a function in the `expe/expes/run.py` file that follows this naming convention:
 
 - `run_{your_experiment_name}`
 
-You have communication exchanges between the Django server and the client side, it's necessary to store the experiments process at each step.
+From this function you have information communication exchanges between the Django server and the client side, it is necessary to store the experimentation process at each step.
 
-Hence, this function need to follow this prototype:
+Therefore, this function must follow this prototype:
 
 ```python
 def run_{your_experiment_name}(request, model_filepath, output_file):
 ```
 
-Information about parameters:
-- `request`: contains all information into `GET`, `POST` and session storages
-- `model_filepath`: filename where you need to store information about experiment model (such as Quest+ or whatever you want) into a binary file (can be just data information or object instanciated from file of `expe/expes/classes`)
-- `output_file`: buffer where you can add information about your experiments (following your `output_header` declared into your experiment configuration into `expe/config.py`)
+Parameter information:
+- `request`: contains all the information from the `GET`, `POST` and session protocols.
+- `model_filepath`: filename where the user-related experience model (like Quest+ or whatever you want) is stored in a binary file (can be just data information or an object instantiated from the `expe/expes/classes` file)
+- `output_file`: buffer where you can add information about your experiments (depending on your `output_header` declared in your experiment configuration in `expe/config.py`)
 
 
-Example of accessing request variables:
+Example of access to request variables :
 ```python
 expe_name_session = request.session.get('expe')
 expe_name_get     = request.GET.get('expe')
 expe_name_post    = request.POST.get('expe')
 ```
 
-Example of loading or saving Python Quest+ object ([pickle](https://docs.python.org/3/library/pickle.html) serialization library is required):
+Example of loading or saving a Python Quest+ object (the serialization library [pickle](https://docs.python.org/3/library/pickle.html) is required):
 ```python
 # check if necessary to construct `quest` object or if backup exists
 if not os.path.exists(model_filepath):
@@ -125,7 +125,7 @@ file_pi = open(model_filepath, 'wb')
 pickle.dump(qp, file_pi)
 ```
 
-Example of writing and append information into `output_file`:
+Example of writing and adding information to the buffer file `output_file`:
 
 ```python
 line = str(previous_stim)
@@ -140,15 +140,14 @@ output_file.flush()
 
 ### 4. Display experiments data into custom template
 
-Finally your `run` function need to return python dictionnary of **data** your need to use into your `expe/` django template. 
+Finally, your `run` function should return a python dictionary of **data** that you should use in your Django `expe/` model. 
 
-Several types of information can be accessed from the Django template, it is important to differentiate it:
+There are several types of information accessible from the Django model, it is important to differentiate between them:
 
-- **Request data:** the set of data (dictionnary) sent from the request when choosing the rendered template;
-- **Session**: for information related more to the context of the experiment and not only the current request, it is possible to store data in the session. In this way, within the template, it is possible to retrieve, display and process the user's session data. 
+- Query data:** the set of data (dictionary) sent by the query when choosing the rendered model;
+- Session**: for information more related to the context of the experiment and not only to the current query, it is possible to store data in the session. In this way, within the html template, it is possible to retrieve, display and process data from the user's session. 
 
-
-If you want to create your own template, specify your template path into configuration:
+If you want to create your own html template, specify the path to your template in the :
 ```python
 'experiments_name':{
     ...
@@ -165,27 +164,27 @@ Example of way to use your experiments current request data with safe display (h
 <h2>Expe {{expe_name}}</h2>
 ```
 
-Example of way to use your experiments current request data with safe display (html encoding) into template:
+Example of how to use the current demand data of your experiences with a safe display (html encoding) in the template:
 ```python
 {{end_text | safe}}
 ```
 
-Example of way to use your experiment session data and access specific dictionary key into template:
+Example of how to use the data from your experimental session and access a specific dictionary key in the model:
 ```python
 {{request.session.expe_data|get_value_from_dict:'image_path'}}
 ```
 
-For a use of the templates the user can redirect to the official documentation of django: [template usages](https://docs.djangoproject.com/en/3.2/topics/templates/).
+For a use of html templates, the user can redirect to the official django documentation: [uses of html templates](https://docs.djangoproject.com/en/3.2/topics/templates/).
 
 ### 5. Data access and management using Javascript and Django
 
-The access and exchange of data between Javascript and Django is not the most obvious. We will present here the tricks used to allow the exchange of client / server data.
+The access and exchange of data between Javascript and Django is not the most obvious. We will present here the tricks used to allow the exchange of client/server data.
 
 
-#### 5.1. Access Django variable from Javascript:
+#### 5.1. Access Django variables from Javascript:
 ```javascript
 // EXPE variables parts
-// get access to django variables (from session)
+// get access to Django variables (from session)
 var BEGIN_EXPE = "{{request.session.expe_started}}" === 'True'
 var END_EXPE   = "{{request.session.expe_finished}}" === 'True'
 
@@ -198,10 +197,9 @@ var expes = "{{expes_names}}"
 
 #### 5.2. Update Django session from Javascript:
 
-The Javascript session and the Django session are both different data state. It is not directly possible to update a variable in Django session from Javascript. It is necessary to create an intermediate request.
+The Javascript session and the Django session are two different data states. It is not possible to update a variable in the Django session directly from Javascript. It is necessary to create an intermediate request.
 
-
-An intermediate route has been created to retrieve data sent from the client (Javascript) and update the Django session.
+An intermediate route has been created to retrieve the data sent by the client (Javascript) and update the Django session.
 ```python
 def update_session_user(request):
     """Update user session data
@@ -221,9 +219,9 @@ def update_session_user(request):
     return HttpResponse('session update done')
 ```
 
-The configuration of this route is specified in the file `expe/expes/urls.py`.
+The configuration of this route is specified in the `expe/expes/urls.py` file.
 
-The javascript file `static/js/updateData.js` proposes the function `updateSession` which allows the call to this route and to store the desired data and key in session.
+The javascript file `static/js/updateData.js` provides the `updateSession` function which allows this route to be called and the desired data and key stored in session.
 
 ```javascript
 function updateSession(route, key, value){
@@ -242,9 +240,9 @@ function updateSession(route, key, value){
 }
 ```
 
-**Note**: the required CSRF token is added automatically in the `base.html` Django template.
+**Note: the required CSRF token is automatically added to the Django template `base.html`.
 
-It is thus possible to retrieve and update the session from javascript. Here is an example of updating the response time obtained from the client after the user's keyboard interaction:
+It is therefore possible to retrieve and update the session from javascript. Here is an example of updating the response time obtained from the client after the user's keyboard interaction:
 
 ```javascript
 
@@ -265,11 +263,12 @@ updateSession('update_session_user', 'expe_answer_time', answerTime)
 })
 ```
 
-It is now possible to retrieve the access to the variable stored in session on Django side:
+It is now possible to get access to the variable stored in the session on the Django side:
+
 ```python
 answer_time = request.session['expe_answer_time']
 ```
 
-**Note**: an example of user response time update with keyboard interaction capture is available in the scripts: 
-- `static/js/loadImg.js`: wait for stimulus displayed to user and initialize the start answer time;
-- `static/js/keyEvents.js`: keyboard interaction capture and answer time sent.
+**Note**: an example of updating the user response time with captured keyboard interactions is available in the scripts: 
+- `static/js/loadImg.js`: waits for the stimulus displayed to the user and initializes the starting response time;
+- `static/js/keyEvents.js`: captures the keyboard interaction and sends the response time.

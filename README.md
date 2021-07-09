@@ -2,11 +2,11 @@
 
 ## Description
 
-Django web application for psychophysical experiment with stimilus using Quest+ developed in Python.
+Django web application for designing a psychophysical experiment with stimilus using here, Quest+ developed in Python.
 
 ## Documentation
 
-The [DOCUMENTATION.md](DOCUMENTATION.md) file allows to understand how Django has been used for the creation of experiment. This document is intended to allow you to create your own experiments as well. This project is a proposal of how to use Django for online psychophysical experiment. We are open to any comments and/or suggestions for improvements, please feel free to contribute.
+The file [DOCUMENTATION.md](DOCUMENTATION.md) provides an understanding of how Django has been used to create experiments. This document is intended to allow you to create your own experiments as well. This project is a proposal to use Django for online psychophysical experiments. We are open to comments and/or suggestions for improvement, so please feel free to contribute.
 
 ## Installation
 
