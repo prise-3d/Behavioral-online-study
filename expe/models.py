@@ -9,8 +9,8 @@ import os
     
 # Some parameters
 example_template_path = os.path.join('expe', 'templates', 'examples')
-javascript_folder_path = os.path.join('static', 'js')
-css_folder_path = os.path.join('static', 'css')
+javascript_folder_path = os.path.join('static', 'experiment', 'js')
+css_folder_path = os.path.join('static', 'experiment', 'css')
 
 # All experiments django model
 class Page(models.Model):
@@ -65,7 +65,7 @@ class Experiment(models.Model):
     """
     # define experiment required field
     title = models.CharField(max_length=255)
-    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=True)
+    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=True, related_name='experiment')
     url = models.SlugField(unique=True, max_length=255, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
@@ -94,7 +94,7 @@ class Session(models.Model):
 
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    experiment = models.ForeignKey(Experiment, on_delete=models.PROTECT)
+    experiment = models.ForeignKey(Experiment, on_delete=models.PROTECT, related_name='sessions')
     is_active = models.IntegerField(default=1, blank=True, null=True, 
                                     #help_text ='Active,0->Inactive', 
                                     choices =((1, 'Active'), (0, 'Inactive')))

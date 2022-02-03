@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# TODO: generate new key if necessary
+# TODO: generate new key if necessary into credentials.json
 with open('credentials.json', 'r') as f:
     config_data = json.load(f)
 
@@ -36,6 +36,7 @@ SECRET_KEY=config_data['secret_key']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# TODO: update allowed_hosts if necessary
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Application definition

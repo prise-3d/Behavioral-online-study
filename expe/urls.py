@@ -8,14 +8,14 @@ from . import views
 app_name = 'expe'
 
 urlpatterns = [
-    path('', views.expe_list, name='expe_list'),
-    path('expe', views.expe, name='expe'),
+    path('', views.experiments, name='experiments'),
+    # path('expe', views.expe, name='expe'),
     # path('expe_end', views.expe_end, name='expe_end'),
-    path('presentation', views.presentation, name='presentation'),
-    path('update_session_user', views.update_session_user, name='update_session_user'),
-    path('admin/results', views.list_results, name='results'),
-    path('admin/results/<str:expe>', views.list_results, name='results_expe'),
-    path('admin/download', views.download_result, name='download')
+    # path('presentation', views.presentation, name='presentation'),
+    # path('update_session_user', views.update_session_user, name='update_session_user'),
+    # path('admin/results', views.list_results, name='results'),
+    # path('admin/results/<str:expe>', views.list_results, name='results_expe'),
+    # path('admin/download', views.download_result, name='download')
 ]
 
 if settings.DEBUG is True:
