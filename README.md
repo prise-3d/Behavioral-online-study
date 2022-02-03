@@ -1,8 +1,8 @@
-# Django Web expe
+# Python based framework for online behavioral
 
 ## Description
 
-Django web application for designing a psychophysical experiment with stimilus using here, Quest+ developed in Python.
+This project is a Python based framework for designing online behavioral experiment with stimilus. This project proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
 
 ## Documentation
 
