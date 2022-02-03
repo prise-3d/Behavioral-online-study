@@ -1,10 +1,12 @@
 from email.policy import default
+from pyexpat import model
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
 from django.urls import reverse
 from uuid import uuid4
+from datetime import timedelta
 import os
     
 # Some parameters
@@ -65,7 +67,11 @@ class Experiment(models.Model):
     """
     # define experiment required field
     title = models.CharField(max_length=255)
-    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=True, related_name='experiment')
+    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=False, related_name='experiment')
+    estimated_duration = models.DurationField(default=timedelta(minutes=0),
+                        help_text='hh:mm:ss')
+    # TODO: add color box field
+    # TODO: icon experiment field
     url = models.SlugField(unique=True, max_length=255, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
@@ -115,3 +121,7 @@ class UserExperiment(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ExperimentProgress(models.Model):
+    pass
