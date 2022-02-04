@@ -3,10 +3,10 @@ from django import template
 
 register = template.Library()
 
-@register.filter('from_dict')
-def get_value_from_dict(dict_data, key):
+@register.filter('from_json')
+def get_value_from_json(dict_data, key):
     """
-    usage example {{ your_dict| from_dict:your_key }}
+    usage example {{ your_dict| from_json:your_key }}
     """
     
     if key:

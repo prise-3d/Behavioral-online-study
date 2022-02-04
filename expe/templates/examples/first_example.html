@@ -23,24 +23,29 @@
         <h1 class="h3 mb-0 text-gray-800">{{page.title}}</h1>
     </div>
 
+    <center>
+        <h3>{{page.config|from_json:"description"}}</h3>
+    </center>
+
     <div class="row">
 
         <!-- Display images -->
-        {% with left_img=page.config|from_dict:"left_image" %}
+        {% with left_img=page.config|from_json:"left_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
-                <img src="{% static left_img|from_dict:'src' %}" alt="Left image" width="{{left_img|from_dict:'width'}}px" height="{{left_img|from_dict:'height'}}px"> 
+                <img src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
             </div>
         {% endwith %}
 
-        {% with right_img=page.config|from_dict:"right_image" %}
+        {% with right_img=page.config|from_json:"right_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
-                <img src="{% static right_img|from_dict:'src' %}" alt="Left image" width="{{right_img|from_dict:'width'}}px" height="{{right_img|from_dict:'height'}}px"> 
+                <img src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
             </div>
         {% endwith %}
     </div>
         
+    <h5>{{page.config|from_json:"answer"}}</h5>
 
 {% endblock %}
 
