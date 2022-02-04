@@ -8,8 +8,21 @@ from django.http import HttpResponseNotAllowed
 from django.conf import settings
 from .models import Experiment
 
+def index(request):
+    """Default home page
+
+    Args:
+        request ([Request]): Django request instance
+
+    Returns:
+        [Template]: new page to render with website explanation
+    """
+    
+    return render(request, 'expe/index.html')
+
+
 def experiments(request):
-    """Default home page with experiment list
+    """Page with experiment list
 
     Args:
         request ([Request]): Django request instance
@@ -26,4 +39,17 @@ def experiments(request):
         'experiments': experiments,
     }
 
-    return render(request, 'expe/index.html', context)
+    return render(request, 'expe/experiments.html', context)
+
+def experiment(request):
+    """Detail of experiment with example page
+
+    Args:
+        request ([Request]): Django request instance
+
+    Returns:
+        [Template]: new page to render with experiment detail data
+    """
+    context = None
+
+    return render(request, 'expe/experiment.html', context)

@@ -8,7 +8,9 @@ from . import views
 app_name = 'expe'
 
 urlpatterns = [
-    path('', views.experiments, name='experiments'),
+    path('', views.index, name='index'),
+    path('experiments', views.experiments, name='experiments'),
+    path('experiments/<slug:name>', views.experiment, name='experiment')
     # path('expe', views.expe, name='expe'),
     # path('expe_end', views.expe_end, name='expe_end'),
     # path('presentation', views.presentation, name='presentation'),
