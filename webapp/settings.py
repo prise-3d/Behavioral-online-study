@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
     'multiselectfield',
+    'django_json_widget',
     'expe'
 ]
 

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import HttpResponseNotAllowed
 from django.conf import settings
-from .models import Experiment
+from .models import ExamplePage, Experiment
 
 def index(request):
     """Default home page
@@ -59,3 +59,27 @@ def experiment(request, slug):
     }
 
     return render(request, 'expe/experiment.html', context)
+
+
+def example_page(request, slug, id):
+    """Display example page of experiment
+
+    Args:
+        request ([Request]): Django request instance
+
+    Returns:
+        [Template]: new page to render with experiment example page
+    """
+
+    # access example page using unique slug
+    example_page = ExamplePage.objects.get(id=id)
+    experiment = Experiment.objects.get(slug=slug)
+
+    # print(experiment.title)
+    context = {
+        'page': example_page,
+        'experiment': experiment
+    }
+
+    # dynamic rendering with use of custom page template
+    return render(request, f'{example_page.template}', context)

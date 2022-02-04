@@ -10,9 +10,13 @@ from datetime import timedelta
 import os
     
 # Some parameters
-example_template_path = os.path.join('expe', 'templates', 'examples')
-javascript_folder_path = os.path.join('static', 'experiment', 'js')
-css_folder_path = os.path.join('static', 'experiment', 'css')
+static_folder = 'static'
+module_name = 'expe'
+templates_path = os.path.join(module_name, 'templates')
+
+example_template_path = os.path.join(templates_path, 'examples')
+javascript_folder_path = os.path.join(static_folder, 'experiment', 'js')
+css_folder_path = os.path.join(static_folder, 'experiment', 'css')
 
 # All experiments django model
 class Page(models.Model):
@@ -23,16 +27,17 @@ class Page(models.Model):
 
     # get all javascript files
     for js in sorted(os.listdir(javascript_folder_path)):
-        _, filename = os.path.split(js)
-        javascript_files.append((js, filename))
+        js_file_path = os.path.join(javascript_folder_path, js).replace(f'{static_folder}/', '')
+        javascript_files.append((js_file_path, js_file_path))
 
     css_files = []
 
     # get all css files
     for css in sorted(os.listdir(css_folder_path)):
-        _, filename = os.path.split(css)
-        css_files.append((css, filename))
+        css_file_path = os.path.join(css_folder_path, css).replace(f'{static_folder}/', '')
+        css_files.append((css_file_path, css_file_path))
 
+    id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, null=False)
     title = models.CharField(max_length=255)
     javascripts = MultiSelectField(choices=javascript_files, null=True, blank=True)
@@ -52,13 +57,16 @@ class ExamplePage(Page):
 
     # get all expected templates
     for template in sorted(os.listdir(example_template_path)):
-        _, filename = os.path.split(template)
-        example_templates.append((template, filename))
+        template_path = os.path.join(example_template_path, template).replace(f'{templates_path}/', '')
+        example_templates.append((template_path, template_path))
 
     template = models.CharField(max_length=255, 
                                 null=False,
                                 help_text=f'You can add templates into: {example_template_path}',
                                 choices=example_templates)
+
+    def get_absolute_url(self):
+        return reverse('example', kwargs={'id': self.id})
 
 class Experiment(models.Model):
 

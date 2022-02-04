@@ -1,6 +1,7 @@
 Django
 django-admin-interface
 django-multiselectfield
+django-json-widget
 numpy
 Pillow
 questplus

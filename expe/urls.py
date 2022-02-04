@@ -10,14 +10,8 @@ app_name = 'expe'
 urlpatterns = [
     path('', views.index, name='index'),
     path('experiments', views.experiments, name='experiments'),
-    path('experiments/<slug:slug>', views.experiment, name='experiment')
-    # path('expe', views.expe, name='expe'),
-    # path('expe_end', views.expe_end, name='expe_end'),
-    # path('presentation', views.presentation, name='presentation'),
-    # path('update_session_user', views.update_session_user, name='update_session_user'),
-    # path('admin/results', views.list_results, name='results'),
-    # path('admin/results/<str:expe>', views.list_results, name='results_expe'),
-    # path('admin/download', views.download_result, name='download')
+    path('experiments/<slug:slug>', views.experiment, name='experiment'),
+    path('experiments/<slug:slug>/example/<int:id>', views.example_page, name='example')
 ]
 
 if settings.DEBUG is True:
