@@ -38,7 +38,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'expe:index' %}">
-                <div class="sidebar-brand-icon rotate-n-15">
+                <div class="sidebar-brand-icon rotate-n-20">
                     <i class="fas fa-vial"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Behavioral Experiment</sup></div>
@@ -157,6 +157,19 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Documentation</span></a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/prise3d">
+                    <i class="fab fa-fw fa-github"></i>
+                    <span>Github</span></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-info"></i>
                     <span>About</span></a>
             </li>
@@ -178,31 +191,8 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                </nav>
-                <!-- End of Topbar -->
-                
+                {% block nav %}
+                {% endblock %}
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                 {% block content %}

@@ -35,9 +35,9 @@ class Page(models.Model):
 
     name = models.CharField(max_length=100, null=False)
     title = models.CharField(max_length=255)
-    javascripts = MultiSelectField(choices=javascript_files, null=True)
-    styles = MultiSelectField(choices=css_files, null=True)
-    config = models.JSONField(null=True)
+    javascripts = MultiSelectField(choices=javascript_files, null=True, blank=True)
+    styles = MultiSelectField(choices=css_files, null=True, blank=True)
+    config = models.JSONField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -67,12 +67,12 @@ class Experiment(models.Model):
     """
     # define experiment required field
     title = models.CharField(max_length=255)
-    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=False, related_name='experiment')
+    example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=True, related_name='experiment')
     estimated_duration = models.DurationField(default=timedelta(minutes=0),
                         help_text='hh:mm:ss')
     # TODO: add color box field
     # TODO: icon experiment field
-    url = models.SlugField(unique=True, max_length=255, blank=True,
+    slug = models.SlugField(unique=True, max_length=255, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
     is_active = models.IntegerField(default=1, blank=True, null=True, 
@@ -81,12 +81,12 @@ class Experiment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('experiment_detail', args=[str(self.url)])
+        return reverse('experiment', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         
-        if not self.url:
-            self.url = slugify(self.title)
+        if not self.slug:
+            self.slug = slugify(self.title)
         super(Experiment, self).save(*args, **kwargs)
 
     class Meta:

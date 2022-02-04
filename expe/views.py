@@ -41,7 +41,7 @@ def experiments(request):
 
     return render(request, 'expe/experiments.html', context)
 
-def experiment(request):
+def experiment(request, slug):
     """Detail of experiment with example page
 
     Args:
@@ -50,6 +50,12 @@ def experiment(request):
     Returns:
         [Template]: new page to render with experiment detail data
     """
-    context = None
+
+    # access using unique slug
+    experiment = Experiment.objects.get(slug=slug)
+
+    context = {
+        'experiment': experiment,
+    }
 
     return render(request, 'expe/experiment.html', context)

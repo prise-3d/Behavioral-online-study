@@ -11,3 +11,11 @@ def get_value_from_dict(dict_data, key):
     
     if key:
         return dict_data.get(key)
+
+@register.filter('duration_minutes')
+def duration_minutes(td):
+    total_seconds = int(td.total_seconds())
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60 + (hours * 60)
+
+    return '{} min'.format(minutes)
