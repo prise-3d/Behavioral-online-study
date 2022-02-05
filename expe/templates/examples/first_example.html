@@ -7,8 +7,19 @@
     {{page.title}}
 {% endblock %}
 
+{% block stylesheets %}
+
+    <!-- Dynamically load css file of experiments -->
+    {% for css_file in page.styles %}
+        
+        <link href="{% static css_file %}" rel="stylesheet">
+
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
 
+<div class="justify-content-center">
     <div class="py-2">
         <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-primary btn-icon-split btn-sm">
             <span class="icon text-white-50">
@@ -19,34 +30,44 @@
     </div>
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
-        <h1 class="h3 mb-0 text-gray-800">{{page.title}}</h1>
-    </div>
-
     <center>
         <h3>{{page.config|from_json:"description"}}</h3>
     </center>
 
     <div class="row">
-
         <!-- Display images -->
         {% with left_img=page.config|from_json:"left_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
-                <img src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+                <center>
+                    <img src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+                </center>
             </div>
         {% endwith %}
 
         {% with right_img=page.config|from_json:"right_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
-                <img src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+                <center>
+                    <img src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+                </center>
             </div>
         {% endwith %}
     </div>
-        
-    <h5>{{page.config|from_json:"answer"}}</h5>
+    
+    <center>
+        <h5>{{page.config|from_json:"answer"}}</h5>
 
+        <div class="py-2">
+            <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">Find session for experiment</span>
+            </a>
+        </div>
+    </center>
+</div>
 {% endblock %}
 
 {% block javascripts %}

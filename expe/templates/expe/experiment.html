@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-
             
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
@@ -46,44 +45,47 @@
     <div class="row">
 
         {% for session in experiment.sessions.all %}
-            <div class="col-xl-4 col-md-6 mb-4">
-                {% if session.is_active %}
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Available</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                    <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="">
-                                        <i class="fas fa-play-circle fa-2x text-gray-300"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="card border-left-danger shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                        Not available</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                    <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+            {% if session.is_available %}
+                <div class="col-xl-4 col-md-6 mb-4">
+                    {% if session.is_active %}
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Available</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
+                                        <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
+                                        <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="">
+                                            <i class="fas fa-play-circle fa-2x text-gray-300"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-            </div>
-
+                    {% else %}
+                        <div class="card border-left-danger shadow h-100 py-0">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                            Not available</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
+                                        <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
+                                        <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% endfor %}
         
     </div>

@@ -1,5 +1,4 @@
 from email.policy import default
-from pyexpat import model
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
@@ -8,13 +7,21 @@ from django.urls import reverse
 from uuid import uuid4
 from datetime import timedelta
 import os
-    
-# Some parameters
+
+from .utils import create_choice_field
+
+# some parameters
 static_folder = 'static'
 module_name = 'expe'
 templates_path = os.path.join(module_name, 'templates')
 
+# specific pages
 example_template_path = os.path.join(templates_path, 'examples')
+information_template_path = os.path.join(templates_path, 'information')
+main_template_path = os.path.join(templates_path, 'main')
+end_template_path = os.path.join(templates_path, 'end')
+
+# styles and javascript
 javascript_folder_path = os.path.join(static_folder, 'experiment', 'js')
 css_folder_path = os.path.join(static_folder, 'experiment', 'css')
 
@@ -45,6 +52,9 @@ class Page(models.Model):
     config = models.JSONField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    template = models.CharField(max_length=255, 
+                                null=False)
+
     class Meta:
         abstract = True
 
@@ -52,21 +62,26 @@ class ExamplePage(Page):
     """
     Specific example page
     """
-    # TODO: make this field generic based on class name
-    example_templates = []
+    template = create_choice_field(example_template_path)
 
-    # get all expected templates
-    for template in sorted(os.listdir(example_template_path)):
-        template_path = os.path.join(example_template_path, template).replace(f'{templates_path}/', '')
-        example_templates.append((template_path, template_path))
+class MainPage(Page):
+    """
+    Specific main page
+    """
+    template = create_choice_field(main_template_path)
 
-    template = models.CharField(max_length=255, 
-                                null=False,
-                                help_text=f'You can add templates into: {example_template_path}',
-                                choices=example_templates)
+class InformationPage(Page):
+    """
+    Specific main page
+    """
+    template = create_choice_field(information_template_path)
 
-    def get_absolute_url(self):
-        return reverse('example', kwargs={'id': self.id})
+class EndPage(Page):
+    """
+    Specific main page
+    """
+    template = create_choice_field(end_template_path)
+
 
 class Experiment(models.Model):
 
@@ -75,11 +90,16 @@ class Experiment(models.Model):
     """
     # define experiment required field
     title = models.CharField(max_length=255)
+    
+    # page members definition
     example_page = models.ForeignKey(ExamplePage, on_delete=models.PROTECT, null=True, related_name='experiment')
+    information_page = models.ForeignKey(InformationPage, on_delete=models.PROTECT, null=True, related_name='experiment')
+    main_page = models.ForeignKey(MainPage, on_delete=models.PROTECT, null=True, related_name='experiment')
+    end_page = models.ForeignKey(EndPage, on_delete=models.PROTECT, null=True, related_name='experiment')
+
     estimated_duration = models.DurationField(default=timedelta(minutes=0),
                         help_text='hh:mm:ss')
-    # TODO: add color box field
-    # TODO: icon experiment field
+    
     slug = models.SlugField(unique=True, max_length=255, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
@@ -107,11 +127,13 @@ class Experiment(models.Model):
 class Session(models.Model):
 
     name = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
     experiment = models.ForeignKey(Experiment, on_delete=models.PROTECT, related_name='sessions')
     is_active = models.IntegerField(default=1, blank=True, null=True, 
-                                    #help_text ='Active,0->Inactive', 
+                                    help_text ='Session will be displayed but not accessible', 
                                     choices =((1, 'Active'), (0, 'Inactive')))
+    is_available = models.IntegerField(default=1, blank=True, null=True, 
+                                    help_text ='Session will not be displayed if disabled', 
+                                    choices =((1, 'Available'), (0, 'Disabled')))
     created_on = models.DateTimeField(auto_now_add=True)
 
 
@@ -121,7 +143,7 @@ class UserExperiment(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=100)
-    sessions = models.ManyToManyField(Session, null=True)
+    sessions = models.ManyToManyField(Session, null=True, related_name='users')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -132,4 +154,21 @@ class UserExperiment(models.Model):
 
 
 class ExperimentProgress(models.Model):
-    pass
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    session = models.ForeignKey(Session, null=True, related_name='progress', on_delete=models.PROTECT)
+    user = models.ForeignKey(UserExperiment, null=True, related_name='progress', on_delete=models.PROTECT)
+
+    # progress data
+    data = models.JSONField(null=True, blank=True)
+
+class ExperimentStep(models.Model):
+    
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    progress = models.ForeignKey(ExperimentProgress, null=False, related_name='steps', on_delete=models.PROTECT)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+    # if necessary want to store binary data (such as python model)
+    binary = models.BinaryField(null=True, blank=True)
+
+    # data which should contain everything for experiment step
+    data = models.JSONField(null=True, blank=True)
