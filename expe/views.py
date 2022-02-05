@@ -1,6 +1,6 @@
 # django imports
 from uuid import uuid4, UUID
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -142,7 +142,7 @@ def check_user(request):
     return HttpResponse(data, content_type="application/json")
 
 
-def load_information_page(request, expe_slug, session_id):
+def load_information_page(request, slug, session_id):
     """Enable to load the information page before starting experiment
     Args:
         request ([Request]): Django request object with expected key and value data
@@ -170,12 +170,13 @@ def load_information_page(request, expe_slug, session_id):
             })
 
         # access using unique slug
-        experiment = Experiment.objects.get(slug=expe_slug)
-        information_page = experiment.information_page
         session = ExperimentSession.objects.get(id=session_id)
+        experiment = Experiment.objects.get(slug=slug)
+        information_page = experiment.information_page
+        progress = None
 
         progress_class = utils.load_progress_class(experiment.progress_choice)
-        
+
         progress = None
         session_id_str = str(session_id) # avoid dict key issue...
 
@@ -186,25 +187,18 @@ def load_information_page(request, expe_slug, session_id):
             if session_id_str in request.session['progress']:
 
                 try:
-                    progress_uuid = request.session['progress'][session_id_str]
-
-                    print(f'Found user session progress for: (expe: {experiment.title}, progress: {progress_class.__name__}, session: {session.name})')
-
-                    generated_uuid = UUID(progress_uuid, version=4)
-                    progress = progress_class.objects.get(id=generated_uuid)
-
+                    progress_id = int(request.session['progress'][session_id_str])
+            
+                    progress = progress_class.objects.get(id=progress_id)
+                    
                     # enable to start new experiment session only if previous session progress is finished
                     if progress.is_finished:
                         progress = None
                     else:
-                        # TODO: redirect to previous one
-                        pass
+                        return redirect(f'/experiments/{slug}/progress/{progress.id}')
 
                 except ValueError:
-                    return HttpResponse({
-                        'status_code': 404,
-                        'error': 'Error when generating information page'
-                    })
+                    print(f'Error while attempted to retrieve progress')
 
         if progress is None:
             # create experiment progress dynamically
@@ -223,8 +217,8 @@ def load_information_page(request, expe_slug, session_id):
             request.session['progress'] = {}
 
         if session_id_str not in request.session['progress']:
-            request.session['progress'][session_id] = str(progress.id)
-
+            request.session['progress'][session_id_str] = progress.id
+        
         # dynamic rendering with use of custom page template
         return render(request, f'{information_page.template}', context)
 
@@ -235,7 +229,7 @@ def load_information_page(request, expe_slug, session_id):
             })
 
 
-def load_example_page(request, expe_slug, progress):
+def load_example_page(request, slug, progress_id):
     """Enable to load the information page before starting experiment
     Args:
         request ([Request]): Django request object with expected key and value data
@@ -243,17 +237,28 @@ def load_example_page(request, expe_slug, progress):
         [HttpResponse]: Http response message
     """
     if request.method == 'POST':
-        # access using unique slug
-        experiment = Experiment.objects.get(slug=expe_slug)
-        information_page = experiment.information_page
-        session = ExperimentSession.objects.get(id=session_id)
 
-        # print(experiment.title)
+        # access using unique slug
+        experiment = Experiment.objects.get(slug=slug)
+        example_page = experiment.example_page
+
+        progress_class = utils.load_progress_class(experiment.progress_choice)
+        
+        progress = progress_class.objects.get(id=progress_id)
+
+        # TODO: get all data fields
+
         context = {
-            'page': information_page,
+            'page': example_page,
             'experiment': experiment, 
-            'session': session
+            'progress': progress
         }
         
         # dynamic rendering with use of custom page template
-        return render(request, f'{information_page.template}', context)
+        return render(request, f'{example_page.template}', context)
+
+    else:
+        return HttpResponse({
+                'status_code': 404,
+                'error': 'Error when generating information page'
+            })

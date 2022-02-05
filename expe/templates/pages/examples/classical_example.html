@@ -43,7 +43,18 @@
     
     <center>
         <h5>{{page.content|from_json:"answer"}}</h5>
-
+        
+        {% if progress %}
+            
+            <div class="py-2">
+                <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{% if progress.is_started %}Continue{% else %}Start{% endif %} experiment</span>
+                </a>
+            </div>
+        {% else %}
         <div class="py-2">
             <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-50">
@@ -52,6 +63,7 @@
                 <span class="text">Find session for experiment</span>
             </a>
         </div>
+        {% endif %}
     </center>
 </div>
 {% endblock %}

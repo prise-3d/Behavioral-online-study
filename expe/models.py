@@ -167,9 +167,10 @@ class ExperimentProgress(models.Model):
     Store the progress of a session for an ExperimentUser
     """
 
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
+    id = models.AutoField(primary_key=True, editable=False, unique=True)
     session = models.ForeignKey(ExperimentSession, null=True, related_name='progress', on_delete=models.PROTECT)
     user = models.ForeignKey(UserExperiment, null=True, related_name='progress', on_delete=models.PROTECT)
+    is_started = models.BooleanField(default=False, editable=False, null=False)
     is_finished = models.BooleanField(default=False, editable=False, null=False)
     created_on = models.DateTimeField(auto_now_add=True)
 

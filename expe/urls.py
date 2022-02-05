@@ -12,7 +12,8 @@ urlpatterns = [
     path('experiments', views.experiments, name='experiments'),
     path('experiments/<slug:slug>', views.experiment, name='experiment'),
     path('experiments/<slug:slug>/example/<int:id>', views.preview_example_page, name='example'),
-    path('experiments/<slug:expe_slug>/session/<int:session_id>', views.load_information_page, name='load_information'),
+    path('experiments/<slug:slug>/session/<int:session_id>', views.load_information_page, name='load_information'),
+    path('experiments/<slug:slug>/progress/<int:progress_id>', views.load_example_page, name='load_example'),
     path('user/checkuser', views.check_user, name='check_user')
 ]
 

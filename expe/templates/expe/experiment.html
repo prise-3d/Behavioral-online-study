@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-auto">
                                     {% if session.is_active %}
-                                    <form method="POST" action="{% url 'expe:load_information' expe_slug=experiment.slug session_id=session.id %}">
+                                    <form method="POST" action="{% url 'expe:load_information' slug=experiment.slug session_id=session.id %}">
                                         {% csrf_token %}
                                         <button class="btn btn-default" type="submit">
                                             <i class="fas fa-play-circle fa-2x text-grey-700" aria-hidden="true"></i>
