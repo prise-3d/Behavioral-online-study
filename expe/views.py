@@ -9,7 +9,7 @@ from django.http import HttpResponseNotAllowed
 from django.http import JsonResponse
 from django.core.serializers import serialize
 from django.conf import Settings
-import utils
+from . import utils
 
 from .models import ExamplePage, Experiment, ExperimentProgress, ExperimentSession, UserExperiment
 
@@ -157,7 +157,6 @@ def load_information_page(request, expe_slug, session_id):
             
             # check if user exists in database
             user = UserExperiment.objects.get(id=generated_uuid)
-            print(f'[{user.id}]: {user.name} start session with specific progress')
 
         except ValueError:
             # If it's a value error, then the string 
@@ -178,27 +177,34 @@ def load_information_page(request, expe_slug, session_id):
         progress_class = utils.load_progress_class(experiment.progress_choice)
         
         progress = None
+        session_id_str = str(session_id) # avoid dict key issue...
+
         # check if necessary to reload progress
         if 'progress' in request.session:
+            
+            # check if session already started by user
+            if session_id_str in request.session['progress']:
 
-            try:
-                progress_uuid = request.session['progress']
-                generated_uuid = UUID(progress_uuid, version=4)
+                try:
+                    progress_uuid = request.session['progress'][session_id_str]
 
-                progress = progress_class.objects.get(id=generated_uuid)
+                    print(f'Found user session progress for: (expe: {experiment.title}, progress: {progress_class.__name__}, session: {session.name})')
 
-                # enable to start new experiment session if previous session is finished
-                if progress.is_finised:
-                    progress = None
-                else:
-                    # TODO: redirect to previous one
-                    pass
+                    generated_uuid = UUID(progress_uuid, version=4)
+                    progress = progress_class.objects.get(id=generated_uuid)
 
-            except ValueError:
-                return HttpResponse({
-                    'status_code': 404,
-                    'error': 'Error when generating information page'
-                })
+                    # enable to start new experiment session only if previous session progress is finished
+                    if progress.is_finished:
+                        progress = None
+                    else:
+                        # TODO: redirect to previous one
+                        pass
+
+                except ValueError:
+                    return HttpResponse({
+                        'status_code': 404,
+                        'error': 'Error when generating information page'
+                    })
 
         if progress is None:
             # create experiment progress dynamically
@@ -212,6 +218,12 @@ def load_information_page(request, expe_slug, session_id):
             'experiment': experiment, 
             'progress': progress
         }
+
+        if 'progress' not in request.session:
+            request.session['progress'] = {}
+
+        if session_id_str not in request.session['progress']:
+            request.session['progress'][session_id] = str(progress.id)
 
         # dynamic rendering with use of custom page template
         return render(request, f'{information_page.template}', context)
