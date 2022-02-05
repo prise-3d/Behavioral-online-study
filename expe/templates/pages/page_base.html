@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load apptags %}    
+
+{% block title %}
+    {{page.title}}
+{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Dynamically load css file of experiments -->
+    {% for css_file in page.styles %}
+        
+        <link href="{% static css_file %}" rel="stylesheet">
+
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- Dynamically load JS file of experiments -->
+    {% for js_file in page.javascripts %}
+        
+        <script src="{% static js_file %}"></script>
+
+    {% endfor %}
+{% endblock %}

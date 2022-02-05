@@ -47,43 +47,31 @@
         {% for session in experiment.sessions.all %}
             {% if session.is_available %}
                 <div class="col-xl-4 col-md-6 mb-4">
-                    {% if session.is_active %}
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Available</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                        <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
-                                        <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="">
-                                            <i class="fas fa-play-circle fa-2x text-gray-300"></i>
-                                        </a>
-                                    </div>
+                    <div class="card border-left-{% if session.is_active %}success{% else %}danger{% endif %} shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-{% if session.is_active %}success{% else %}danger{% endif %} text-uppercase mb-1">
+                                        {% if session.is_active %}Available{% else %}Not available{% endif %}</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
+                                    <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
+                                    <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
+                                </div>
+                                <div class="col-auto">
+                                    {% if session.is_active %}
+                                    <form method="POST" action="{% url 'expe:load_information' expe_slug=experiment.slug session_id=session.id %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fas fa-play-circle fa-2x text-grey-700" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                        <i class="fas fa-times-circle fa-2x text-gray-300" aria-hidden="true"></i>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                    {% else %}
-                        <div class="card border-left-danger shadow h-100 py-0">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                            Not available</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                        <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
-                                        <p><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</p>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
+                    </div>
                 </div>
             {% endif %}
         {% endfor %}
@@ -93,5 +81,6 @@
 {% endblock %}
 
 {% block javascripts %}
-
+    <!-- Specific launch experiment script -->
+    <script src="{% static 'main/js/launch_session.js' %}"></script>
 {% endblock %}

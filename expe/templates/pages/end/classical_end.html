@@ -1,0 +1,23 @@
+{% extends 'pages/page_base.html' %}
+
+{% load static %}
+{% load apptags %}    
+
+{% block content %}
+
+<div class="justify-content-center">
+    <div class="py-2">
+        <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-primary btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Back to {{experiment.title}}</span>
+        </a>
+    </div>
+
+    <!-- Page Heading -->
+    <center>
+        <h5>{{page.content | from_dict:"end_text"}}</h5>
+    </center>
+</div>
+{% endblock %}

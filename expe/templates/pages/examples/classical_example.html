@@ -1,21 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'pages/page_base.html' %}
 
 {% load static %}
 {% load apptags %}    
-
-{% block title %}
-    {{page.title}}
-{% endblock %}
-
-{% block stylesheets %}
-
-    <!-- Dynamically load css file of experiments -->
-    {% for css_file in page.styles %}
-        
-        <link href="{% static css_file %}" rel="stylesheet">
-
-    {% endfor %}
-{% endblock %}
 
 {% block content %}
 
@@ -31,12 +17,12 @@
 
     <!-- Page Heading -->
     <center>
-        <h3>{{page.config|from_json:"description"}}</h3>
+        <h3>{{page.content|from_json:"description"}}</h3>
     </center>
 
     <div class="row">
         <!-- Display images -->
-        {% with left_img=page.config|from_json:"left_image" %}
+        {% with left_img=page.content|from_json:"left_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
                 <center>
@@ -45,7 +31,7 @@
             </div>
         {% endwith %}
 
-        {% with right_img=page.config|from_json:"right_image" %}
+        {% with right_img=page.content|from_json:"right_image" %}
         
             <div class="col-xl-6 col-md-6 mb-4">
                 <center>
@@ -56,7 +42,7 @@
     </div>
     
     <center>
-        <h5>{{page.config|from_json:"answer"}}</h5>
+        <h5>{{page.content|from_json:"answer"}}</h5>
 
         <div class="py-2">
             <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">
@@ -68,14 +54,4 @@
         </div>
     </center>
 </div>
-{% endblock %}
-
-{% block javascripts %}
-
-    <!-- Dynamically load JS file of experiments -->
-    {% for js_file in page.javascripts %}
-        
-        <script src="{% static js_file %}"></script>
-
-    {% endfor %}
 {% endblock %}

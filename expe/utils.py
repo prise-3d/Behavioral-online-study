@@ -1,6 +1,7 @@
 # main imports
 import os
 from django.db import models
+from importlib import import_module
 
 # some parameters
 static_folder = 'static'
@@ -8,6 +9,7 @@ module_name = 'expe'
 templates_path = os.path.join(module_name, 'templates')
 
 def create_choice_field(template_path):
+    
     templates_files = []
 
     # get all expected templates
@@ -21,4 +23,16 @@ def create_choice_field(template_path):
                                 choices=templates_files)
 
     return template
-        
+
+def load_progress_class(module_path):
+
+    # retrieve module and expected class
+    modules = module_path.split('.')
+    module_name = '.'.join(modules[:-1])
+    class_name = modules[-1]
+
+    # load module and get class
+    module = import_module(module_name)
+    progress_class = getattr(module, class_name)
+
+    return progress_class
