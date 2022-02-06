@@ -1,5 +1,6 @@
 # django imports
 from uuid import uuid4, UUID
+from django.http import FileResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
@@ -13,7 +14,7 @@ from . import utils
 import random
 import json
 
-from .models import ExamplePage, Experiment, ExperimentProgress, ExperimentSession, ExperimentStep, UserExperiment
+from .models import ExamplePage, Experiment, ExperimentSession, ExperimentStep, UserExperiment
 
 def index(request):
     """Default home page
@@ -39,7 +40,7 @@ def experiments(request):
     """
 
     # retrieve each experiment
-    experiments = Experiment.objects.all().exclude(is_active=0, sessions__is_active=0).order_by('-created_on')
+    experiments = Experiment.objects.all().exclude(is_available=0, sessions__is_active=0).order_by('-created_on')
     
     # experiments.all().sessions = experiments.all().sessions.all().exclude(is_active=0) 
     context = {
@@ -410,6 +411,7 @@ def experiment_stat(request):
    
     progress_class = utils.load_progress_class(experiment.progress_choice)
         
+    # only the 3 with most stats info
     progress_data = {}
     for s in experiment.sessions.all():
         progresses = progress_class.objects.filter(session_id=s.id)
@@ -422,3 +424,23 @@ def experiment_stat(request):
 
     return HttpResponse(json.dumps(progress_data), content_type="application/json")
 
+def download_session_progresses(request, slug, session_id):
+    """Create JSON file as output and send it
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    if not request.method =='POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    experiment = Experiment.objects.get(slug=slug)
+
+    data = serialize("json", [ experiment ], fields=('id', 'name'))
+
+    with open('test.json', 'w') as f:
+        json.dump(data, f, indent=2)
+
+    f = open('test.json', 'rb')
+    json_file = FileResponse(f)
+    return json_file

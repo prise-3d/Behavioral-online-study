@@ -25,23 +25,23 @@ class ExperimentAdmin(admin.ModelAdmin):
 
         return super(ExperimentAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     
-    list_display = ('title', 'active', 'created_on')
+    list_display = ('title', 'available', 'created_on')
 
-    def active(self, obj):
-        return obj.is_active == 1
-    active.boolean = True
+    def available(self, obj):
+        return obj.is_available == 1
+    available.boolean = True
 
-    actions = ['make_active', 'make_inactive']
+    actions = ['make_available', 'make_disabled']
 
-    @admin.action(description='Marked as active')
+    @admin.action(description='Marked as available')
     def make_active(self, request, queryset):
-        queryset.update(is_active = 1)
-        messages.success(request, "Selected experiment(s) Marked as active Successfully!")
+        queryset.update(is_available = 1)
+        messages.success(request, "Selected experiment(s) Marked as available Successfully!")
 
-    @admin.action(description='Marked as inactive')
+    @admin.action(description='Marked as disabled')
     def make_inactive(modeladmin, request, queryset):
-        queryset.update(is_active = 0)
-        messages.success(request, "Selected experiment(s) Marked as Inactive Successfully!")
+        queryset.update(is_available = 0)
+        messages.success(request, "Selected experiment(s) Marked as disabled Successfully!")
 
     formfield_overrides = {
         # fields.JSONField: {'widget': JSONEditorWidget}, # if django < 3.1

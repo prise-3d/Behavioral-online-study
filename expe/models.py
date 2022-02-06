@@ -108,9 +108,8 @@ class Experiment(models.Model):
     slug = models.SlugField(unique=True, max_length=255, editable=False, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
-    is_active = models.IntegerField(default=1, blank=True, null=True, 
-                                    #help_text ='Active,0->Inactive', 
-                                    choices =((1, 'Active'), (0, 'Inactive')))
+    is_available = models.IntegerField(default=1, blank=True, null=True, 
+                                    choices =((1, 'Available'), (0, 'Disabled')))
     created_on = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
