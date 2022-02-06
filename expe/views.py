@@ -177,43 +177,51 @@ def load_information_page(request, slug, session_id):
 
         progress_class = utils.load_progress_class(experiment.progress_choice)
 
-        progress = None
+        current_progress = None
         session_id_str = str(session_id) # avoid dict key issue...
-
         
         # check if necessary to reload progress
         if 'progress' in request.session:
             
+            print('Progress data', request.session['progress'])
             # check if session already started by user
             if session_id_str in request.session['progress']:
 
-                try:
-                    progress_id = int(request.session['progress'][session_id_str])
-            
-                    progress = progress_class.objects.get(id=progress_id)
+                print('Progress obj', request.session['progress'][session_id_str])
+                # try:
+                progress_id = int(request.session['progress'][session_id_str])
+        
+                progress = progress_class.objects.get(id=progress_id)
+                
+                # enable to start new experiment session only if previous session progress is finished
+                # or with other criterion...
+                print('Check if session experiment is finished')
+                print(progress.is_finished)
+                if progress.is_finished == True:
+                    # remove from session previous one
+                    current_progress = None
+                    del request.session['progress'][session_id_str]
+        
+                else:  
+                    previous_step = ExperimentStep.objects.filter(progress_id=progress.id).latest('created_on')
+
+                    context = {
+                        'page': experiment.main_page,
+                        'experiment': experiment, 
+                        'progress': progress,
+                        'progress_info': int(progress.progress()),
+                        'step': previous_step
+                    }
                     
-                    # enable to start new experiment session only if previous session progress is finished
-                    # or with other criterion...
-                    print('Check if session experiment is finished')
-                    print(progress.is_finished)
-                    if progress.is_finished == True:
-                        progress = None
-                    else:  # progress.is_started: # TODO: check if ok
-                        context = {
-                            'page': experiment.example_page,
-                            'experiment': experiment, 
-                            'progress': progress
-                        }
-                        
-                        # dynamic rendering with use of custom page template
-                        return render(request, f'{experiment.example_page.template}', context)
+                    # dynamic rendering with use of custom page template
+                    return render(request, f'{experiment.main_page.template}', context)
 
-                except ValueError:
-                    print(f'Error while attempted to retrieve progress')
+                # except ValueError:
+                #     print(f'Error while attempted to retrieve progress')
 
-        if progress is None:
+        if current_progress is None:
             # create experiment progress dynamically
-            progress = progress_class.objects.create(
+            current_progress = progress_class.objects.create(
                 session=session,
                 user=user
             )
@@ -221,14 +229,14 @@ def load_information_page(request, slug, session_id):
         context = {
             'page': information_page,
             'experiment': experiment, 
-            'progress': progress
+            'progress': current_progress
         }
 
         if 'progress' not in request.session:
             request.session['progress'] = {}
 
         if session_id_str not in request.session['progress']:
-            request.session['progress'][session_id_str] = progress.id
+            request.session['progress'][session_id_str] = current_progress.id
         
         # dynamic rendering with use of custom page template
         return render(request, f'{information_page.template}', context)
@@ -291,16 +299,19 @@ def run_experiment_step(request, slug, progress_id):
         
         progress = progress_class.objects.get(id=progress_id)
 
+        # retrieve previous step if exists
+        previous_step = None
+
         # process an experiment step
         if not progress.is_started:
             progress.start()
             progress.is_started = True
             progress.save()
+        else:
+            previous_step = ExperimentStep.objects.filter(progress_id=progress.id).latest('created_on')
 
-        # TODO: get expected answer
-        previous_step = None
-        answer = 1 
-        step_data = progress.next(previous_step, answer)
+        # send previous step (if exists) and request dict form data
+        step_data = progress.next(previous_step, request.POST)
 
         # create new state
         experiment_step = ExperimentStep.objects.create(
@@ -308,9 +319,9 @@ def run_experiment_step(request, slug, progress_id):
             data=step_data
         )
 
-        session = ExperimentSession.objects.get(id=progress.session.id)
-        print(session.users.all())
-        print('There is some expe steps:', ExperimentStep.objects.filter(progress_id=progress.id).all().count())
+        # session = ExperimentSession.objects.get(id=progress.session.id)
+        # print(session.users.all())
+        # print('There is some expe steps:', ExperimentStep.objects.filter(progress_id=progress.id).all().count())
 
         if progress.end():
             

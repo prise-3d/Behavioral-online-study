@@ -222,7 +222,7 @@ class ExperimentStep(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    datetime = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     # generic way to add specific ExperimentProgress object
     progress_type = models.ForeignKey(ContentType, related_name='steps', on_delete=models.PROTECT)

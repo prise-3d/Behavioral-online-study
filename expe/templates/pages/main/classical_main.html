@@ -29,7 +29,7 @@
         
             <div class="col-xl-5 col-md-5 mb-4">
                 <center>
-                    <img src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+                    <img class="classical-experiment-image" src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
                 </center>
             </div>
         {% endwith %}
@@ -38,7 +38,7 @@
         
             <div class="col-xl-5 col-md-5 mb-4">
                 <center>
-                    <img src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+                    <img class="classical-experiment-image" src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
                 </center>
             </div>
         {% endwith %}
@@ -49,11 +49,15 @@
         <!-- If user progression exists-->
         {% if progress %}
             <div class="row justify-content-md-center py-4">
-                <form method="post" class="col-xs-6 col-md-offset-3" action="{% url 'expe:run_session' slug=experiment.slug progress_id=progress.id %}">  
-                    {% csrf_token %} 
+                
+                <form class="classical-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'expe:run_session' slug=experiment.slug progress_id=progress.id %}">  
+                    {% csrf_token %}
+                    <input type="hidden" name="classical-answer-time"/>
+                    <input type="hidden" name="classical-answer-value"/>
+                    
                     <div class="row">
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-danger btn-icon-split">
+                            <button type="submit" class="btn btn-danger btn-icon-split" value="0">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-times-circle"></i>
                                 </span>
@@ -61,7 +65,7 @@
                             </button>
                         </div>
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-success btn-icon-split">
+                            <button type="submit" class="btn btn-success btn-icon-split" value="1">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                 </span>
@@ -69,7 +73,9 @@
                             </button>
                         </div>
                     </div>
+                
                 </form> 
+            
             </div> 
         {% endif %}
     </center>

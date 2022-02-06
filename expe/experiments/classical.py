@@ -26,7 +26,18 @@ class ClassicalExperimentProgress(ExperimentProgress):
 
         Return: JSON data object
         """
+
+        # 1. update previous step depending of answer (if previous step exists)
+        if step is not None:
+            answer_time = answer['classical-answer-time']
+            answer_value = answer['classical-answer-value']
+            
+            step.data['answer_time'] = answer_time
+            step.data['answer_value'] = answer_value
+            step.save()
         
+        # 2. process next step data (can be depending of answer)
+
         # folder of images could also stored into experiment config
         cornel_box_path = 'resources/images/cornel_box'
         # need to take care of static media folder
