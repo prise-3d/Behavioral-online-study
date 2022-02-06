@@ -103,9 +103,6 @@ class Experiment(models.Model):
                                 help_text=f'You can add progress classes into: expe/experiments',
                                 choices=[('default', 'default')]) # in order to override, need of pre-filled
 
-    estimated_duration = models.DurationField(default=timedelta(minutes=0),
-                        help_text='hh:mm:ss')
-
     config = models.JSONField(null=True, blank=True)
     
     slug = models.SlugField(unique=True, max_length=255, editable=False, blank=True,
@@ -137,6 +134,11 @@ class ExperimentSession(models.Model):
     id = models.AutoField(primary_key=True, editable=False, unique=True)
     name = models.CharField(max_length=255)
     experiment = models.ForeignKey(Experiment, on_delete=models.PROTECT, related_name='sessions')
+
+    estimated_duration = models.DurationField(default=timedelta(minutes=0),
+                help_text='hh:mm:ss')
+    config = models.JSONField(null=True, blank=True)
+    
     is_active = models.IntegerField(default=1, blank=True, null=True, 
                                     help_text ='Session will be displayed but not accessible', 
                                     choices =((1, 'Active'), (0, 'Inactive')))
@@ -178,18 +180,16 @@ class ExperimentProgress(models.Model):
     data = models.JSONField(null=True, blank=True)
 
     @abstractmethod
-    def start(self) -> dict:
+    def start(self):
         """
-        Define start experiment method
-
-        Return: dict object
+        Define and init some progress variables
         """
         pass
 
     @abstractmethod
-    def next(self, step) -> dict:
+    def next(self, step, answer) -> dict:
         """
-        Define next step data object taking into account current step
+        Define next step data object taking into account current step and answer
 
         Return: JSON data object
         """

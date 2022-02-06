@@ -17,7 +17,7 @@
 
     <!-- Page Heading -->
     <center>
-        <h5>{{page.content | from_dict:"end_text"}}</h5>
+        <h5>{{page.content | from_json:"end_text"}}</h5>
     </center>
 </div>
 {% endblock %}

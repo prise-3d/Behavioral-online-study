@@ -8,13 +8,70 @@
 <div class="justify-content-center">
 
     <!-- Page Heading -->
-    <center>
-        <h5>{{page.content | from_dict:"description"}}</h5>
-    </center>
-
-    <div class="mb-1 small">Experiment progress</div>
-    <div class="progress progress-sm mb-2">
-        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="py-2"></div>
+        <center>
+            <h5>{{page.content | from_json:"description"}}</h5>
+        </center>
     </div>
+
+    <div class="row justify-content-md-center py-2">
+        <div class="col-xl-8 col-md-8 mb-8">
+            <div class="mb-1 small">Experiment progress ({{progress_info}}%)</div>
+            <div class="progress progress-sm mb-2">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{progress_info}}%" aria-valuenow="{{progress_info}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row py-2 justify-content-md-center">
+        <!-- Display images -->
+        {% with left_img=step.data|from_json:"left_image" %}
+        
+            <div class="col-xl-5 col-md-5 mb-4">
+                <center>
+                    <img src="{% static left_img|from_json:'src' %}" alt="Left image" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+                </center>
+            </div>
+        {% endwith %}
+
+        {% with right_img=step.data|from_json:"right_image" %}
+        
+            <div class="col-xl-5 col-md-5 mb-4">
+                <center>
+                    <img src="{% static right_img|from_json:'src' %}" alt="Left image" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+                </center>
+            </div>
+        {% endwith %}
+    </div>
+    
+    <center>
+        
+        <!-- If user progression exists-->
+        {% if progress %}
+            <div class="row justify-content-md-center py-4">
+                <form method="post" class="col-xs-6 col-md-offset-3" action="{% url 'expe:run_session' slug=experiment.slug progress_id=progress.id %}">  
+                    {% csrf_token %} 
+                    <div class="row">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-danger btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-times-circle"></i>
+                                </span>
+                                <span class="text">No identicals</span>
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Identicals</span>
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+            </div> 
+        {% endif %}
+    </center>
 </div>
 {% endblock %}

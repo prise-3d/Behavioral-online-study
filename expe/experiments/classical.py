@@ -1,27 +1,62 @@
 import os
+import random
 from typing import overload
-from ..models import ExperimentProgress
+from ..models import ExperimentProgress, Experiment
 
 class ClassicalExperimentProgress(ExperimentProgress):
     """
     Example of Classical experiment with specific number of iteration
     """    
     
-    def start(self) -> dict:
+    def start(self):
         """
-        Define start experiment method
+        Define and init some progress variables
+        """
+        if self.data is None:
+            self.data = {}
 
-        Return: dict object
-        """
-        pass
+        self.data['iteration'] = 0
 
-    def next(self, step) -> dict:
+        # always save state
+        self.save()
+
+    def next(self, step, answer) -> dict:
         """
-        Define next step data object taking into account current step
+        Define next step data object taking into account current step and answer
 
         Return: JSON data object
         """
-        pass
+        
+        # folder of images could also stored into experiment config
+        cornel_box_path = 'resources/images/cornel_box'
+        # need to take care of static media folder
+        images_path = sorted([ 
+                    os.path.join(cornel_box_path, img) 
+                    for img in os.listdir(os.path.join('static', cornel_box_path)) 
+                ])
+
+        # right image always display reference
+        # prepare next step data
+        step_data = {
+            "left_image": {
+                "src": f"{random.choice(images_path)}",
+                "width": 500,
+                "height": 500
+            },
+            "right_image": {
+                "src": f"{images_path[-1]}",
+                "width": 500,
+                "height": 500
+            }
+        }
+
+        # increment iteration into progress data
+        self.data['iteration'] += 1
+
+        # always save state
+        self.save()
+
+        return step_data
 
     def progress(self) -> float:
         """
@@ -29,7 +64,11 @@ class ClassicalExperimentProgress(ExperimentProgress):
 
         Return: float progress between [0, 100]
         """
-        pass
+        total_iterations = int(self.session.config['iterations'])
+        iteration = int(self.data['iteration'])
+
+        # return percent of session advancement
+        return (iteration / total_iterations) * 100
 
     def end(self) -> bool:
         """
@@ -37,4 +76,9 @@ class ClassicalExperimentProgress(ExperimentProgress):
 
         Return: bool
         """
-        pass
+        total_iterations = int(self.session.config['iterations'])
+        iteration = int(self.data['iteration'])
+
+        return iteration >= total_iterations
+
+

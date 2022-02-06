@@ -44,16 +44,25 @@
     <center>
         <h5>{{page.content|from_json:"answer"}}</h5>
         
+        <!-- If user progression exists-->
         {% if progress %}
-            
-            <div class="py-2">
-                <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-check"></i>
-                    </span>
-                    <span class="text">{% if progress.is_started %}Continue{% else %}Start{% endif %} experiment</span>
-                </a>
-            </div>
+            <div class="row justify-content-md-center py-4">
+                <form method="post" class="col-xs-6 col-md-offset-3" action="{% url 'expe:run_session' slug=experiment.slug progress_id=progress.id %}">  
+                    {% csrf_token %} 
+                    <div class="row"></div> 
+                        <div class="col-auto">
+                            
+                            <button type="submit" class="btn btn-success btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">{% if progress.is_started %}Continue{% else %}Start{% endif %} experiment</span>
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+            </div> 
+                
         {% else %}
         <div class="py-2">
             <a href="{% url 'expe:experiment' slug=experiment.slug %}" class="btn btn-success btn-icon-split">

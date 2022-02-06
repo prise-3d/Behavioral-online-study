@@ -11,7 +11,7 @@ from django.core.serializers import serialize
 from django.conf import Settings
 from . import utils
 
-from .models import ExamplePage, Experiment, ExperimentProgress, ExperimentSession, UserExperiment
+from .models import ExamplePage, Experiment, ExperimentProgress, ExperimentSession, ExperimentStep, UserExperiment
 
 def index(request):
     """Default home page
@@ -180,6 +180,7 @@ def load_information_page(request, slug, session_id):
         progress = None
         session_id_str = str(session_id) # avoid dict key issue...
 
+        
         # check if necessary to reload progress
         if 'progress' in request.session:
             
@@ -192,10 +193,20 @@ def load_information_page(request, slug, session_id):
                     progress = progress_class.objects.get(id=progress_id)
                     
                     # enable to start new experiment session only if previous session progress is finished
-                    if progress.is_finished:
+                    # or with other criterion...
+                    print('Check if session experiment is finished')
+                    print(progress.is_finished)
+                    if progress.is_finished == True:
                         progress = None
-                    else:
-                        return redirect(f'/experiments/{slug}/progress/{progress.id}')
+                    else:  # progress.is_started: # TODO: check if ok
+                        context = {
+                            'page': experiment.example_page,
+                            'experiment': experiment, 
+                            'progress': progress
+                        }
+                        
+                        # dynamic rendering with use of custom page template
+                        return render(request, f'{experiment.example_page.template}', context)
 
                 except ValueError:
                     print(f'Error while attempted to retrieve progress')
@@ -257,6 +268,76 @@ def load_example_page(request, slug, progress_id):
         # dynamic rendering with use of custom page template
         return render(request, f'{example_page.template}', context)
 
+    else:
+        return HttpResponse({
+                'status_code': 404,
+                'error': 'Error when generating information page'
+            })
+
+
+def run_experiment_step(request, slug, progress_id):
+    """Enable to process an experiment for the current user progress 
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    if request.method == 'POST':
+        # access using unique slug
+        experiment = Experiment.objects.get(slug=slug)
+        main_page = experiment.main_page
+
+        progress_class = utils.load_progress_class(experiment.progress_choice)
+        
+        progress = progress_class.objects.get(id=progress_id)
+
+        # process an experiment step
+        if not progress.is_started:
+            progress.start()
+            progress.is_started = True
+            progress.save()
+
+        # TODO: get expected answer
+        previous_step = None
+        answer = 1 
+        step_data = progress.next(previous_step, answer)
+
+        # create new state
+        experiment_step = ExperimentStep.objects.create(
+            progress=progress,
+            data=step_data
+        )
+
+        session = ExperimentSession.objects.get(id=progress.session.id)
+        print(session.users.all())
+        print('There is some expe steps:', ExperimentStep.objects.filter(progress_id=progress.id).all().count())
+
+        if progress.end():
+            
+            # passed as finished state
+            progress.is_finished = True
+            progress.save()
+            
+            end_page = experiment.end_page
+
+            context = {
+                'page': end_page,
+                'experiment': experiment, 
+                'progress': progress
+            }
+
+            return render(request, f'{end_page.template}', context)
+
+        context = {
+            'page': main_page,
+            'experiment': experiment, 
+            'progress': progress,
+            'progress_info': int(progress.progress()),
+            'step': experiment_step
+        }
+        
+        # dynamic rendering with use of custom page template
+        return render(request, f'{main_page.template}', context)
     else:
         return HttpResponse({
                 'status_code': 404,
