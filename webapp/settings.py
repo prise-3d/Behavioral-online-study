@@ -39,6 +39,8 @@ DEBUG = True
 # TODO: update allowed_hosts if necessary
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+SESSION_SAVE_EVERY_REQUEST = True
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -19,16 +19,16 @@
         <form method="post" class="col-xs-6 col-md-offset-3" action="{% url 'expe:load_example' slug=experiment.slug progress_id=progress.id %}">  
             {% csrf_token %}  
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Your surname</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <label for="classical-input-surname" class="form-label">Your surname</label>
+                <input name="classical-info-surname" type="text" class="form-control" id="classical-input-surname" placeholder="">
             </div>
             <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Why do you want to do this experiment?</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="classical-textarea-why" class="form-label">Why do you want to do this experiment?</label>
+                <textarea name="classical-info-why" class="form-control" id="classical-textarea-why" rows="3"></textarea>
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlSelect1" class="form-label">Do you wear glasses?</label>
-                <select id="exampleFormControlSelect1" class="form-control" aria-label="Default select example">
+                <label for="classical-select-glasses" class="form-label">Do you wear glasses?</label>
+                <select name="classical-info-glasses" id="classical-select-glasses" class="form-control" aria-label="Default select example">
                     <option selected>No</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>

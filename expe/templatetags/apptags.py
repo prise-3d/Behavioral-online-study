@@ -19,3 +19,7 @@ def duration_minutes(td):
     minutes = (total_seconds % 3600) // 60 + (hours * 60)
 
     return '{} min'.format(minutes)
+
+@register.simple_tag
+def setvar(val=None):
+  return val

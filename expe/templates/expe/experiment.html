@@ -23,7 +23,7 @@
         <!-- Card Content - Collapse -->
         <div class="collapse show" id="collapseCardExample" style="">
             <div class="card-body">
-                <h5><i class="fas fa-fw fa-comment-dots"></i> {{experiment.description | truncatechars:60 }}</h5>
+                <h5><i class="fas fa-fw fa-comment-dots"></i> {{experiment.description }}</h5>
                 <div class="h7 mb-0 font-weight-bold text-gray-800"><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</div>
 
                 <div class="py-2">
@@ -42,35 +42,46 @@
         <h2 class="h5 mb-0 text-gray-800">Related sessions</h2>
     </div>
     <div class="row">
-
+        
         {% for session in experiment.sessions.all %}
             {% if session.is_available %}
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card border-left-{% if session.is_active %}success{% else %}danger{% endif %} shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-{% if session.is_active %}success{% else %}danger{% endif %} text-uppercase mb-1">
-                                        {% if session.is_active %}Available{% else %}Not available{% endif %}</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                    <i class="fas fa-fw fa-users"></i> {{ session.users.all | length}} users passed
-                                    <p><i class="fas fa-fw fa-clock"></i> {{ session.estimated_duration | duration_minutes }}</p>
-                                </div>
-                                <div class="col-auto">
-                                    {% if session.is_active %}
-                                    <form method="POST" action="{% url 'expe:load_information' slug=experiment.slug session_id=session.id %}">
-                                        {% csrf_token %}
-                                        <button class="btn btn-default" type="submit">
-                                            <i class="fas fa-play-circle fa-2x text-grey-700" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                    {% else %}
-                                        <i class="fas fa-times-circle fa-2x text-gray-300" aria-hidden="true"></i>
-                                    {% endif %}
+                    {% with card_class="success" %}
+
+                        {% if not session.is_active %}
+                            {% setvar "danger" as card_class %}
+                        {% endif %}
+
+                        {% if session.is_active and session.id|stringformat:'s' in progress_session %}
+                            {% setvar "warning" as card_class %}
+                        {% endif %}
+
+                        <div class="card border-left-{{card_class}} shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-{{card_class}} text-uppercase mb-1">
+                                            {% if session.is_active %}Available{% if session.id|stringformat:'s' in progress_session %} (continue session){% endif %}{% else %}Not available{% endif %}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
+                                        <i class="fas fa-fw fa-users"></i> {{ session.progresses.all | length}} users passed
+                                        <p><i class="fas fa-fw fa-clock"></i> {{ session.estimated_duration | duration_minutes }}</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        {% if session.is_active %}
+                                        <form method="POST" action="{% url 'expe:load_information' slug=experiment.slug session_id=session.id %}">
+                                            {% csrf_token %}
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="fas fa-play-circle fa-2x text-grey-700" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                        {% else %}
+                                            <i class="fas fa-times-circle fa-2x text-gray-300" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endwith %}
                 </div>
             {% endif %}
         {% endfor %}

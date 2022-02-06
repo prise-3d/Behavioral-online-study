@@ -8,7 +8,7 @@ class ClassicalExperimentProgress(ExperimentProgress):
     Example of Classical experiment with specific number of iteration
     """    
     
-    def start(self):
+    def start(self, user_data):
         """
         Define and init some progress variables
         """
@@ -16,6 +16,11 @@ class ClassicalExperimentProgress(ExperimentProgress):
             self.data = {}
 
         self.data['iteration'] = 0
+        self.data['user'] = {
+            'username': user_data['classical-info-surname'],
+            'why': user_data['classical-info-why'],
+            'glasses': user_data['classical-info-glasses'],
+        }
 
         # always save state
         self.save()

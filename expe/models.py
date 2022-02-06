@@ -154,7 +154,7 @@ class UserExperiment(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
-    sessions = models.ManyToManyField(ExperimentSession, editable=False, related_name='users')
+    # sessions = models.ManyToManyField(ExperimentProgress, editable=False, related_name='users')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -170,8 +170,8 @@ class ExperimentProgress(models.Model):
     """
 
     id = models.AutoField(primary_key=True, editable=False, unique=True)
-    session = models.ForeignKey(ExperimentSession, null=True, related_name='progress', on_delete=models.PROTECT)
-    user = models.ForeignKey(UserExperiment, null=True, related_name='progress', on_delete=models.PROTECT)
+    session = models.ForeignKey(ExperimentSession, null=True, related_name='progresses', on_delete=models.PROTECT)
+    user = models.ForeignKey(UserExperiment, null=True, related_name='progresses', on_delete=models.PROTECT)
     is_started = models.BooleanField(default=False, editable=False, null=False)
     is_finished = models.BooleanField(default=False, editable=False, null=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -180,7 +180,7 @@ class ExperimentProgress(models.Model):
     data = models.JSONField(null=True, blank=True)
 
     @abstractmethod
-    def start(self):
+    def start(self, user_data):
         """
         Define and init some progress variables
         """
