@@ -15,24 +15,55 @@
     </div>
 
     <!-- Content Row -->
-    <div class="card shadow mb-4">
-        <!-- Card Header - Accordion -->
-        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Description</h6>
-        </a>
-        <!-- Card Content - Collapse -->
-        <div class="collapse show" id="collapseCardExample" style="">
-            <div class="card-body">
-                <h5><i class="fas fa-fw fa-comment-dots"></i> {{experiment.description }}</h5>
-                <div class="h7 mb-0 font-weight-bold text-gray-800"><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</div>
+    <div class="row">
+        <div class="col-xl-9 col-lg-8">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Description</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample" style="">
+                    <div class="card-body">
+                        <h5><i class="fas fa-fw fa-comment-dots"></i> {{experiment.description }}</h5>
+                        <div class="h7 mb-0 font-weight-bold text-gray-800"><i class="fas fa-fw fa-calendar-day"></i> {{experiment.created_on}}</div>
 
-                <div class="py-2">
-                    <a href="{% url 'expe:example' slug=experiment.slug id=experiment.example_page.id %}" class="btn btn-primary btn-icon-split btn-sm">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-arrow-right"></i>
+                        <div class="py-2">
+                            <a href="{% url 'expe:example' slug=experiment.slug id=experiment.example_page.id %}" class="btn btn-primary btn-icon-split btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text">Display example</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-4">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Stats</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4">
+                        <canvas id="experiment-stat"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <!-- TODO... -->
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Direct
                         </span>
-                        <span class="text">Display example</span>
-                    </a>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Social
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Referral
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +74,7 @@
     </div>
     <div class="row">
         
-        {% for session in experiment.sessions.all %}
+        {% for session in experiment.sessions.all|dictsortreversed:"created_on" %}
             {% if session.is_available %}
                 <div class="col-xl-4 col-md-6 mb-4">
                     {% with card_class="success" %}
@@ -91,6 +122,9 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script type="text/javascript">
+         var EXPE_SLUG = "{{experiment.slug}}"
+    </script>
     <!-- Specific launch experiment script -->
-    <script src="{% static 'main/js/launch_session.js' %}"></script>
+    <script src="{% static 'main/js/experiment_stat.js' %}"></script>
 {% endblock %}

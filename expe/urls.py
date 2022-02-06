@@ -15,7 +15,8 @@ urlpatterns = [
     path('experiments/<slug:slug>/session/<int:session_id>', views.load_information_page, name='load_information'),
     path('experiments/<slug:slug>/start/<int:progress_id>', views.load_example_page, name='load_example'),
     path('experiments/<slug:slug>/run/<int:progress_id>', views.run_experiment_step, name='run_session'),
-    path('user/checkuser', views.check_user, name='check_user')
+    path('experiments/experiment/stat', views.experiment_stat, name='experiment_stat'),
+    path('user/checkuser', views.check_user, name='check_user'),
 ]
 
 if settings.DEBUG is True:

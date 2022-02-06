@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 from django.conf import Settings
 from . import utils
+import random
+import json
 
 from .models import ExamplePage, Experiment, ExperimentProgress, ExperimentSession, ExperimentStep, UserExperiment
 
@@ -169,9 +171,17 @@ def load_information_page(request, slug, session_id):
                 'status_code': 404,
                 'error': 'Error when generating information page'
             })
+        
 
         # access using unique slug
         session = ExperimentSession.objects.get(id=session_id)
+
+        if not session.is_available:
+            return HttpResponse({
+                'status_code': 404,
+                'error': 'Cannot get access to this session'
+            })
+
         experiment = Experiment.objects.get(slug=slug)
         information_page = experiment.information_page
         progress = None
@@ -370,3 +380,45 @@ def run_experiment_step(request, slug, progress_id):
                 'status_code': 404,
                 'error': 'Error when generating information page'
             })
+
+
+def experiment_stat(request):
+    """Check and add user if not exist
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    if not request.method =='POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    experiment = None
+
+    if 'slug' in request.POST:
+        slug = request.POST['slug']
+        try:        
+            experiment = Experiment.objects.get(slug=request.POST['slug'])
+        except:
+            print(f'Cannot load experiment with slug: {slug}')
+
+    if experiment is None:
+
+        return HttpResponse({
+                'status_code': 404,
+                'error': 'Error when generating information page'
+            }, content_type="application/json")
+   
+    progress_class = utils.load_progress_class(experiment.progress_choice)
+        
+    progress_data = {}
+    for s in experiment.sessions.all():
+        progresses = progress_class.objects.filter(session_id=s.id)
+
+        progress_data[s.name] = {
+            'count': progresses.count(),
+            'color': "#"+''.join([random.choice('0123456789ABCDEF') for _ in range(6)])
+        }
+    # data = serialize("json", experiment.sessions.all(), fields=('id', 'name', 'progresses'))
+
+    return HttpResponse(json.dumps(progress_data), content_type="application/json")
+
