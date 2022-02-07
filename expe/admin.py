@@ -6,7 +6,6 @@ from django_json_widget.widgets import JSONEditorWidget
 
 from .models import Experiment, Participant, Session, SessionProgress
 from .models import ExamplePage, InformationPage, MainPage, EndPage
-from .experiments.classical import ClassicalSessionProgress
 
 
 @admin.register(Experiment)
@@ -106,7 +105,3 @@ class PageAdmin(admin.ModelAdmin):
         # fields.JSONField: {'widget': JSONEditorWidget}, # if django < 3.1
         models.JSONField: {'widget': JSONEditorWidget},
     }
-
-@admin.register(ClassicalSessionProgress)
-class ClassicalSessionProgressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'participant', 'created_on')
