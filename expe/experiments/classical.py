@@ -121,7 +121,6 @@ class ClassicalSessionProgressTime(ClassicalSessionProgress):
 
         Return: bool
         """
-        print("Progress time here")
         total_iterations = int(self.session.config['iterations'])
         iteration = int(self.data['iteration'])
 

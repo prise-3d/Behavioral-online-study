@@ -58,7 +58,7 @@ class Page(models.Model):
     styles = MultiSelectField(choices=css_files, null=True, blank=True)
     content = models.JSONField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-
+    
     class Meta:
         abstract = True
 
@@ -67,6 +67,7 @@ class ExamplePage(Page):
     Specific example page
     """
     template = create_choice_field(example_template_path)
+    
 
 class MainPage(Page):
     """

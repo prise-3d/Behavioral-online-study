@@ -16,6 +16,14 @@ import_submodules(experiments)
 @admin.register(Experiment)
 class ExperimentAdmin(admin.ModelAdmin):
     
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(ExperimentAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['example_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
+        form.base_fields['information_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
+        form.base_fields['main_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
+        form.base_fields['end_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
+        return form
+
     list_display = ('title', 'available', 'created_on')
 
     def available(self, obj):
@@ -43,6 +51,12 @@ class ExperimentAdmin(admin.ModelAdmin):
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('name', 'experiment', 'active', 'available', 'created_on')
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(SessionAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['experiment'].label_from_instance = lambda inst: "{}".format(inst.slug)
+        return form
+
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         
