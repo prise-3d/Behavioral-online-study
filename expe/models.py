@@ -1,6 +1,7 @@
-from abc import abstractmethod
 from email.policy import default
 from django.db import models
+from polymorphic.models import PolymorphicModel
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
@@ -13,6 +14,8 @@ import os
 from django.conf import settings
 
 from .utils import create_choice_field
+from abc import abstractmethod
+
 
 # some parameters
 static_folder = settings.RELATIVE_STATIC_URL
@@ -130,6 +133,8 @@ class Session(models.Model):
     name = models.CharField(max_length=255)
     experiment = models.ForeignKey(Experiment, on_delete=models.PROTECT, related_name='sessions')
 
+    # progresses = models.ManyToManyField(SessionProgress, editable=False, related_name='session')
+
     estimated_duration = models.DurationField(default=timedelta(minutes=0),
                 help_text='hh:mm:ss')
 
@@ -155,7 +160,7 @@ class Participant(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
-    # sessions = models.ManyToManyField(SessionProgress, editable=False, related_name='participants')
+    # progresses = models.ManyToManyField(SessionProgress, editable=False, related_name='participant')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -164,8 +169,7 @@ class Participant(models.Model):
     def __str__(self):
         return self.name
 
-
-class SessionProgress(models.Model):
+class SessionProgress(PolymorphicModel):
     """
     Store the progress of a session for an ExperimentUser
     """
@@ -214,8 +218,6 @@ class SessionProgress(models.Model):
         """
         pass
 
-    class Meta:
-        abstract = True
 
 class SessionStep(models.Model):
     """

@@ -6,7 +6,12 @@ from django_json_widget.widgets import JSONEditorWidget
 
 from .models import Experiment, Participant, Session, SessionProgress
 from .models import ExamplePage, InformationPage, MainPage, EndPage
+from .utils import import_submodules
 
+from . import experiments
+
+# recursively import all subclasses of SessionProgress
+import_submodules(experiments)
 
 @admin.register(Experiment)
 class ExperimentAdmin(admin.ModelAdmin):

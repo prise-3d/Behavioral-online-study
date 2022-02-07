@@ -1,7 +1,7 @@
 import os
 import random
 import time
-from ..models import SessionProgress
+from ..models import SessionProgress, Session
 from django.conf import settings
 
 class ClassicalSessionProgress(SessionProgress):
@@ -121,6 +121,7 @@ class ClassicalSessionProgressTime(ClassicalSessionProgress):
 
         Return: bool
         """
+        print("Progress time here")
         total_iterations = int(self.session.config['iterations'])
         iteration = int(self.data['iteration'])
 
