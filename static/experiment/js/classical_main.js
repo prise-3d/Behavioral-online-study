@@ -2,16 +2,17 @@
 document.addEventListener('DOMContentLoaded',() => {
 
     var start_answer_time = null;
-    var experiment_images = document.querySelector('img[class="classical-experiment-image"]')
-        
-    if (experiment_images !== null) {
-        experiment_images.onload = function() {
-            document.querySelector('img[class="classical-experiment-image"]').style.display = 'inline'
+    var experiment_images = document.querySelectorAll('img[class="classical-experiment-image"]')
+    
 
-            // Once images are loaded, the stimulus is then available we can measure the answer time
-            start_answer_time = Date.now();
-        }
+    if (experiment_images !== null) {
+        experiment_images.forEach(e => { 
+            e.style.display = 'inline'
+        });
     }
+
+    // Once images are loaded, the stimulus is then available we can measure the answer time
+    start_answer_time = Date.now();
 
     // Do whatever you want
     document.querySelector('form[class="classical-form"]').onsubmit = (e) => {	

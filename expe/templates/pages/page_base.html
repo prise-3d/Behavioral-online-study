@@ -15,6 +15,10 @@
         <link href="{% static css_file %}" rel="stylesheet">
 
     {% endfor %}
+
+    {% block customstylesheets %}
+    {% endblock %}
+
 {% endblock %}
 
 {% block content %}

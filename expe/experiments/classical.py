@@ -1,14 +1,15 @@
 import os
 import random
-from typing import overload
-from ..models import ExperimentProgress, Experiment
+import time
+from ..models import SessionProgress
+from django.conf import settings
 
-class ClassicalExperimentProgress(ExperimentProgress):
+class ClassicalSessionProgress(SessionProgress):
     """
     Example of Classical experiment with specific number of iteration
     """    
     
-    def start(self, user_data):
+    def start(self, participant_data):
         """
         Define and init some progress variables
         """
@@ -16,10 +17,10 @@ class ClassicalExperimentProgress(ExperimentProgress):
             self.data = {}
 
         self.data['iteration'] = 0
-        self.data['user'] = {
-            'username': user_data['classical-info-surname'],
-            'why': user_data['classical-info-why'],
-            'glasses': user_data['classical-info-glasses'],
+        self.data['participant'] = {
+            'know-cg': participant_data['classical-info-know-cg'],
+            'why': participant_data['classical-info-why'],
+            'glasses': participant_data['classical-info-glasses'],
         }
 
         # always save state
@@ -48,7 +49,7 @@ class ClassicalExperimentProgress(ExperimentProgress):
         # need to take care of static media folder
         images_path = sorted([ 
                     os.path.join(cornel_box_path, img) 
-                    for img in os.listdir(os.path.join('static', cornel_box_path)) 
+                    for img in os.listdir(os.path.join(settings.RELATIVE_STATIC_URL, cornel_box_path)) 
                 ])
 
         # right image always display reference
@@ -98,3 +99,27 @@ class ClassicalExperimentProgress(ExperimentProgress):
         return iteration >= total_iterations
 
 
+class ClassicalSessionProgressTime(ClassicalSessionProgress):
+    """
+    Same SessionProgress but with different end criterion
+    """
+    def start(self, participant_data):
+
+        # inherit from base state
+        super().start(participant_data)
+  
+        # Get time in milliseconds using
+        # lambda function
+        milliseconds = lambda: int(time() * 1000)
+        self.data['start_time'] = milliseconds
+
+    def end(self) -> bool:
+        """
+        Check whether it's the end or not of the experiment
+
+        Return: bool
+        """
+        total_iterations = int(self.session.config['iterations'])
+        iteration = int(self.data['iteration'])
+
+        return iteration >= total_iterations

@@ -10,11 +10,12 @@ from django.urls import reverse
 from uuid import uuid4
 from datetime import timedelta
 import os
+from django.conf import settings
 
 from .utils import create_choice_field
 
 # some parameters
-static_folder = 'static'
+static_folder = settings.RELATIVE_STATIC_URL
 module_name = 'expe'
 pages_templates_path = os.path.join(module_name, 'templates', 'pages')
 
@@ -37,14 +38,14 @@ class Page(models.Model):
 
     # get all javascript files
     for js in sorted(os.listdir(javascript_folder_path)):
-        js_file_path = os.path.join(javascript_folder_path, js).replace(f'{static_folder}/', '')
+        js_file_path = os.path.join(javascript_folder_path, js).replace(f'{static_folder}', '')
         javascript_files.append((js_file_path, js_file_path))
 
     css_files = []
 
     # get all css files
     for css in sorted(os.listdir(css_folder_path)):
-        css_file_path = os.path.join(css_folder_path, css).replace(f'{static_folder}/', '')
+        css_file_path = os.path.join(css_folder_path, css).replace(f'{static_folder}', '')
         css_files.append((css_file_path, css_file_path))
 
     id = models.AutoField(primary_key=True, unique=True)
@@ -98,19 +99,14 @@ class Experiment(models.Model):
     main_page = models.ForeignKey(MainPage, on_delete=models.PROTECT, null=True, related_name='experiment')
     end_page = models.ForeignKey(EndPage, on_delete=models.PROTECT, null=True, related_name='experiment')
 
-    progress_choice = models.CharField(max_length=255, 
-                                null=False,
-                                help_text=f'You can add progress classes into: expe/experiments',
-                                choices=[('default', 'default')]) # in order to override, need of pre-filled
-
-    config = models.JSONField(null=True, blank=True)
-    
     slug = models.SlugField(unique=True, max_length=255, editable=False, blank=True,
                            help_text='This field is not required and will be generated automatically when the object is saved based on the title of the experiment')
     description = models.TextField()
     is_available = models.IntegerField(default=1, blank=True, null=True, 
                                     choices =((1, 'Available'), (0, 'Disabled')))
     created_on = models.DateTimeField(auto_now_add=True)
+
+    config = models.JSONField(null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('experiment', kwargs={'slug': self.slug})
@@ -128,7 +124,7 @@ class Experiment(models.Model):
         return self.title
 
 
-class ExperimentSession(models.Model):
+class Session(models.Model):
 
     id = models.AutoField(primary_key=True, editable=False, unique=True)
     name = models.CharField(max_length=255)
@@ -136,8 +132,12 @@ class ExperimentSession(models.Model):
 
     estimated_duration = models.DurationField(default=timedelta(minutes=0),
                 help_text='hh:mm:ss')
-    config = models.JSONField(null=True, blank=True)
-    
+
+    progress_choice = models.CharField(max_length=255, 
+                            null=False,
+                            help_text=f'You can add progress classes into: expe/experiments',
+                            choices=[('default', 'default')]) # in order to override, need of pre-filled
+
     is_active = models.IntegerField(default=1, blank=True, null=True, 
                                     help_text ='Session will be displayed but not accessible', 
                                     choices =((1, 'Active'), (0, 'Inactive')))
@@ -146,14 +146,16 @@ class ExperimentSession(models.Model):
                                     choices =((1, 'Available'), (0, 'Disabled')))
     created_on = models.DateTimeField(auto_now_add=True)
 
+    config = models.JSONField(null=True, blank=True)
 
-class UserExperiment(models.Model):
+
+class Participant(models.Model):
     """
     User model which can be attached to sessions of experiment
     """
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
     name = models.CharField(max_length=100)
-    # sessions = models.ManyToManyField(ExperimentProgress, editable=False, related_name='users')
+    # sessions = models.ManyToManyField(SessionProgress, editable=False, related_name='participants')
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -163,14 +165,14 @@ class UserExperiment(models.Model):
         return self.name
 
 
-class ExperimentProgress(models.Model):
+class SessionProgress(models.Model):
     """
     Store the progress of a session for an ExperimentUser
     """
 
     id = models.AutoField(primary_key=True, editable=False, unique=True)
-    session = models.ForeignKey(ExperimentSession, null=True, related_name='progresses', on_delete=models.PROTECT)
-    user = models.ForeignKey(UserExperiment, null=True, related_name='progresses', on_delete=models.PROTECT)
+    session = models.ForeignKey(Session, null=True, related_name='progresses', on_delete=models.PROTECT)
+    participant = models.ForeignKey(Participant, null=True, related_name='progresses', on_delete=models.PROTECT)
     is_started = models.BooleanField(default=False, editable=False, null=False)
     is_finished = models.BooleanField(default=False, editable=False, null=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -179,7 +181,7 @@ class ExperimentProgress(models.Model):
     data = models.JSONField(null=True, blank=True)
 
     @abstractmethod
-    def start(self, user_data):
+    def start(self, participant_data):
         """
         Define and init some progress variables
         """
@@ -215,15 +217,15 @@ class ExperimentProgress(models.Model):
     class Meta:
         abstract = True
 
-class ExperimentStep(models.Model):
+class SessionStep(models.Model):
     """
-    Define a step of an ExperimentProgress of an UserExperiment during a Session
+    Define a step of an SessionProgress of an Participant during a Session
     """
 
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
-    # generic way to add specific ExperimentProgress object
+    # generic way to add specific SessionProgress object
     progress_type = models.ForeignKey(ContentType, related_name='steps', on_delete=models.PROTECT)
     progress_id = models.PositiveIntegerField()
     progress = GenericForeignKey('progress_type', 'progress_id')

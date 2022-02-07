@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -195,13 +195,13 @@
             <!-- Main Content -->
             <div id="content">
 
-                {% block nav %}
-                {% endblock %}
+                    {% block nav %}
+                    {% endblock %}
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                {% block content %}
-                
-                {% endblock %}
+                    {% block content %}
+                    
+                    {% endblock %}
                 
                 </div>
                 <!-- End of Main Content -->
@@ -267,7 +267,7 @@
 
      <!-- Specific experiment global script -->
      <script src="{% static 'main/js/utils.js' %}"></script>
-     <script src="{% static 'main/js/init_user.js' %}"></script>
+     <script src="{% static 'main/js/init_participant.js' %}"></script>
  
     <!-- Custom Javascript file for experiments template is placed here -->
     {% block javascripts %}

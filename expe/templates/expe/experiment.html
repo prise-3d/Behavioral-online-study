@@ -24,9 +24,10 @@
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <!-- <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample"> -->
+                <div class="d-block card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Description</h6>
-                </a>
+                </div>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardExample" style="">
                     <div class="card-body">
@@ -96,7 +97,7 @@
                                         <div class="text-xs font-weight-bold text-{{card_class}} text-uppercase mb-1">
                                             {% if session.is_active %}Available{% if session.id|stringformat:'s' in progress_session %} (continue session){% endif %}{% else %}Not available{% endif %}</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{session.name}}</div>
-                                        <i class="fas fa-fw fa-users"></i> {{ session.progresses.all | length}} users passed
+                                        <i class="fas fa-fw fa-users"></i> {{ session.progresses.all | length}} participants passed
                                         <p><i class="fas fa-fw fa-clock"></i> {{ session.estimated_duration | duration_minutes }}</p>
                                     </div>
                                     <div class="col-auto">
@@ -113,7 +114,7 @@
                                             </button>
                                         {% endif %}
                                         {% if request.user.is_superuser %}
-                                            <form method="POST" action="{% url 'expe:download_session' slug=experiment.slug session_id=session.id %}">
+                                            <form method="POST" action="{% url 'expe:download_session' session_id=session.id %}">
                                                 {% csrf_token %}
                                                 <button class="btn btn-default" type="submit">
                                                     <i class="fas fa-download fa-2x text-grey-700" aria-hidden="true"></i>

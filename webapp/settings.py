@@ -143,6 +143,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 RELATIVE_STATIC_URL = 'static/'
 
+OUPUT_DATA_FOLDER = 'data'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )

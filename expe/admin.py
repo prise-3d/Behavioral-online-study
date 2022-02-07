@@ -4,26 +4,13 @@ from django.db import models
 from django import forms
 from django_json_widget.widgets import JSONEditorWidget
 
-from .models import Experiment, UserExperiment, ExperimentSession, ExperimentProgress
+from .models import Experiment, Participant, Session, SessionProgress
 from .models import ExamplePage, InformationPage, MainPage, EndPage
-from .experiments.classical import ClassicalExperimentProgress
+from .experiments.classical import ClassicalSessionProgress
 
 
 @admin.register(Experiment)
 class ExperimentAdmin(admin.ModelAdmin):
-    
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        
-        # Add some logic here to base your choices on.
-        if db_field.name == 'progress_choice':
-            cl_choices = []
-            for cl in ExperimentProgress.__subclasses__():
-                full_name = '.'.join([cl.__module__, cl.__name__])
-                cl_choices.append((full_name, full_name))
-            
-            db_field.choices = cl_choices
-
-        return super(ExperimentAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     
     list_display = ('title', 'available', 'created_on')
 
@@ -49,9 +36,27 @@ class ExperimentAdmin(admin.ModelAdmin):
     }
 
 
-@admin.register(ExperimentSession)
-class ExperimentSessionAdmin(admin.ModelAdmin):
+@admin.register(Session)
+class SessionAdmin(admin.ModelAdmin):
     list_display = ('name', 'experiment', 'active', 'available', 'created_on')
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        
+        # recursively get all subclasses
+        def all_subclasses(cls):
+            return set(cls.__subclasses__()).union(
+                [s for c in cls.__subclasses__() for s in all_subclasses(c)])
+
+        # Add some logic here to base your choices on.
+        if db_field.name == 'progress_choice':
+            cl_choices = []
+            for cl in all_subclasses(SessionProgress):
+                full_name = '.'.join([cl.__module__, cl.__name__])
+                cl_choices.append((full_name, full_name))
+            
+            db_field.choices = cl_choices
+
+        return super(SessionAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
     def active(self, obj):
         return obj.is_active == 1
@@ -88,8 +93,8 @@ class ExperimentSessionAdmin(admin.ModelAdmin):
         models.JSONField: {'widget': JSONEditorWidget},
     }
  
-@admin.register(UserExperiment)
-class UserExperimentAdmin(admin.ModelAdmin):
+@admin.register(Participant)
+class ParticipantAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_on')
 
 
@@ -102,6 +107,6 @@ class PageAdmin(admin.ModelAdmin):
         models.JSONField: {'widget': JSONEditorWidget},
     }
 
-@admin.register(ClassicalExperimentProgress)
-class ClassicalExperimentProgressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'created_on')
+@admin.register(ClassicalSessionProgress)
+class ClassicalSessionProgressAdmin(admin.ModelAdmin):
+    list_display = ('id', 'participant', 'created_on')

@@ -1,20 +1,18 @@
 # django imports
+import os
 from uuid import uuid4, UUID
-from django.http import FileResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import HttpResponseNotAllowed
 from django.http import JsonResponse
 from django.core.serializers import serialize
-from django.conf import Settings
 from . import utils
-import random
+from django.contrib.auth.decorators import user_passes_test
 import json
 
-from .models import ExamplePage, Experiment, ExperimentSession, ExperimentStep, UserExperiment
+from .models import ExamplePage, Experiment, Session, SessionStep, Participant
 
 def index(request):
     """Default home page
@@ -94,8 +92,8 @@ def preview_example_page(request, slug, id):
     return render(request, f'{example_page.template}', context)
 
 
-def check_user(request):
-    """Check and add user if not exist
+def check_participant(request):
+    """Check and add participant if not exist
     Args:
         request ([Request]): Django request object with expected key and value data
     Returns:
@@ -104,44 +102,44 @@ def check_user(request):
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
     
-    if 'user_uuid' in request.session:
+    if 'participant_uuid' in request.session:
         try:
-            user = UserExperiment.objects.get(id=request.session['user_uuid'])
+            participant = Participant.objects.get(id=request.session['participant_uuid'])
         except:
-            user = None
+            participant = None
 
     else:
-        if 'user_uuid' not in request.POST:
+        if 'participant_uuid' not in request.POST:
             return JsonResponse({
                 'status_code': 404,
-                'error': 'Error when generating user'
+                'error': 'Error when generating participant'
             })
 
-        user_uuid = request.POST.get('user_uuid')
+        participant_uuid = request.POST.get('participant_uuid')
 
         try:
-            generated_uuid = UUID(user_uuid, version=4)
+            generated_uuid = UUID(participant_uuid, version=4)
             
-            # check if user exists in database
-            user = UserExperiment.objects.get(id=generated_uuid)
-            print(f'[{user.id}]: {user.name} access page')
+            # check if participant exists in database
+            participant = Participant.objects.get(id=generated_uuid)
+            print(f'[{participant.id}]: {participant.name} access page')
 
         except ValueError:
             # If it's a value error, then the string 
             # is not a valid hex code for a UUID.
-            user = None
+            participant = None
 
-    if user is None:
+    if participant is None:
 
-        # create new user if necessary
-        user = UserExperiment.objects.create(
+        # create new participant if necessary
+        participant = Participant.objects.create(
             name='Anonymous', 
         )
-    # store or refresh if necessary the user id
-    request.session['user_uuid'] = str(user.id)
+    # store or refresh if necessary the participant id
+    request.session['participant_uuid'] = str(participant.id)
 
-    # return the created user instance
-    data = serialize("json", [ user,  ], fields=('id', 'name', 'created_on'))
+    # return the created participant instance
+    data = serialize("json", [ participant,  ], fields=('id', 'name', 'created_on'))
 
     return HttpResponse(data, content_type="application/json")
 
@@ -156,18 +154,18 @@ def load_information_page(request, slug, session_id):
     if request.method == 'POST':
         
         try:
-            user_uuid = request.session['user_uuid']
-            generated_uuid = UUID(user_uuid, version=4)
+            participant_uuid = request.session['participant_uuid']
+            generated_uuid = UUID(participant_uuid, version=4)
             
-            # check if user exists in database
-            user = UserExperiment.objects.get(id=generated_uuid)
+            # check if participant exists in database
+            participant = Participant.objects.get(id=generated_uuid)
 
         except ValueError:
             # If it's a value error, then the string 
             # is not a valid hex code for a UUID.
-            user = None
+            participant = None
         
-        if user is None:
+        if participant is None:
             return HttpResponse({
                 'status_code': 404,
                 'error': 'Error when generating information page'
@@ -175,7 +173,7 @@ def load_information_page(request, slug, session_id):
         
 
         # access using unique slug
-        session = ExperimentSession.objects.get(id=session_id)
+        session = Session.objects.get(id=session_id)
 
         if not session.is_available:
             return HttpResponse({
@@ -187,7 +185,7 @@ def load_information_page(request, slug, session_id):
         information_page = experiment.information_page
         progress = None
 
-        progress_class = utils.load_progress_class(experiment.progress_choice)
+        progress_class = utils.load_progress_class(session.progress_choice)
 
         current_progress = None
         session_id_str = str(session_id) # avoid dict key issue...
@@ -195,7 +193,7 @@ def load_information_page(request, slug, session_id):
         # check if necessary to reload progress
         if 'progress' in request.session:
             
-            # check if session already started by user
+            # check if session already started by participant
             if session_id_str in request.session['progress']:
 
                 try:
@@ -212,14 +210,15 @@ def load_information_page(request, slug, session_id):
             
                     else:  
                         
-                        # start if experiment is started or not (user quit at example or not)
+                        # start if experiment is started or not (participant quit at example or not)
                         try:
-                            previous_step = ExperimentStep.objects.filter(progress_id=progress.id).latest('created_on')
+                            previous_step = SessionStep.objects.filter(progress_id=progress.id).latest('created_on')
 
                             context = {
                                 'page': experiment.main_page,
                                 'experiment': experiment,
                                 'progress': progress,
+                                'session': session,
                                 'progress_info': int(progress.progress()),
                                 'step': previous_step
                             }
@@ -232,6 +231,7 @@ def load_information_page(request, slug, session_id):
                             context = {
                                 'page': experiment.example_page,
                                 'experiment': experiment, 
+                                'session': session,
                                 'progress': progress
                             }
                             
@@ -247,13 +247,14 @@ def load_information_page(request, slug, session_id):
             # create experiment progress dynamically
             current_progress = progress_class.objects.create(
                 session=session,
-                user=user
+                participant=participant
             )
 
         context = {
             'page': information_page,
             'experiment': experiment, 
-            'progress': current_progress
+            'progress': current_progress,
+            'session': session,
         }
 
         if 'progress' not in request.session:
@@ -272,7 +273,7 @@ def load_information_page(request, slug, session_id):
             })
 
 
-def load_example_page(request, slug, progress_id):
+def load_example_page(request, slug, session_id, progress_id):
     """Enable to load the information page before starting experiment
     Args:
         request ([Request]): Django request object with expected key and value data
@@ -283,9 +284,10 @@ def load_example_page(request, slug, progress_id):
 
         # access using unique slug
         experiment = Experiment.objects.get(slug=slug)
+        session = Session.objects.get(id=session_id)
         example_page = experiment.example_page
 
-        progress_class = utils.load_progress_class(experiment.progress_choice)
+        progress_class = utils.load_progress_class(session.progress_choice)
         
         progress = progress_class.objects.get(id=progress_id)
 
@@ -295,7 +297,8 @@ def load_example_page(request, slug, progress_id):
         context = {
             'page': example_page,
             'experiment': experiment, 
-            'progress': progress
+            'progress': progress,
+            'session': session
         }
         
         # dynamic rendering with use of custom page template
@@ -308,8 +311,8 @@ def load_example_page(request, slug, progress_id):
             })
 
 
-def run_experiment_step(request, slug, progress_id):
-    """Enable to process an experiment for the current user progress 
+def run_experiment_step(request, slug, session_id, progress_id):
+    """Enable to process an experiment for the current participant progress 
     Args:
         request ([Request]): Django request object with expected key and value data
     Returns:
@@ -318,9 +321,10 @@ def run_experiment_step(request, slug, progress_id):
     if request.method == 'POST':
         # access using unique slug
         experiment = Experiment.objects.get(slug=slug)
+        session = Session.objects.get(id=session_id)
         main_page = experiment.main_page
 
-        progress_class = utils.load_progress_class(experiment.progress_choice)
+        progress_class = utils.load_progress_class(session.progress_choice)
         
         progress = progress_class.objects.get(id=progress_id)
 
@@ -331,20 +335,20 @@ def run_experiment_step(request, slug, progress_id):
         if not progress.is_started:
             progress.is_started = True
         else:
-            previous_step = ExperimentStep.objects.filter(progress_id=progress.id).latest('created_on')
+            previous_step = SessionStep.objects.filter(progress_id=progress.id).latest('created_on')
 
         # send previous step (if exists) and request dict form data
         step_data = progress.next(previous_step, request.POST)
 
         # create new state
-        experiment_step = ExperimentStep.objects.create(
+        experiment_step = SessionStep.objects.create(
             progress=progress,
             data=step_data
         )
 
-        # session = ExperimentSession.objects.get(id=progress.session.id)
-        # print(session.users.all())
-        # print('There is some expe steps:', ExperimentStep.objects.filter(progress_id=progress.id).all().count())
+        # session = Session.objects.get(id=progress.session.id)
+        # print(session.participants.all())
+        # print('There is some expe steps:', SessionStep.objects.filter(progress_id=progress.id).all().count())
 
         if progress.end():
             
@@ -361,6 +365,7 @@ def run_experiment_step(request, slug, progress_id):
             context = {
                 'page': end_page,
                 'experiment': experiment, 
+                'session': session,
                 'progress': progress
             }
 
@@ -368,7 +373,8 @@ def run_experiment_step(request, slug, progress_id):
 
         context = {
             'page': main_page,
-            'experiment': experiment, 
+            'experiment': experiment,
+            'session': session,
             'progress': progress,
             'progress_info': int(progress.progress()),
             'step': experiment_step
@@ -384,7 +390,7 @@ def run_experiment_step(request, slug, progress_id):
 
 
 def experiment_stat(request):
-    """Check and add user if not exist
+    """Check and add participant if not exist
     Args:
         request ([Request]): Django request object with expected key and value data
     Returns:
@@ -408,23 +414,25 @@ def experiment_stat(request):
                 'status_code': 404,
                 'error': 'Error when generating information page'
             }, content_type="application/json")
+
    
-    progress_class = utils.load_progress_class(experiment.progress_choice)
-        
     # only the 3 with most stats info
     progress_data = {}
     for s in experiment.sessions.all():
-        progresses = progress_class.objects.filter(session_id=s.id)
 
-        progress_data[s.name] = {
-            'count': progresses.count(),
-            'color': "#"+''.join([random.choice('0123456789ABCDEF') for _ in range(6)])
-        }
-    # data = serialize("json", experiment.sessions.all(), fields=('id', 'name', 'progresses'))
+        if s.is_available:
+            progress_class = utils.load_progress_class(s.progress_choice)
+
+            progresses = progress_class.objects.filter(session_id=s.id)
+
+            progress_data[s.name] = {
+                'count': progresses.count()
+            }
 
     return HttpResponse(json.dumps(progress_data), content_type="application/json")
 
-def download_session_progresses(request, slug, session_id):
+@user_passes_test(lambda user: user.is_superuser)
+def download_session_progresses(request, session_id):
     """Create JSON file as output and send it
     Args:
         request ([Request]): Django request object with expected key and value data
@@ -434,13 +442,115 @@ def download_session_progresses(request, slug, session_id):
     if not request.method =='POST':
         return HttpResponseNotAllowed(['POST'])
 
-    experiment = Experiment.objects.get(slug=slug)
+    session = Session.objects.get(id=session_id)
 
-    data = serialize("json", [ experiment ], fields=('id', 'name'))
+    progress_class = utils.load_progress_class(session.progress_choice)
 
-    with open('test.json', 'w') as f:
+    session_progresses = progress_class.objects.filter(session_id=session.id)
+    
+    data = {
+        'experiment': session.experiment.title,
+        'session': session.name,
+        'number_of_participants': session_progresses.count(),
+        'participations': []
+    }
+
+    for s_progress in session_progresses:
+
+        # retrieve main information
+        progress_data = {
+            'participant_id': str(s_progress.participant.id),
+            'created_on': s_progress.created_on.strftime('%A %d-%m-%Y, %H:%M:%S'),
+            'participation_data': s_progress.data,
+            'steps': []
+        }
+        # retrieve steps information
+        steps = SessionStep.objects.filter(progress_id=s_progress.id)
+
+        for step in steps:
+            data_step = {
+                'created_on': step.created_on.strftime('%A %d-%m-%Y, %H:%M:%S'),
+                'data': step.data
+            }
+
+            progress_data['steps'].append(data_step)
+
+        # finally add progress data into main returned data
+        data['participations'].append(progress_data)
+
+    if not os.path.exists(settings.OUPUT_DATA_FOLDER):
+        os.makedirs(settings.OUPUT_DATA_FOLDER)
+    # create output file
+    json_filename = f'{session.experiment.title.replace(" ", "-").lower().strip()}__\
+        {session.name.replace(" ", "-").lower().strip()}.json'
+
+    # create file into specific data folder
+    json_filepath = os.path.join(settings.OUPUT_DATA_FOLDER, json_filename)
+
+    with open(json_filepath, 'w') as f:
         json.dump(data, f, indent=2)
 
-    f = open('test.json', 'rb')
-    json_file = FileResponse(f)
-    return json_file
+    # return buffer data
+    f = open(json_filepath, 'r')
+    
+    response = HttpResponse(f, content_type='application/json')
+    response['Content-Disposition'] = f'attachment; filename={json_filename}'
+
+    return response
+
+def error_404(request, exception):
+    """Create 404 error page
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    context = {
+        'error_code': 404,
+        'message': 'Page request not found'
+    }
+    print(f'Error encountered [404]: {exception}')
+    return render(request, 'expe/error.html', context)
+
+
+def error_500(request):
+    """Create 500 error page
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    context = {
+        'error_code': 500,
+        'message': 'Server seems to encountered some issues, please wait'
+    }
+    print(f'Error encountered [500]')
+    return render(request, 'expe/error.html', context)
+
+def error_403(request, exception):
+    """Create 403 error page
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    context = {
+        'error_code': 403,
+        'message': 'You do not have permissions for this page'
+    }
+    print(f'Error encountered [403]: {exception}')
+    return render(request, 'expe/error.html', context)
+
+def error_400(request, exception):
+    """Create 400 error page
+    Args:
+        request ([Request]): Django request object with expected key and value data
+    Returns:
+        [HttpResponse]: Http response message
+    """
+    context = {
+        'error_code': 400,
+        'message': 'Server seems to encountered some issues, please wait'
+    }
+    print(f'Error encountered [400]: {exception}')
+    return render(request, 'expe/error.html', context)
