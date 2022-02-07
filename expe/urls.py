@@ -7,11 +7,6 @@ from . import views
 
 app_name = 'expe'
 
-handler404 = views.error_404
-handler500 = views.error_500
-handler403 = views.error_403
-handler400 = views.error_400
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('experiments', views.experiments, name='experiments'),

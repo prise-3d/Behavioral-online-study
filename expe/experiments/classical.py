@@ -13,6 +13,8 @@ class ClassicalSessionProgress(SessionProgress):
         """
         Define and init some progress variables
         """
+
+        # need to be initialized in order to start experiment
         if self.data is None:
             self.data = {}
 

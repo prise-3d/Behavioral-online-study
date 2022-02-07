@@ -14,11 +14,6 @@ import os
 import json
 from django.utils.translation import ugettext_lazy as _
 
-# set language used
-WEBEXPE_LANG_KEY         = 'WEBEXPE_LANG'
-WEBEXPE_LANG             = os.environ.get(WEBEXPE_LANG_KEY) \
-                                 if os.environ.get(WEBEXPE_LANG_KEY) is not None else 'en'
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,7 +37,6 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 SESSION_SAVE_EVERY_REQUEST = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,8 +121,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     #'django.core.context_processors.request',
 )
 
-LANGUAGE_CODE = WEBEXPE_LANG
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -142,6 +134,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 RELATIVE_STATIC_URL = 'static/'
+# STATIC_ROOT = '/var/www/html/static'
+
+STATICFILES_DIRS = [
+    "static/main",
+    "static/experiment",
+    "static/resources",
+    "static/website",
+]
+
 
 OUPUT_DATA_FOLDER = 'data'
 

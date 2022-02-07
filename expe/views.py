@@ -110,10 +110,12 @@ def check_participant(request):
 
     else:
         if 'participant_uuid' not in request.POST:
-            return JsonResponse({
-                'status_code': 404,
-                'error': 'Error when generating participant'
-            })
+            context = {
+                'error_code': 404,
+                'message': 'Page request not found'
+            }
+            return render(request, 'expe/error.html', context)
+        
 
         participant_uuid = request.POST.get('participant_uuid')
 
@@ -166,20 +168,22 @@ def load_information_page(request, slug, session_id):
             participant = None
         
         if participant is None:
-            return HttpResponse({
-                'status_code': 404,
-                'error': 'Error when generating information page'
-            })
+            context = {
+                'error_code': 404,
+                'message': 'Page request not found'
+            }
+            return render(request, 'expe/error.html', context)
         
 
         # access using unique slug
         session = Session.objects.get(id=session_id)
 
         if not session.is_available:
-            return HttpResponse({
-                'status_code': 404,
-                'error': 'Cannot get access to this session'
-            })
+            context = {
+                'error_code': 404,
+                'message': 'Page request not found'
+            }
+            return render(request, 'expe/error.html', context)
 
         experiment = Experiment.objects.get(slug=slug)
         information_page = experiment.information_page
@@ -201,6 +205,18 @@ def load_information_page(request, slug, session_id):
             
                     progress = progress_class.objects.get(id=progress_id)
                     
+                    if progress.data is None:
+                        
+                        context = {
+                            'page': experiment.information_page,
+                            'experiment': experiment, 
+                            'progress': progress,
+                            'session': session
+                        }
+
+                        # if not start then redirect to information page
+                        return render(request, f'{experiment.information_page.template}', context)
+
                     # enable to start new experiment session only if previous session progress is finished
                     # or with other criterion...
                     if progress.is_finished == True:
@@ -267,10 +283,11 @@ def load_information_page(request, slug, session_id):
         return render(request, f'{information_page.template}', context)
 
     else:
-        return HttpResponse({
-                'status_code': 404,
-                'error': 'Error when generating information page'
-            })
+        context = {
+            'error_code': 404,
+            'message': 'Page request not found'
+        }
+        return render(request, 'expe/error.html', context)
 
 
 def load_example_page(request, slug, session_id, progress_id):
@@ -305,10 +322,11 @@ def load_example_page(request, slug, session_id, progress_id):
         return render(request, f'{example_page.template}', context)
 
     else:
-        return HttpResponse({
-                'status_code': 404,
-                'error': 'Error when generating information page'
-            })
+        context = {
+            'error_code': 404,
+            'message': 'Page request not found'
+        }
+        return render(request, 'expe/error.html', context)
 
 
 def run_experiment_step(request, slug, session_id, progress_id):
@@ -331,7 +349,7 @@ def run_experiment_step(request, slug, session_id, progress_id):
         # retrieve previous step if exists
         previous_step = None
 
-        # process an experiment step
+        # process an experiment step only if data field is not None
         if not progress.is_started:
             progress.is_started = True
         else:
@@ -383,10 +401,11 @@ def run_experiment_step(request, slug, session_id, progress_id):
         # dynamic rendering with use of custom page template
         return render(request, f'{main_page.template}', context)
     else:
-        return HttpResponse({
-                'status_code': 404,
-                'error': 'Error when generating information page'
-            })
+        context = {
+            'error_code': 404,
+            'message': 'Page request not found'
+        }
+        return render(request, 'expe/error.html', context)
 
 
 def experiment_stat(request):
@@ -410,10 +429,11 @@ def experiment_stat(request):
 
     if experiment is None:
 
-        return HttpResponse({
-                'status_code': 404,
-                'error': 'Error when generating information page'
-            }, content_type="application/json")
+        context = {
+            'error_code': 404,
+            'message': 'Page request not found'
+        }
+        return render(request, 'expe/error.html', context)
 
    
     # only the 3 with most stats info
@@ -429,7 +449,16 @@ def experiment_stat(request):
                 'count': progresses.count()
             }
 
-    return HttpResponse(json.dumps(progress_data), content_type="application/json")
+    
+    most_popular_sessions = sorted(progress_data, key=lambda k: progress_data[k]['count'], reverse=True)[:3]
+    final_progress_data = {}
+
+    for elem in most_popular_sessions:
+        final_progress_data[elem] = {
+                'count': progress_data[elem]['count']
+            }
+
+    return HttpResponse(json.dumps(final_progress_data), content_type="application/json")
 
 @user_passes_test(lambda user: user.is_superuser)
 def download_session_progresses(request, session_id):

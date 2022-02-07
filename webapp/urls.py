@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
+from django.conf.urls import handler404, handler500, handler403, handler400
+
+handler404 = 'expe.views.error_404'
+handler500 = 'expe.views.error_500'
+handler403 = 'expe.views.error_403'
+handler400 = 'expe.views.error_400'
 
 urlpatterns = [
     path('', include('expe.urls', namespace='expe')),
