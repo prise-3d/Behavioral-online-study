@@ -18,6 +18,12 @@ urlpatterns = [
     path('experiments/experiment/stat', views.experiment_stat, name='experiment_stat'),
     path('participant/check', views.check_participant, name='check_participant'),
 
+    # others routes
+    path('documentation', views.load_documentation, name='load_documentation'),
+    path('about', views.load_about, name='load_about'),
+    path('charts', views.load_charts, name='load_charts'),
+    path('history', views.load_history, name='load_history'),
+
     # admin urlpatterns
     path('experiments/session/download/<int:session_id>', views.download_session_progresses, name='download_session'),
 ]

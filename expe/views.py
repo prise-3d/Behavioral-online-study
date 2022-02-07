@@ -581,5 +581,18 @@ def error_400(request, exception):
         'error_code': 400,
         'message': 'Server seems to encountered some issues, please wait'
     }
-    print(f'Error encountered [400]: {exception}')
+    
     return render(request, 'expe/error.html', context)
+
+
+def load_documentation(request):
+    return render(request, 'expe/documentation.html')
+
+def load_about(request):
+    return render(request, 'expe/about.html')
+
+def load_charts(request):
+    return render(request, 'expe/charts.html')
+
+def load_history(request):
+    return render(request, 'expe/history.html')

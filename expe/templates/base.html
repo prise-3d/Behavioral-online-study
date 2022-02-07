@@ -50,9 +50,9 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
+            
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item {% if '/' == request.path %}active{% endif %}">
                 <a class="nav-link" href="{% url 'expe:index' %}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Home</span></a>
@@ -66,7 +66,7 @@
                 Help science
             </div>
 
-            <li class="nav-item">
+            <li class="nav-item {% if 'experiments' in request.path %}active{% endif %}">
                 <a class="nav-link" href="{% url 'expe:experiments' %}">
                     <i class="fas fa-fw fa-vials"></i>
                     <span>Experiments</span></a>
@@ -137,15 +137,15 @@
             </li>-->
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+            <li class="nav-item {% if 'charts' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'expe:load_charts' %}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+            <li class="nav-item {% if 'history' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'expe:load_history' %}">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
             </li>
@@ -159,8 +159,8 @@
             </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+            <li class="nav-item {% if 'documentation' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'expe:load_documentation' %}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Documentation</span></a>
             </li>
@@ -171,9 +171,8 @@
                     <span>Github</span></a>
             </li>
 
-
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+            <li class="nav-item {% if 'about' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'expe:load_about' %}">
                     <i class="fas fa-fw fa-info"></i>
                     <span>About</span></a>
             </li>

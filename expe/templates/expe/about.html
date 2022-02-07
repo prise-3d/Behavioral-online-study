@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Behavioral experiments
+{% endblock %}
+
+{% block content %}
+
+            
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
+        <h1 class="h3 mb-0 text-gray-800">About</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row py-3 pt-4">
+
+        <div class="col-lg-6 mb-4 align-items-center py-3 pt-4">
+
+            <!-- Illustrations -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><i>PrISE-3D (Perception, Interactions et Simulation d'Eclairage 3D)</i></h6>
+                </div>
+                <div class="card-body">
+                    <p>We are interested in how people perceive computer-generated images. Online experiments allow us to validate or not certain hypotheses, or models of perception. These studies have led us to design this online science experiment platform.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="col-lg-6 mb-4 text-center align-middle py-6">
+
+            <!-- Project Card Example -->
+            <img class="" style="width: 60%; " src="{% static 'website/img/undraw_science_re_mnnr.svg' %}">
+
+            <div class="text-center font-italic py-4">
+                <h6>PrISE-3D is a French Research project</h6>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
