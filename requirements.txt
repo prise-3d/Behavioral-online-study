@@ -6,7 +6,6 @@ django-polymorphic
 numpy
 Pillow
 questplus
-pandas
-requests
 docker-compose
-ipfml
+sphinx==v2.2.0
+asteroid_sphinx_theme

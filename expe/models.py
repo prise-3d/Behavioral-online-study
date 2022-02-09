@@ -67,6 +67,10 @@ class ExamplePage(Page):
     Specific example page
     """
     template = create_choice_field(example_template_path)
+
+    class Meta:
+        verbose_name = '[Page] example'
+        verbose_name_plural = '[Page] examples'
     
 
 class MainPage(Page):
@@ -75,17 +79,29 @@ class MainPage(Page):
     """
     template = create_choice_field(main_template_path)
 
+    class Meta:
+        verbose_name = '[Page] main'
+        verbose_name_plural = '[Page] mains'
+
 class InformationPage(Page):
     """
     Specific main page
     """
     template = create_choice_field(information_template_path)
 
+    class Meta:
+        verbose_name = '[Page] information'
+        verbose_name_plural = '[Page] informations'
+
 class EndPage(Page):
     """
     Specific main page
     """
     template = create_choice_field(end_template_path)
+
+    class Meta:
+        verbose_name = '[Page] end'
+        verbose_name_plural = '[Page] ends'
 
 
 class Experiment(models.Model):
@@ -123,6 +139,8 @@ class Experiment(models.Model):
 
     class Meta:
         ordering = ['title']
+        verbose_name = '[Experiment] experiment'
+        verbose_name_plural = '[Experiment] experiments'
 
     def __str__(self):
         return self.title
@@ -154,6 +172,10 @@ class Session(models.Model):
 
     config = models.JSONField(null=True, blank=True)
 
+    
+    class Meta:
+        verbose_name = '[Experiment] session'
+        verbose_name_plural = '[Experiment] sessions'
 
 class Participant(models.Model):
     """
@@ -166,9 +188,13 @@ class Participant(models.Model):
 
     class Meta:
         ordering = ['created_on']
+        verbose_name = '[Experiment] participant'
+        verbose_name_plural = '[Experiment] participants'
 
     def __str__(self):
         return self.name
+
+    
 
 class SessionProgress(PolymorphicModel):
     """
@@ -238,3 +264,7 @@ class SessionStep(models.Model):
 
     # data for an experiment step
     data = models.JSONField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = '[Experiment] session step'
+        verbose_name_plural = '[Experiment] session steps'
