@@ -18,10 +18,10 @@ class ExperimentAdmin(admin.ModelAdmin):
     
     def get_form(self, request, obj=None, **kwargs):
         form = super(ExperimentAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['example_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
-        form.base_fields['information_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
-        form.base_fields['main_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
-        form.base_fields['end_page'].label_from_instance = lambda inst: "{} {}".format(inst.name, self.id)
+        form.base_fields['example_page'].label_from_instance = lambda inst: "{} ({})".format(inst.name, inst.id)
+        form.base_fields['information_page'].label_from_instance = lambda inst: "{} ({})".format(inst.name, inst.id)
+        form.base_fields['main_page'].label_from_instance = lambda inst: "{} ({})".format(inst.name, inst.id)
+        form.base_fields['end_page'].label_from_instance = lambda inst: "{} ({})".format(inst.name, inst.id)
         return form
 
     list_display = ('title', 'available', 'created_on')
@@ -54,7 +54,7 @@ class SessionAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SessionAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['experiment'].label_from_instance = lambda inst: "{}".format(inst.slug)
+        form.base_fields['experiment'].label_from_instance = lambda inst: "{} ({})".format(inst.slug, inst.id)
         return form
 
 
