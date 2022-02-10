@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load apptags %}    
+
+{% block title %}
+    Available experiments
+{% endblock %}
+
+
+{% block nav %}
+    <!-- Topbar -->
+    <!--<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </nav>-->
+    <!-- End of Topbar -->
+{% endblock %}
+
+
+{% block content %}
+            
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
+        <h1 class="h3 mb-0 text-gray-800">Experiments</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- <div class="col-lg-6 mb-6"> -->
+        {% if experiments|length == 0 %}
+            <div class="text-center">
+                <h1 class="h5 mb-0 text-gray-800">No experiments added for the moment</h1>
+            </div>
+        {% endif %}
+        
+        {% for expe in experiments %}
+            <!-- Illustrations -->
+            <div class="col-xl-6 col-md-6 mb-4">
+                
+                <div class="card border-left-primary shadow">
+                    <div class="card-header py-3">
+                        <a target="_blank" rel="nofollow" href="{% url 'experiments:experiment' slug=expe.slug %}">
+                            <h6 class="m-0 font-weight-bold text-primary">{{expe.title}}</h6>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5><i class="fas fa-fw fa-comment-dots"></i> {{expe.description | truncatechars:60 }}</h5>
+                        <div class="h6 mb-0 font-weight-bold text-gray-800"><i class="fas fa-fw fa-calendar-day"></i> {{expe.created_on}}</div>
+
+                        <div class="py-2">
+                            <a href="{% url 'experiments:experiment' slug=expe.slug %}" class="btn btn-secondary btn-icon-split btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text">Show more</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- </div> -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

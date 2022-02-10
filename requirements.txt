@@ -5,7 +5,6 @@ django-json-widget
 django-polymorphic
 numpy
 Pillow
-questplus
 docker-compose
 sphinx==v2.2.0
 asteroid_sphinx_theme

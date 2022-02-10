@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Behavioral experiments
+{% endblock %}
+
+{% block content %}
+
+            
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 py-2">
+        <h1 class="h3 mb-0 text-gray-800">Welcome!</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Content Column -->
+        <div class="col-lg-6 mb-4 text-center py-6">
+
+            <!-- Project Card Example -->
+            <img class="" style="width: 60%; " src="{% static 'website/img/undraw_building_blocks_re_rwls.svg' %}">
+
+            <div class="text-center font-italic py-4">
+                <h5>Dive into online experiment design</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <!-- Illustrations -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Description of the platform</h6>
+                </div>
+                <div class="card-body">
+                    <p>We propose through this platform the participation of online behavioral study experiments. Each person connected can contribute to science by providing some of his or her time.</p>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Why the interest of such a platform?</h6>
+                </div>
+                <div class="card-body">
+                    <p>Offering online experiments makes it much easier to target a large number of people while increasing the diversity of the population.</p>
+                    <p>This platform is a generic one and anyone who wants to propose experiments can configure their own quickly: <a href="{% url 'experiments:load_documentation' %}">more information</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

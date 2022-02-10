@@ -1,0 +1,62 @@
+{% extends 'pages/page_base.html' %}
+
+{% load static %}
+{% load apptags %}    
+
+<!-- Custom loader style -->
+{% block customstylesheets %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="justify-content-center">
+
+    <!-- Page Heading -->
+    <div class="py-2 text-center">
+        <h4>{{page.content | from_json:"question"}}</h4>
+    </div>
+
+    <!-- Page Heading -->
+    <div class="py-2 text-center">
+        <h5>{{page.content | from_json:"description"}}</h5>
+    </div>
+
+    <div class="row justify-content-md-center py-2">
+        <div class="col-xl-8 col-md-8 mb-8">
+            <div class="mb-1 small">Experiment progress ({{progress_info}}%)</div>
+            <div class="progress progress-sm mb-2">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{progress_info}}%" aria-valuenow="{{progress_info}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row py-2 justify-content-md-center text-center">
+        <!-- Display images -->
+        {% with reconstructed_img=step.data|from_json:"reconstructed_image" %}
+
+            <!-- Set same height to div in order to avoid buttons flickering.. -->
+            <div class="col-xl-6 col-md-6 mb-5 col-md-offset-3" style="height: {{reconstructed_img|from_json:'height'}}px">
+                <img class="classical-experiment-image" src="{% static reconstructed_img|from_json:'src' %}" alt="" width="{{reconstructed_img|from_json:'width'}}px" height="{{reconstructed_img|from_json:'height'}}px"> 
+            </div>
+        {% endwith %}
+
+    </div>
+    
+    <!-- If participant progression exists-->
+    {% if progress %}
+        <div class="row justify-content-md-center py-4 classical-experiment-buttons text-center">
+            
+            <!-- Always need this url action-->
+            <form class="quest-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
+                {% csrf_token %}
+                <!-- form with no button -->
+                <input type="hidden" name="quest-answer-time"/>
+                <input type="hidden" name="quest-answer-value"/>
+            
+            </form> 
+        
+        </div> 
+    {% endif %}
+</div>
+{% endblock %}

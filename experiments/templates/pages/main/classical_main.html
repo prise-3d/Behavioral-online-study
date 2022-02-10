@@ -1,0 +1,81 @@
+{% extends 'pages/page_base.html' %}
+
+{% load static %}
+{% load apptags %}    
+
+<!-- Custom loader style -->
+{% block customstylesheets %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="justify-content-center">
+
+    <!-- Page Heading -->
+    <div class="py-2 text-center">
+        <h5>{{page.content | from_json:"description"}}</h5>
+    </div>
+
+    <div class="row justify-content-md-center py-2">
+        <div class="col-xl-8 col-md-8 mb-8">
+            <div class="mb-1 small">Experiment progress ({{progress_info}}%)</div>
+            <div class="progress progress-sm mb-2">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{progress_info}}%" aria-valuenow="{{progress_info}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row py-2 justify-content-md-center text-center">
+        <!-- Display images -->
+        {% with left_img=step.data|from_json:"left_image" %}
+
+            <!-- Set same height to div in order to avoid buttons flickering.. -->
+            <div class="col-xl-5 col-md-5 mb-4" style="height: {{left_img|from_json:'height'}}px">
+                <img class="classical-experiment-image" src="{% static left_img|from_json:'src' %}" alt="" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+            </div>
+        {% endwith %}
+
+        {% with right_img=step.data|from_json:"right_image" %}
+            
+            <!-- Set same height to div in order to avoid buttons flickering.. -->
+            <div class="col-xl-5 col-md-5 mb-4"  style="height: {{right_img|from_json:'height'}}px">
+                <img class="classical-experiment-image" src="{% static right_img|from_json:'src' %}" alt="" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+            </div>
+        {% endwith %}
+    </div>
+        
+    <!-- If participant progression exists-->
+    {% if progress %}
+        <div class="row justify-content-md-center py-4 classical-experiment-buttons text-center">
+            
+            <form class="classical-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
+                {% csrf_token %}
+                <input type="hidden" name="classical-answer-time"/>
+                <input type="hidden" name="classical-answer-value"/>
+                
+                <div class="row">
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-danger btn-icon-split" value="0">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-times-circle"></i>
+                            </span>
+                            <span class="text">No identicals</span>
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-success btn-icon-split" value="1">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Identicals</span>
+                        </button>
+                    </div>
+                </div>
+            
+            </form> 
+        
+        </div> 
+    {% endif %}
+</div>
+{% endblock %}

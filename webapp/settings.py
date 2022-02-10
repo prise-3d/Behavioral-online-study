@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'colorfield',
     'multiselectfield',
     'django_json_widget',
-    'expe'
+    'experiments'
 ]
 
 MIDDLEWARE = [
