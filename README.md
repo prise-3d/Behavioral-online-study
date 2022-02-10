@@ -5,7 +5,7 @@
 
 
 <p align="center">
-    <img src="https://github.com/prise-3d/behavioral-online-experiment/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="40%">
+    <img src="https://github.com/prise-3d/behavioral-online-experiment/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="55%">
 </p>
 
 ## Description

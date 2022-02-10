@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.26951813"
-     inkscape:cx="862.65068"
-     inkscape:cy="-128.00623"
+     inkscape:zoom="0.52645966"
+     inkscape:cx="838.62077"
+     inkscape:cy="-188.99834"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
@@ -39,29 +39,54 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#4e73df;fill-opacity:1;stroke:#4e73df;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 56.510271,20.482918 37.643164,1.6127228 c 0,0 -0.803926,-1.06244467 -1.634558,-0.3055556 -0.830633,0.756889 -4.178009,4.1116847 -4.178009,4.1116847 0,0 -0.458809,0.4703686 0.142581,1.0461726 0.601387,0.5758042 1.186029,1.1917867 1.186029,1.1917867 0,0 0.105693,0.168189 -0.632597,0.8592957 C 31.788322,9.2072126 6.5944501,34.377985 6.5944501,34.377985 c 0,0 -3.1895352,3.198961 -3.6575639,4.478134 -0.4680297,1.279171 -1.3870244,3.703018 -1.2392244,6.000517 0.147799,2.297499 0.7612247,4.304678 1.6917041,5.564791 0.9304804,1.260112 2.3348208,3.234097 4.4256996,4.183464 2.0908758,0.949365 3.5109875,1.465887 5.3279815,1.365907 1.816992,-0.09998 4.929322,-0.582303 5.926362,-1.136476 0.997038,-0.554175 2.967943,-2.241695 3.688326,-3.042502 0.720381,-0.800806 9.816433,-9.963009 9.816433,-9.963009 L 49.375112,24.996638 c 0,0 0.466452,-0.540168 1.067043,-0.01513 0.600594,0.525037 1.409224,1.652617 2.201794,0.831652 0.79257,-0.820963 4.109246,-4.238231 4.109246,-4.238231 0,0 0.533308,-0.386945 -0.242924,-1.092011 z"
+       style="fill:#89a2ea;fill-opacity:0.331435;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 58.097772,21.541252 39.230665,2.6710562 c 0,0 -0.803926,-1.0624447 -1.634558,-0.3055556 -0.830633,0.756889 -4.178009,4.1116847 -4.178009,4.1116847 0,0 -0.458809,0.4703686 0.142581,1.0461726 0.601387,0.5758042 1.186029,1.1917867 1.186029,1.1917867 0,0 0.105693,0.168189 -0.632597,0.8592957 C 33.375823,10.265546 8.1819502,35.436319 8.1819502,35.436319 c 0,0 -3.1895352,3.198961 -3.6575639,4.478134 -0.4680297,1.279171 -1.3870244,3.703018 -1.2392244,6.000517 0.147799,2.297499 0.7612247,4.304678 1.6917041,5.564791 0.9304804,1.260112 2.3348208,3.234097 4.4256996,4.183464 2.0908764,0.949365 3.5109884,1.465887 5.3279824,1.365907 1.816992,-0.09998 4.929322,-0.582303 5.926362,-1.136476 0.997038,-0.554175 2.967943,-2.241695 3.688326,-3.042502 0.720381,-0.800806 9.816433,-9.963009 9.816433,-9.963009 L 50.962613,26.054972 c 0,0 0.466452,-0.540168 1.067043,-0.01513 0.600594,0.525037 1.409224,1.652617 2.201794,0.831652 0.79257,-0.820963 4.109246,-4.238231 4.109246,-4.238231 0,0 0.533308,-0.386945 -0.242924,-1.092011 z"
        id="path1080" />
     <circle
-       style="fill:#4e73df;fill-opacity:1;stroke:#4e73df;stroke-width:0.429;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#89a2ea;fill-opacity:0.331435;stroke:none;stroke-width:0.429;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path1104"
-       cx="12.788478"
+       cx="14.375977"
+       cy="46.191975"
+       r="11.684887" />
+    <path
+       style="fill:#89a2ea;fill-opacity:0.331435;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 21.978721,29.44492 17.817547,0.05396 7.717393,-7.66678 -8.813186,-8.839705 z"
+       id="path2395" />
+    <text
+       xml:space="preserve"
+       style="font-size:28.2222px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:0.329769"
+       x="67.38707"
+       y="45.641163"
+       id="text2608"><tspan
+         sodipodi:role="line"
+         id="tspan2606"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28.2222px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:0.329769"
+         x="67.38707"
+         y="45.641163">BEHAVIORAL EXPERIMENT</tspan></text>
+    <path
+       style="fill:#4e73df;fill-opacity:1;stroke:#4e73df;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 57.03942,20.482918 38.172318,1.612724 c 0,0 -0.80392,-1.06244499 -1.63455,-0.305556 -0.830636,0.756889 -4.178007,4.111685 -4.178007,4.111685 0,0 -0.45881,0.470369 0.14258,1.046173 0.60139,0.575804 1.18603,1.191786 1.18603,1.191786 0,0 0.10569,0.168189 -0.6326,0.859296 -0.73829,0.691106 -25.9321423,25.861877 -25.9321423,25.861877 0,0 -3.189537,3.198962 -3.657557,4.478135 -0.46803,1.279171 -1.38703,3.703018 -1.23923,6.000517 0.1478,2.297499 0.76123,4.304678 1.69171,5.564791 0.930477,1.260112 2.334817,3.234098 4.425697,4.183465 2.0908653,0.949365 3.5109743,1.465887 5.3279743,1.365907 1.816987,-0.09998 4.929317,-0.582303 5.926358,-1.136476 0.997037,-0.554175 2.967936,-2.241696 3.688326,-3.042503 0.72038,-0.800806 9.816424,-9.963009 9.816424,-9.963009 L 49.904262,24.996638 c 0,0 0.46645,-0.540168 1.06705,-0.01513 0.600591,0.525037 1.409217,1.652617 2.201787,0.831652 0.79257,-0.820963 4.109251,-4.23823 4.109251,-4.23823 0,0 0.533296,-0.386946 -0.24293,-1.092012 z"
+       id="path1080-3" />
+    <circle
+       style="fill:#4e73df;fill-opacity:1;stroke:#4e73df;stroke-width:0.429;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path1104-6"
+       cx="13.317567"
        cy="45.13364"
        r="11.684887" />
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 20.39122,28.386586 17.817547,0.05396 7.717393,-7.66678 -8.813186,-8.839705 z"
-       id="path2395" />
+       d="m 20.920387,28.386586 17.817541,0.05396 7.717388,-7.66678 -8.813188,-8.839704 z"
+       id="path2395-7" />
     <text
        xml:space="preserve"
        style="font-size:28.2222px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:1"
-       x="65.799568"
-       y="44.582829"
-       id="text2608"><tspan
+       x="66.409111"
+       y="45.193619"
+       id="text2608-5"><tspan
          sodipodi:role="line"
-         id="tspan2606"
+         id="tspan2606-3"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28.2222px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:1"
-         x="65.799568"
-         y="44.582829">BEHAVIORAL EXPERIMENT</tspan></text>
+         x="66.409111"
+         y="45.193619">BEHAVIORAL EXPERIMENT</tspan></text>
   </g>
 </svg>
