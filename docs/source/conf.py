@@ -16,7 +16,7 @@ import os
 import sys
 import asteroid_sphinx_theme
 
-sys.path.insert(0, os.path.abspath('../../expe'))
+sys.path.insert(0, os.path.abspath('../../experiments'))
 print(sys.path)
 
 # -- Project information -----------------------------------------------------
@@ -25,9 +25,9 @@ copyright = '2021, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
 # The short X.Y version
-version = "1.0.0"
+version = "v1.0.0"
 # The full version, including alpha/beta/rc tags
-release = "1.0.0"
+release = "v1.0.0"
 
 
 # -- General configuration ---------------------------------------------------

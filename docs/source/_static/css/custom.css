@@ -3,10 +3,14 @@
 }
 
 .header-logo {
-    background-image: url("../dial_logo.png") !important;
-    background-size: 50px 50px !important;
+    background-image: url("../behavioral_logo.svg") !important;
+    background-size: 300px 50px !important;
     height: 50px !important;
     margin-top: 0px !important;
+    margin-left: 0px !important;
+    top: -20px !important;
+    width: 300px !important;
+
 }
 
 @media only screen and (max-width: 900px) {

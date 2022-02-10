@@ -1,15 +1,10 @@
-Minimalist And Customisable Optimisation Package
+Behavioral online experiment
 ================================================
 
-.. image:: _static/logo_macop.png
-   :width: 300 px
-   :align: center
+What's **Behavioral online experiment** framework?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What's **Macop** ?
-~~~~~~~~~~~~~~~~~~
-
-**Macop** is a discrete optimisation Python package which not which doesn't implement every algorithm in the literature but provides the ability to quickly develop and test your own algorithm and strategies. The main objective of this package is to provide maximum flexibility, which allows for easy experimentation in implementation.
-
+This project is a framework for designing online behavioral experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
 
 Contents
 ~~~~~~~~
