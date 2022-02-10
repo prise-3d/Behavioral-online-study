@@ -1,20 +1,16 @@
 # Behavioral online experiment
 
 
-[![GitHub](https://img.shields.io/github/license/prise-3d/behavioral-online-experiment?style=flat)](https://github.com/prise-3d/behavioral-online-study/blob/master/LICENCE)
+[![GitHub](https://img.shields.io/github/license/prise-3d/behavioral-online-experiment?style=flat)](https://github.com/prise-3d/behavioral-online-experiment/blob/master/LICENCE)
 
 
 <p align="center">
-    <img src="https://github.com/jbuisine/macop/blob/master/docs/source/_static/behavioral_logo.png" alt="" width="40%">
+    <img src="https://github.com/prise-3d/behavioral-online-experiment/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="40%">
 </p>
 
 ## Description
 
 This project is a framework for designing online behavioral experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
-
-## Documentation
-
-The file [DOCUMENTATION.md](DOCUMENTATION.md) provides an understanding of how Django has been used to create experiments. This document is intended to allow you to create your own experiments as well. This project is a proposal to use Django for online psychophysical experiments. We are open to comments and/or suggestions for improvement, so please feel free to contribute.
 
 ## Installation
 
