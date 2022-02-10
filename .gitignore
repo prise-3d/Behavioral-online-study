@@ -121,3 +121,4 @@ media
 # credentials
 credentials.json
 data
+docs/_build

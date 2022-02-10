@@ -1,8 +1,16 @@
-# Python based framework for online behavioral
+# Behavioral online experiment
+
+
+[![GitHub](https://img.shields.io/github/license/prise-3d/behavioral-online-experiment?style=flat)](https://github.com/prise-3d/behavioral-online-study/blob/master/LICENCE)
+
+
+<p align="center">
+    <img src="https://github.com/jbuisine/macop/blob/master/docs/source/_static/behavioral_logo.png" alt="" width="40%">
+</p>
 
 ## Description
 
-This project is a Python based framework for designing online behavioral experiment with stimilus. This project proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
+This project is a framework for designing online behavioral experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
 
 ## Documentation
 
