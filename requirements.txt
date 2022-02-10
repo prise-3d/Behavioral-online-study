@@ -6,5 +6,5 @@ django-polymorphic
 numpy
 Pillow
 docker-compose
-sphinx==v2.2.0
+sphinx
 asteroid_sphinx_theme
