@@ -1,0 +1,98 @@
+.main-menu {
+    display: none !important;
+}
+
+.header-logo {
+    background-image: url("../behavioral_logo.svg") !important;
+    background-size: 300px 50px !important;
+    height: 50px !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+    top: -20px !important;
+    width: 300px !important;
+
+}
+
+@media only screen and (max-width: 900px) {
+
+    .header-logo {
+        background-size: 30px 30px !important;
+        height: 33px !important;
+        margin-top: 1px !important;
+    }
+}
+
+.pytorch-left-menu-search input[type="text"] {
+    border-color: #4C71DD !important;
+}
+
+.pytorch-left-menu li.toctree-l1.current > a, .pytorch-right-menu li.toctree-l1.current > a {
+    color: #4C71DD !important;
+}
+
+ul.pytorch-breadcrumbs a {
+    color: #4C71DD !important;
+}
+
+.pytorch-left-menu-search .version {
+    color: #4B70DD !important;
+    text-align: center !important;
+}
+
+a .btn {
+    color: #4C71DD !important;
+}
+
+footer a {
+    color: #4C71DD !important;   
+}
+
+div[id=api] colgroup :first-child {
+    width: 60% !important;
+}
+
+table.docutils colgroup :first-child {
+    width: 60% !important;
+}
+
+table.colwidths-given colgroup :first-child {
+    width: 30% !important;
+}
+
+.rst-content a:link, .rst-content a:visited, .rst-content a:hover {
+    color: #4C71DD !important;
+}
+
+.pre {
+    color: #4C71DD !important;
+}
+
+.article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
+    background-color: #4B70DD !important;
+}
+
+.article.pytorch-article .class em.property {
+    color: #404040 !important;
+}
+
+.article.pytorch-article .function dt em, article.pytorch-article .attribute dt em, article.pytorch-article .class .attribute dt em, article.pytorch-article .class dt em, article.pytorch-article .function dt .sig-paren, article.pytorch-article .attribute dt .sig-paren, article.pytorch-article .class dt .sig-paren {
+    color: #404040 !important;
+}
+
+.article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
+    color: #4C71DD !important;
+}
+
+.article.pytorch-article .function dt > code, article.pytorch-article .attribute dt > code, article.pytorch-article .class .attribute dt > code, article.pytorch-article .class dt > code {
+    color: #4C71DD !important;
+}
+
+.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tutorials-header .main-menu-open-button {
+    display: none !important;
+}
