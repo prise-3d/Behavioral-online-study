@@ -96,3 +96,7 @@ table.colwidths-given colgroup :first-child {
 .tutorials-header .main-menu-open-button {
     display: none !important;
 }
+
+svg {
+    width: 80%;
+}

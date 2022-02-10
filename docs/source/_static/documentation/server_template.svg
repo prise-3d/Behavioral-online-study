@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="210mm" height="63mm" inkscape:export-filename="/home/jerome/Documents/Research/Thesis/Development/applications/WebExperiment-QuestPlus/docs/source/_static/documentation/bitmap.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)" sodipodi:docname="server_template.svg" version="1.1" viewBox="0 0 210 63" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+ <sodipodi:namedview bordercolor="#666666" borderopacity="1.0" inkscape:current-layer="layer1" inkscape:cx="407.43548" inkscape:cy="239.31667" inkscape:document-units="mm" inkscape:guide-bbox="true" inkscape:pagecheckerboard="0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="1016" inkscape:window-maximized="1" inkscape:window-width="1840" inkscape:window-x="80" inkscape:window-y="27" inkscape:zoom="1.0885159" pagecolor="#ffffff" showgrid="false" showguides="true">
+  <sodipodi:guide orientation="0,-1" position="125.42306,104.54629"/>
+  <sodipodi:guide orientation="0,-1" position="89.449006,93.608233"/>
+  <sodipodi:guide orientation="0,-1" position="89.692074,64.926215"/>
+ </sodipodi:namedview>
+ <defs>
+  <marker overflow="visible" inkscape:isstock="true" inkscape:stockid="Arrow1Mend" orient="auto">
+   <path transform="matrix(-.4 0 0 -.4 -4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+  </marker>
+  <marker overflow="visible" inkscape:isstock="true" inkscape:stockid="Arrow1Mstart" orient="auto">
+   <path transform="matrix(.4 0 0 .4 4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+  </marker>
+  <marker id="Arrow1Mend" overflow="visible" inkscape:isstock="true" inkscape:stockid="Arrow1Mend" orient="auto">
+   <path transform="matrix(-.4 0 0 -.4 -4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+  </marker>
+  <marker id="Arrow1Mstart" overflow="visible" inkscape:isstock="true" inkscape:stockid="Arrow1Mstart" orient="auto">
+   <path transform="matrix(.4 0 0 .4 4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+  </marker>
+  <inkscape:perspective inkscape:persp3d-origin="105 : -33.238519 : 1" inkscape:vp_x="0 : -15.816876 : 1" inkscape:vp_y="0 : 696.86573 : 0" inkscape:vp_z="210 : -15.816876 : 1" sodipodi:type="inkscape:persp3d"/>
+  <inkscape:perspective inkscape:persp3d-origin="122.25332 : 6.9357392 : 1" inkscape:vp_x="17.25331 : 31.935744 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="227.25332 : 31.935744 : 1" sodipodi:type="inkscape:persp3d"/>
+  <inkscape:perspective inkscape:persp3d-origin="133.70024 : 198.38382 : 1" inkscape:vp_x="105.91899 : 204.9984 : 1" inkscape:vp_y="0 : 264.58332 : 0" inkscape:vp_z="161.48149 : 204.9984 : 1" sodipodi:type="inkscape:persp3d"/>
+  <marker id="Arrow1Mstart-0" overflow="visible" inkscape:isstock="true" inkscape:stockid="Arrow1Mstart" orient="auto">
+   <path transform="matrix(.4 0 0 .4 4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+  </marker>
+ </defs>
+ <g inkscape:groupmode="layer" inkscape:label="Layer 1">
+  <g fill-rule="evenodd" stroke-dasharray="1.44756, 1.44756" stroke-width="1.4476" inkscape:corner0="1.1883802 : 0.1143772 : 0 : 1" inkscape:corner7="1.1883802 : 0.1143772 : 0.25 : 1" inkscape:perspectiveID="#perspective852" sodipodi:type="inkscape:box3d">
+   <path d="m81.845-5.5901v-2e-7 8e-7 1e-7z" points="81.845377,-5.5900734 81.845377,-5.5900726 81.845377,-5.5900725 81.845377,-5.5900732 " fill="#e9e9ff" inkscape:box3dsidetype="11" sodipodi:type="inkscape:box3dside"/>
+   <path d="m65.234-9.7775v7e-7l16.611 4.1874v-7e-7z" points="65.23401,-9.7774538 81.845377,-5.5900725 81.845377,-5.5900732 65.23401,-9.7774545 " fill="#353564" inkscape:box3dsidetype="6" sodipodi:type="inkscape:box3dside"/>
+   <path d="m65.234-9.7775v-3e-7l16.611 4.1874v2e-7z" points="65.23401,-9.7774548 81.845377,-5.5900734 81.845377,-5.5900732 65.23401,-9.7774545 " fill="#4d4d9f" inkscape:box3dsidetype="5" sodipodi:type="inkscape:box3dside"/>
+   <path d="m65.234-9.7775v-2e-7l16.611 4.1874v1e-7z" points="65.23401,-9.777454 81.845377,-5.5900726 81.845377,-5.5900725 65.23401,-9.7774538 " fill="#afafde" inkscape:box3dsidetype="13" sodipodi:type="inkscape:box3dside"/>
+   <path d="m65.234-9.7775v8e-7l16.611 4.1874v-8e-7z" points="65.23401,-9.777454 81.845377,-5.5900726 81.845377,-5.5900734 65.23401,-9.7774548 " fill="#d7d7ff" inkscape:box3dsidetype="14" sodipodi:type="inkscape:box3dside"/>
+   <path d="m65.234-9.7775v-3e-7 8e-7 2e-7z" points="65.23401,-9.7774548 65.23401,-9.777454 65.23401,-9.7774538 65.23401,-9.7774545 " fill="#8686bf" inkscape:box3dsidetype="3" sodipodi:type="inkscape:box3dside"/>
+  </g>
+  <rect x="42.507" y="1.518" width="31.116" height="52.757" fill="#ac3e3d" stroke="#000" stroke-linejoin="bevel" stroke-width=".5"/>
+  <text x="58.179138" y="24.918488" font-family="Roboto" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" text-anchor="middle" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="58.179138" y="24.918488" text-align="center" sodipodi:role="line">Django</tspan><tspan x="58.179138" y="33.737938" text-align="center" sodipodi:role="line">server</tspan></text>
+  <g fill-rule="evenodd" stroke-dasharray="1.44756, 1.44756" stroke-width="1.4476" inkscape:corner0="1.1883802 : 0.1143772 : 0 : 1" inkscape:corner7="1.1883802 : 0.1143772 : 0.25 : 1" inkscape:perspectiveID="#perspective852-3" sodipodi:type="inkscape:box3d">
+   <path d="m123.01-151.7z" points="123.00898,-151.69652 123.00898,-151.69652 " fill="#e9e9ff" inkscape:box3dsidetype="11" sodipodi:type="inkscape:box3dside"/>
+   <path d="m118.61-152.8 4.3951 1.1079z" points="118.61388,-152.80443 123.00898,-151.69652 123.00898,-151.69652 118.61388,-152.80443 " fill="#353564" inkscape:box3dsidetype="6" sodipodi:type="inkscape:box3dside"/>
+   <path d="m118.61-152.8 4.3951 1.1079z" points="118.61388,-152.80443 123.00898,-151.69652 123.00898,-151.69652 118.61388,-152.80443 " fill="#4d4d9f" inkscape:box3dsidetype="5" sodipodi:type="inkscape:box3dside"/>
+   <path d="m118.61-152.8 4.3951 1.1079z" points="118.61388,-152.80443 123.00898,-151.69652 123.00898,-151.69652 118.61388,-152.80443 " fill="#afafde" inkscape:box3dsidetype="13" sodipodi:type="inkscape:box3dside"/>
+   <path d="m118.61-152.8 4.3951 1.1079z" points="118.61388,-152.80443 123.00898,-151.69652 123.00898,-151.69652 118.61388,-152.80443 " fill="#d7d7ff" inkscape:box3dsidetype="14" sodipodi:type="inkscape:box3dside"/>
+   <path d="m118.61-152.8z" points="118.61388,-152.80443 118.61388,-152.80443 " fill="#8686bf" inkscape:box3dsidetype="3" sodipodi:type="inkscape:box3dside"/>
+  </g>
+  <rect x="142.68" y="1.518" width="31.116" height="52.757" fill="#957e7e" stroke="#000" stroke-width=".5"/>
+  <text x="157.97447" y="29.753208" font-family="Roboto" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="157.97447" y="29.753208" font-size="7.0556px" stroke-width=".26458" text-align="center" text-anchor="middle" sodipodi:role="line">Client</tspan></text>
+  <path d="m137.37 12.456h-59.788" fill="none" marker-end="url(#Arrow1Mend)" stroke="#000" stroke-width=".8"/>
+  <path d="m136.62 41.138h-59.788" fill="none" marker-start="url(#Arrow1Mstart-0)" stroke="#000" stroke-width=".8"/>
+  <g font-family="Roboto" font-size="4.2333px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="106.80365" y="5.4052219" font-style="italic" text-anchor="middle" style="line-height:1.25" xml:space="preserve"><tspan x="106.80365" y="5.4052219" text-align="center" sodipodi:role="line">Client request </tspan><tspan x="106.80365" y="10.696884" text-align="center" sodipodi:role="line">(with or without data)</tspan></text>
+   <text x="23.165529" y="59.964687" style="line-height:1.25" xml:space="preserve"><tspan x="23.165529" y="59.964687" font-size="4.2333px" font-style="italic" stroke-width=".26458" sodipodi:role="line">Process client request and prepare answer</tspan></text>
+   <text x="106.59082" y="32.609497" font-style="italic" text-anchor="middle" style="line-height:1.25" xml:space="preserve"><tspan x="106.59082" y="32.609497" text-align="center" sodipodi:role="line">Render the template</tspan><tspan x="106.59082" y="37.901161" text-align="center" sodipodi:role="line">with data</tspan></text>
+  </g>
+  <path d="m38.503 12.456s-41.388 17.138-0.66427 28.682" fill="none" marker-end="url(#Arrow1Mend)" stroke="#000" stroke-width=".8"/>
+ </g>
+</svg>

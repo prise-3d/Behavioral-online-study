@@ -16,12 +16,11 @@ import os
 import sys
 import asteroid_sphinx_theme
 
-sys.path.insert(0, os.path.abspath('../../experiments'))
-print(sys.path)
+#sys.path.insert(0, os.path.abspath('../../experiments'))
 
 # -- Project information -----------------------------------------------------
 project = 'Behavioral oneline experiment'
-copyright = '2021, Jérôme BUISINE'
+copyright = '2022, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
 # The short X.Y version

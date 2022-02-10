@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Description &mdash; Behavioral oneline experiment v1.0.0 documentation</title>
+  <title>Installation &mdash; Behavioral oneline experiment v1.0.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
-    <link rel="prev" title="Behavioral online experiment" href="index.html" /> 
+    <link rel="next" title="A tour of Behavioral online experiment" href="documentations.html" />
+    <link rel="prev" title="Description" href="description.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -165,8 +165,8 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentations.html">A tour of Behavioral online experiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Some examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -210,14 +210,14 @@
       </li>
 
         
-      <li>Description</li>
+      <li>Installation</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/prise-3d/behavioral-online-study/blob/master/docs/source/description.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/prise-3d/behavioral-online-study/blob/master/docs/source/installation.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -244,22 +244,73 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <div class="section" id="description">
-<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
-<a class="reference internal image-reference" href="_images/dial_logo.png"><img alt="_images/dial_logo.png" class="align-center" src="_images/dial_logo.png" style="width: 50px;" /></a>
-<div class="section" id="context">
-<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
-<p>This project is a framework for designing behavioral online experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.</p>
-<div class="section" id="motivation">
-<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h3>
-<p>The development of experiments for the collection of information and measures from participants on human behavior have been increasingly implemented on web platforms. The recent health crisis and the diversity of the population that can be affected are two main reasons for this trend.</p>
-<p>However, setting up such a platform is not necessarily easy, because it requires skills to create such a website. This framework aims to propose a generic approach to online experience design in order to simplify this task for those wishing to create one.</p>
-<p>The proposed framework is based on the Django Python framework, which allows the integration of python code for experience management in backend. Moreover, it proposes a certain way to approach an experiment, making it as generic as possible:</p>
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-requirements">
+<h2>Install requirements<a class="headerlink" href="#install-requirements" title="Permalink to this headline">¶</a></h2>
+<p>With your python version (ideally python &gt;= 3.7), you can the following required modules:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
 </div>
-<div class="section" id="target-audience">
-<h3>Target Audience<a class="headerlink" href="#target-audience" title="Permalink to this headline">¶</a></h3>
-<p>This framework is intended for anyone who wants to quickly implement an online experience without having any web skills. The framework tries to simplify the client/server interactions as much as possible, however, there are still elements to be specified by the experiment builder, such as how to display the information and how the information is to be retrieved from the client, but still in a very accessible way.</p>
+<p>Initialize the database with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
+python manage.py migrate
+</pre></div>
 </div>
+</div>
+<div class="section" id="configure-server">
+<h2>Configure server<a class="headerlink" href="#configure-server" title="Permalink to this headline">¶</a></h2>
+<p>Add your own super user admin credentials:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp credentials.example.json credentials.json
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="s2">&quot;pass&quot;</span>
+   <span class="s2">&quot;secret_key&quot;</span><span class="p">:</span> <span class="s2">&quot;******&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can generate and replace the secret key param:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Django requires a secret key to securing signed data.</p>
+</div>
+</div>
+<div class="section" id="run-the-web-application">
+<h2>Run the web application<a class="headerlink" href="#run-the-web-application" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py runserver <span class="m">8080</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>the administrator interface is now available: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/admin</span></code></p>
+</div>
+</div>
+<div class="section" id="using-docker">
+<h2>Using docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h2>
+<p>First, you need to add your own user admin credentials wished:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp credentials.example.json credentials.json
+</pre></div>
+</div>
+<p>Then, use make commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make build
+make run
+</pre></div>
+</div>
+<p>Or simply:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make deploy
+</pre></div>
+</div>
+<p>You also have <code class="docutils literal notranslate"><span class="pre">stop</span></code>, <code class="docutils literal notranslate"><span class="pre">remove</span></code>, <code class="docutils literal notranslate"><span class="pre">clean</span></code> commands:
+- <code class="docutils literal notranslate"><span class="pre">stop</span></code>: stop current container instance if exists
+- <code class="docutils literal notranslate"><span class="pre">remove</span></code>: stop and remove container instance if exists
+- <code class="docutils literal notranslate"><span class="pre">clean</span></code>: remove docker image if exists</p>
 </div>
 </div>
 
@@ -271,10 +322,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="documentations.html" class="btn btn-neutral float-right" title="A tour of Behavioral online experiment" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Behavioral online experiment" accesskey="p" rel="prev"><img src="_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="description.html" class="btn btn-neutral" title="Description" accesskey="p" rel="prev"><img src="_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -306,12 +357,11 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Description</a><ul>
-<li><a class="reference internal" href="#context">Context</a><ul>
-<li><a class="reference internal" href="#motivation">Motivation</a></li>
-<li><a class="reference internal" href="#target-audience">Target Audience</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#install-requirements">Install requirements</a></li>
+<li><a class="reference internal" href="#configure-server">Configure server</a></li>
+<li><a class="reference internal" href="#run-the-web-application">Run the web application</a></li>
+<li><a class="reference internal" href="#using-docker">Using docker</a></li>
 </ul>
 </li>
 </ul>
