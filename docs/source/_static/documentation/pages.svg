@@ -28,15 +28,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="0.47517302"
-     inkscape:cx="752.35754"
-     inkscape:cy="182.03896"
+     inkscape:zoom="0.88927598"
+     inkscape:cx="322.1722"
+     inkscape:cy="229.96236"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="graph0" />
+     inkscape:current-layer="node4" />
   <g
      id="graph0"
      class="graph"
@@ -65,7 +65,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="421,-103.5 421,-82.5 273,-82.5 273,-103.5 "
-         id="polygon10" />
+         id="polygon10"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="321"
@@ -364,7 +365,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="151,-293 151,-263 9,-263 9,-293 "
-         id="polygon95" />
+         id="polygon95"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="39"
@@ -818,7 +820,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="187,-293 329,-293 329,-263 187,-263 "
-         id="polygon219" />
+         id="polygon219"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="225.5"
@@ -1298,7 +1301,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="685,-293 685,-263 543,-263 543,-293 "
-         id="polygon467" />
+         id="polygon467"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="584.5"
@@ -1758,7 +1762,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="365,-263 365,-293 507,-293 507,-263 "
-         id="polygon343" />
+         id="polygon343"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="387.5"
