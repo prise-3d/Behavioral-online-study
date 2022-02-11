@@ -97,9 +97,9 @@ class OneBlockSessionProgress(SessionProgress):
 
         self.data['iteration'] = 0
         self.data['participant'] = {
-            'know-cg': participant_data['classical-info-know-cg'],
-            'why': participant_data['classical-info-why'],
-            'glasses': participant_data['classical-info-glasses'],
+            'know-cg': participant_data['basic-answer-know-cg'],
+            'why': participant_data['basic-answer-why'],
+            'glasses': participant_data['basic-answer-glasses'],
         }
 
         dataset_path = self.session.experiment.config['dataset']
@@ -133,8 +133,8 @@ class OneBlockSessionProgress(SessionProgress):
 
         # 1. update previous step depending of answer (if previous step exists)
         if step is not None:
-            answer_time = answer['classical-answer-time']
-            answer_value = answer['classical-answer-value']
+            answer_time = answer['binary-answer-time']
+            answer_value = answer['binary-answer-value']
             
             step.data['answer_time'] = answer_time
             step.data['answer_value'] = answer_value
@@ -142,13 +142,13 @@ class OneBlockSessionProgress(SessionProgress):
 
             # update answer
             if int(self.data['iteration']) > 0 and int(answer_value) == 1:
-                self.data['selected_index'] = int(self.data['selected_index'] / 1.5)
+                self.data['selected_index'] = int(self.data['selected_index'] / 2)
 
             if int(self.data['iteration']) > 0 and int(answer_value) == 0:
                 self.data['selected_index'] = int(self.data['selected_index'] * 1.5)
     
             # 2. process next step data (can be depending of answer)
-            # TODO: check stopping creterion here based on previous answer
+            # TODO: check better stopping creterion here based on previous answer
             if self.data['iteration'] > 0 and int(answer_value) == 0:
 
                 self.data['iteration'] = 0

@@ -35,9 +35,9 @@ class QuestSessionProgress(SessionProgress):
 
         self.data['iteration'] = 0
         self.data['participant'] = {
-            'know-cg': participant_data['classical-info-know-cg'],
-            'why': participant_data['classical-info-why'],
-            'glasses': participant_data['classical-info-glasses'],
+            'know-cg': participant_data['basic-answer-know-cg'],
+            'why': participant_data['basic-answer-why'],
+            'glasses': participant_data['basic-answer-glasses'],
         }
 
         slopes = np.arange(0.0001, 0.001, 0.00003, 'float32')

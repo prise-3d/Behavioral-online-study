@@ -32,7 +32,7 @@
 
             <!-- Set same height to div in order to avoid buttons flickering.. -->
             <div class="col-xl-5 col-md-5 mb-4" style="height: {{left_img|from_json:'height'}}px">
-                <img class="classical-experiment-image" src="{% static left_img|from_json:'src' %}" alt="" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+                <img class="experiment-image" src="{% static left_img|from_json:'src' %}" alt="" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
             </div>
         {% endwith %}
 
@@ -40,19 +40,19 @@
             
             <!-- Set same height to div in order to avoid buttons flickering.. -->
             <div class="col-xl-5 col-md-5 mb-4"  style="height: {{right_img|from_json:'height'}}px">
-                <img class="classical-experiment-image" src="{% static right_img|from_json:'src' %}" alt="" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+                <img class="experiment-image" src="{% static right_img|from_json:'src' %}" alt="" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
             </div>
         {% endwith %}
     </div>
         
     <!-- If participant progression exists-->
     {% if progress %}
-        <div class="row justify-content-md-center py-4 classical-experiment-buttons text-center">
+        <div class="row justify-content-md-center py-4 experiment-buttons text-center">
             
-            <form class="classical-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
+            <form class="binary-answer-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
                 {% csrf_token %}
-                <input type="hidden" name="classical-answer-time"/>
-                <input type="hidden" name="classical-answer-value"/>
+                <input type="hidden" name="binary-answer-time"/>
+                <input type="hidden" name="binary-answer-value"/>
                 
                 <div class="row">
                     <div class="col-auto">

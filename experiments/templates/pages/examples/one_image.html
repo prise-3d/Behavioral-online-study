@@ -26,11 +26,11 @@
 
     <div class="row text-center">
         <!-- Display images -->
-        {% with reconstructed_img=page.content|from_json:"reconstructed_image" %}
+        {% with image=page.content|from_json:"image" %}
 
             <!-- Set same height to div in order to avoid buttons flickering.. -->
-            <div class="col-xl-12 col-md-12 mb-12" style="height: {{reconstructed_img|from_json:'height'}}px">
-                <img class="quest-experiment-image" src="{% static reconstructed_img|from_json:'src' %}" alt="" width="{{reconstructed_img|from_json:'width'}}px" height="{{reconstructed_img|from_json:'height'}}px"> 
+            <div class="col-xl-12 col-md-12 mb-12" style="height: {{image|from_json:'height'}}px">
+                <img class="experiment-image" src="{% static image|from_json:'src' %}" alt="" width="{{image|from_json:'width'}}px" height="{{reconstructed_img|from_json:'height'}}px"> 
             </div>
         {% endwith %}
 

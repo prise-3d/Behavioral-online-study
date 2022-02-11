@@ -19,19 +19,19 @@
         <form method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:load_example' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
             {% csrf_token %}  
             <div class="mb-3">
-                <label for="classical-select-know-cg" class="form-label">Do you know how such images are computed?</label>
-                <select name="classical-info-know-cg" id="classical-select-know-cg" class="form-control" aria-label="Default select example">
+                <label for="basic-select-know-cg" class="form-label">Do you know how such images are computed?</label>
+                <select name="basic-info-know-cg" id="basic-select-know-cg" class="form-control" aria-label="Default select example">
                     <option value="0" selected>No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
             <div class="mb-3">
-            <label for="classical-textarea-why" class="form-label">Why do you want to do this experiment?</label>
-                <textarea name="classical-info-why" class="form-control" id="classical-textarea-why" rows="3"></textarea>
+            <label for="basic-textarea-why" class="form-label">Why do you want to do this experiment?</label>
+                <textarea name="basic-info-why" class="form-control" id="basic-textarea-why" rows="3"></textarea>
             </div>
             <div class="mb-3">
-                <label for="classical-select-glasses" class="form-label">Do you wear glasses?</label>
-                <select name="classical-info-glasses" id="classical-select-glasses" class="form-control" aria-label="Default select example">
+                <label for="basic-select-glasses" class="form-label">Do you wear glasses?</label>
+                <select name="basic-info-glasses" id="basic-select-glasses" class="form-control" aria-label="Default select example">
                     <option value="0" selected>No</option>
                     <option value="1">Yes</option>
                 </select>

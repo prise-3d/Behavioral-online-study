@@ -20,9 +20,9 @@ class ClassicalSessionProgress(SessionProgress):
 
         self.data['iteration'] = 0
         self.data['participant'] = {
-            'know-cg': participant_data['classical-info-know-cg'],
-            'why': participant_data['classical-info-why'],
-            'glasses': participant_data['classical-info-glasses'],
+            'know-cg': participant_data['basic-answer-know-cg'],
+            'why': participant_data['basic-answer-why'],
+            'glasses': participant_data['basic-answer-glasses'],
         }
 
         # always save state
@@ -37,8 +37,8 @@ class ClassicalSessionProgress(SessionProgress):
 
         # 1. update previous step depending of answer (if previous step exists)
         if step is not None:
-            answer_time = answer['classical-answer-time']
-            answer_value = answer['classical-answer-value']
+            answer_time = answer['binary-answer-time']
+            answer_value = answer['binary-answer-value']
             
             step.data['answer_time'] = answer_time
             step.data['answer_value'] = answer_value

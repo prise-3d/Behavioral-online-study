@@ -24,14 +24,14 @@ const checkKey = e => {
         let answer_time = Date.now() - start_answer_time;
 
         // Do whatever you want
-        quest_form = document.querySelector('form[class="quest-form"]');
+        binary_answer_form = document.querySelector('form[class="binary-answer-form"]');
 
         // set specific input values
-        document.querySelector('input[name="quest-answer-time"]').value = answer_time
-        document.querySelector('input[name="quest-answer-value"]').value = answer_value
+        document.querySelector('input[name="binary-answer-time"]').value = answer_time
+        document.querySelector('input[name="binary-answer-value"]').value = answer_value
         
         // then submit form
-        quest_form.submit();
+        binary_answer_form.submit();
    }
 }
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
     // load images
     var start_answer_time = null;
-    var experiment_images = document.querySelectorAll('img[class="quest-experiment-image"]')
+    var experiment_images = document.querySelectorAll('img[class="experiment-image"]')
     
 
     if (experiment_images !== null) {

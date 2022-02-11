@@ -33,11 +33,11 @@
 
     <div class="row py-2 justify-content-md-center text-center">
         <!-- Display images -->
-        {% with reconstructed_img=step.data|from_json:"reconstructed_image" %}
+        {% with image=step.data|from_json:"image" %}
 
             <!-- Set same height to div in order to avoid buttons flickering.. -->
-            <div class="col-xl-6 col-md-6 mb-5 col-md-offset-3" style="height: {{reconstructed_img|from_json:'height'}}px">
-                <img class="classical-experiment-image" src="{% static reconstructed_img|from_json:'src' %}" alt="" width="{{reconstructed_img|from_json:'width'}}px" height="{{reconstructed_img|from_json:'height'}}px"> 
+            <div class="col-xl-6 col-md-6 mb-5 col-md-offset-3" style="height: {{image|from_json:'height'}}px">
+                <img class="experiment-image" src="{% static image|from_json:'src' %}" alt="" width="{{image|from_json:'width'}}px" height="{{image|from_json:'height'}}px"> 
             </div>
         {% endwith %}
 
@@ -45,14 +45,14 @@
     
     <!-- If participant progression exists-->
     {% if progress %}
-        <div class="row justify-content-md-center py-4 classical-experiment-buttons text-center">
+        <div class="row justify-content-md-center py-4 experiment-keyboard text-center">
             
             <!-- Always need this url action-->
-            <form class="quest-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
+            <form class="binary-answer-form" method="post" class="col-xs-6 col-md-offset-3" action="{% url 'experiments:run_session' slug=experiment.slug session_id=session.id progress_id=progress.id %}">  
                 {% csrf_token %}
                 <!-- form with no button -->
-                <input type="hidden" name="quest-answer-time"/>
-                <input type="hidden" name="quest-answer-value"/>
+                <input type="hidden" name="binary-answer-time"/>
+                <input type="hidden" name="binary-answer-value"/>
             
             </form> 
         

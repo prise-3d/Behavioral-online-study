@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded',() => {
 
     var start_answer_time = null;
-    var experiment_images = document.querySelectorAll('img[class="classical-experiment-image"]')
+    var experiment_images = document.querySelectorAll('img[class="experiment-image"]')
     
 
     if (experiment_images !== null) {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded',() => {
     start_answer_time = Date.now();
 
     // Do whatever you want
-    document.querySelector('form[class="classical-form"]').onsubmit = (e) => {	
+    document.querySelector('form[class="binary-answer-form"]').onsubmit = (e) => {	
         
         e.preventDefault();
 
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded',() => {
         let answer_time = Date.now() - start_answer_time
 
         // set specific input values
-        document.querySelector('input[name="classical-answer-time"]').value = answer_time
-        document.querySelector('input[name="classical-answer-value"]').value = answer_value
+        document.querySelector('input[name="binary-answer-time"]').value = answer_time
+        document.querySelector('input[name="binary-answer-value"]').value = answer_value
         
         // then submit form
         form = e.target;

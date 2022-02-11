@@ -367,7 +367,6 @@ def run_experiment_step(request, slug, session_id, progress_id):
         # session = Session.objects.get(id=progress.session.id)
         # print(session.participants.all())
         # print('There is some expe steps:', SessionStep.objects.filter(progress_id=progress.id).all().count())
-
         if progress.end():
             
             # passed as finished state
