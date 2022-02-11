@@ -358,8 +358,6 @@ def run_experiment_step(request, slug, session_id, progress_id):
         # send previous step (if exists) and request dict form data
         step_data = progress.next(previous_step, request.POST)
 
-        print(step_data)
-
         # create new state
         experiment_step = SessionStep.objects.create(
             progress=progress,

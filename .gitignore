@@ -122,3 +122,5 @@ media
 credentials.json
 data
 docs/_build
+static/generated
+static/resources/dataset
