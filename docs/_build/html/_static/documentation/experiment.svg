@@ -29,14 +29,14 @@
      inkscape:document-units="pt"
      showgrid="false"
      inkscape:zoom="1.2209248"
-     inkscape:cx="205.9914"
-     inkscape:cy="187.15322"
+     inkscape:cx="205.99139"
+     inkscape:cy="187.15321"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg152" />
+     inkscape:current-layer="node1" />
   <g
      id="graph0"
      class="graph"
@@ -63,7 +63,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="9,-169 179,-169 179,-148 9,-148 "
-         id="polygon10" />
+         id="polygon10"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="54"

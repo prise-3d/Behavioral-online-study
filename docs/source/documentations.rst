@@ -24,8 +24,10 @@ Before going into details, we need to take a look at a very important concept of
 The following figure describe the process:
 
 .. image:: _static/documentation/server_template.png
-   :width: 70%
+   :width: 45%
    :align: center
+
+
 
 Here is an example of how Django works: 
 

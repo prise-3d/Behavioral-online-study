@@ -28,15 +28,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="0.77021943"
-     inkscape:cx="391.44689"
-     inkscape:cy="377.16524"
+     inkscape:zoom="0.77750001"
+     inkscape:cx="145.9807"
+     inkscape:cy="369.77491"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="edge3-6" />
+     inkscape:current-layer="node6" />
   <g
      id="graph0"
      class="graph"
@@ -55,7 +55,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="71.5,-148 71.5,-169 241.5,-169 241.5,-148 "
-         id="polygon65" />
+         id="polygon65"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="116.5"
@@ -232,7 +233,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="69.5,-341 69.5,-362 244.5,-362 244.5,-341 "
-         id="polygon210" />
+         id="polygon210"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="124.5"
@@ -436,7 +438,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="280.5,-302 280.5,-323 422.5,-323 422.5,-302 "
-         id="polygon340" />
+         id="polygon340"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="311.5"
@@ -571,7 +574,8 @@
          fill="#1b563f"
          stroke="transparent"
          points="362.5,-563.5 362.5,-533.5 190.5,-533.5 190.5,-563.5 "
-         id="polygon389" />
+         id="polygon389"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="227.5"
@@ -872,7 +876,8 @@
          stroke="transparent"
          points="399.5,-512.5 399.5,-533.5 572.5,-533.5 572.5,-512.5 "
          id="polygon534"
-         transform="translate(74.561772,13.547371)" />
+         transform="translate(74.561772,13.547371)"
+         style="fill:#4c71dd;fill-opacity:1" />
       <text
          text-anchor="start"
          x="517.56177"
