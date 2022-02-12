@@ -143,7 +143,7 @@ class QuestSessionProgress(SessionProgress):
 
         # STATIC_URL should never be included into image path for template
         step_data = {
-            "reconstructed_image": {
+            "image": {
                 "src": f"{output_image_path.replace(settings.RELATIVE_STATIC_URL, '')}",
                 "width": 500,
                 "height": 500
