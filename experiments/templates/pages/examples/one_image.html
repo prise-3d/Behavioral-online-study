@@ -30,7 +30,7 @@
 
             <!-- Set same height to div in order to avoid buttons flickering.. -->
             <div class="col-xl-12 col-md-12 mb-12" style="height: {{image|from_json:'height'}}px">
-                <img class="experiment-image" src="{% static image|from_json:'src' %}" alt="" width="{{image|from_json:'width'}}px" height="{{reconstructed_img|from_json:'height'}}px"> 
+                <img class="experiment-image" src="{% static image|from_json:'src' %}" alt="" width="{{image|from_json:'width'}}px" height="{{image|from_json:'height'}}px"> 
             </div>
         {% endwith %}
 
