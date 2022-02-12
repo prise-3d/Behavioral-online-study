@@ -157,7 +157,7 @@ class OneBlockSessionProgress(SessionProgress):
                 self.data['scenes_done'].append(self.data['selected_scene'])
 
                 # end of the experiment all scenes done
-                if len(self.data['scenes_done'] >= self.data['scenes']):
+                if len(self.data['scenes_done'] >= len(self.data['scenes'])):
                     return None
 
                 # new selected scene
