@@ -97,9 +97,9 @@ class OneBlockSessionProgress(SessionProgress):
 
         self.data['iteration'] = 0
         self.data['participant'] = {
-            'know-cg': participant_data['basic-answer-know-cg'],
-            'why': participant_data['basic-answer-why'],
-            'glasses': participant_data['basic-answer-glasses'],
+            'know-cg': participant_data['basic-info-know-cg'],
+            'why': participant_data['basic-info-why'],
+            'glasses': participant_data['basic-info-glasses'],
         }
 
         dataset_path = self.session.experiment.config['dataset']
