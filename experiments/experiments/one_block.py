@@ -177,7 +177,7 @@ class OneBlockSessionProgress(SessionProgress):
         # need to take care of static media folder
         images_path = sorted([ 
                     os.path.join(scene_path, img) 
-                    for img in os.listdir(os.path.join(settings.STATIC_URL, scene_path)) 
+                    for img in os.listdir(os.path.join(settings.RELATIVE_STATIC_URL, scene_path)) 
                 ])
 
         # get reference image
