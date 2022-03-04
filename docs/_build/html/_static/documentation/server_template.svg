@@ -225,7 +225,7 @@
        stroke-width=".26458"
        text-anchor="middle"
        word-spacing="0px"
-       style="line-height:1.25"
+       style="line-height:1.25;fill:#ffffff;fill-opacity:1"
        xml:space="preserve"
        id="text55"><tspan
          x="58.179138"
@@ -307,7 +307,7 @@
        letter-spacing="0px"
        stroke-width=".26458"
        word-spacing="0px"
-       style="line-height:1.25"
+       style="line-height:1.25;fill:#ffffff;fill-opacity:1"
        xml:space="preserve"
        id="text75"><tspan
          x="157.97447"

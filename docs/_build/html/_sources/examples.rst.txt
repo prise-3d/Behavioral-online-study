@@ -1,19 +1,23 @@
 Some examples
 =====================================
 
-You will find here some examples of using Macop with implementations of problems well known from the literature.
+In order to fully understand how the interface of the proposed application works, you can run it on example data.
 
-Available code examples
------------------------
+Define the application with example data
+----------------------------------------
 
-- mono-objective knapsack problem: knapsackExample.py_
-- multi-objective knapsack problem: knapsackMultiExample.py_
-- QAP problem: qapExample.py_
-- UBQP problem: ubqpExample.py_
-- Continuous Zdt optimisation problem: ZdtExample.py_
+.. code-block:: bash
 
-.. _knapsackExample.py: https://github.com/jbuisine/macop/blob/master/examples/knapsackExample.py
-.. _knapsackMultiExample.py: https://github.com/jbuisine/macop/blob/master/examples/knapsackMultiExample.py
-.. _qapExample.py: https://github.com/jbuisine/macop/blob/master/examples/qapExample.py
-.. _ubqpExample.py: https://github.com/jbuisine/macop/blob/master/examples/ubqpExample.py
-.. _ZdtExample.py: https://github.com/jbuisine/macop/blob/master/examples/ZdtExample.py
+    cp db.example.sqlite3 db.sqlite3
+
+
+.. note::
+    
+    The website will now be composed of a set of example data.
+
+You can log in to the administrator interface with the following credentials: 
+
+.. code-block:: bash
+
+    username: adminuser
+    password: adminuser
