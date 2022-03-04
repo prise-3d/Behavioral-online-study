@@ -12,6 +12,10 @@
 
 This project is a framework for designing online behavioral experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
 
+## Documentation
+
+A complete documentation is available at [https://prise-3d.github.io/behavioral-online-experiment](https://prise-3d.github.io/behavioral-online-experiment/).
+
 ## How to contribute ?
 
 This project uses [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/) to improve cooperation during the development.

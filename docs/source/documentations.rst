@@ -19,7 +19,7 @@ Here is a main overview of the important components of the framework:
 Template introduction
 =====================
 
-Before going into details, we need to take a look at a very important concept of Django: the notion of ``template``. A **template** is an html page with a particular way of displaying data sent from the Django server. This is common way we display data to the client in Django.
+Before going into details, we need to take a look at a very important concept of Django: the notion of ``template``. A **template** is an html page with a particular way of displaying data sent from the Django server. This is a common way in order to display data to the client in Django.
 
 The following figure describe the process:
 
@@ -35,6 +35,7 @@ Here is an example of how Django works:
     
     def render_template_with_data(request):
         """
+        Route available at `/experiment`
         Choose template and returns expected data
         """
 
@@ -42,7 +43,7 @@ Here is an example of how Django works:
             "experiment": "My experiment title"
         }
 
-        return render(request, "templates/example.html", data)
+        return render(request, "templates/experiment.html", data)
 
 
 .. code-block:: html
@@ -59,7 +60,7 @@ Here is an example of how Django works:
 Experiments
 ===========
 
-The introduction to templates is important because we will explain their use in the design of an experiment.
+The introduction to templates is important because we will explain later their use in the design of an experiment.
 
 
 Experiment representation
