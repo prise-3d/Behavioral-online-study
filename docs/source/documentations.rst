@@ -10,9 +10,6 @@ This documentation will allow you to get to know the framework and the administr
 
 In order to fully understand how the interface of the proposed application works, you can run it on example data.
 
-Define the application with example data
-----------------------------------------
-
 .. code-block:: bash
 
     cp db.example.sqlite3 db.sqlite3
