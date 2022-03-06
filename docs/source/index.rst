@@ -23,7 +23,7 @@ Contents
 
    documentations
 
-   examples
+   usages
 
    contributing
 

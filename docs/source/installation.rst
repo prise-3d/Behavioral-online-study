@@ -89,6 +89,7 @@ Or simply:
 
 
 You also have ``stop``, ``remove``, ``clean`` commands:
+
 - ``stop``: stop current container instance if exists
 - ``remove``: stop and remove container instance if exists
 - ``clean``: remove docker image if exists
