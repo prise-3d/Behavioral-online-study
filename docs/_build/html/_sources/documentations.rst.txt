@@ -6,7 +6,28 @@ A tour of Behavioral online experiment
 This documentation will allow you to get to know the framework and the administrator interface. It will detail the concepts and the idea behind the abstraction for the creation of online experiments.
 
 .. note:: 
-    It is highly recommended to read this documentation in parallel with the administrator interface (which is available at ``http://127.0.0.1:8080/admin``). You can also run it on example data (:doc:`load data <examples>`).
+    It is highly recommended to read this documentation in parallel with the administrator interface (which is available at ``http://127.0.0.1:8080/admin``).
+
+In order to fully understand how the interface of the proposed application works, you can run it on example data.
+
+Define the application with example data
+----------------------------------------
+
+.. code-block:: bash
+
+    cp db.example.sqlite3 db.sqlite3
+
+
+.. note::
+    
+    The website will now be composed of a set of example data.
+
+You can log in to the administrator interface with the following credentials: 
+
+.. code-block:: bash
+
+    username: adminuser
+    password: adminuser
 
 Main concepts
 =============
