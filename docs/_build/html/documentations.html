@@ -1,255 +1,107 @@
-
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>A tour of Behavioral online experiment &mdash; Behavioral oneline experiment v1.0.0 documentation</title>
-  
-
-  
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A tour of Behavioral online experiment &mdash; Behavioral oneline experiment v1.0.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Advanced usages" href="usages.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
-  <!-- Preload the theme fonts -->
-
-<link rel="preload" href="_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<!-- Preload the katex fonts -->
-
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 </head>
 
-<div class="container-fluid header-holder tutorials-header" id="header-holder">
-  <div class="container">
-    <div class="header-container">
-      <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch">
-       <!-- <img class="call-to-action-img" src="_static/images/asteroid_logo_dark.png"/> -->
-      </a>
-
-      <div class="main-menu">
-        <ul>
-          <li>
-            <a href="https://pytorch.org/get-started">Get Started</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/blog/">Blog</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/tutorials">Tutorials</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
-          </li>
-
-          <li>
-            <div class="resources-dropdown">
-              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
-                Resources
-              </a>
-              <div class="resources-dropdown-menu">
-                <a class="nav-dropdown-item" href="https://pytorch.org/resources"">
-                  <span class=dropdown-title>Developer Resources</span>
-                  <p>Find resources and get questions answered</p>
-                </a>
-                <!--
-                <a class="nav-dropdown-item" href="https://pytorch.org/features">
-                  <span class=dropdown-title>About</span>
-                  <p>Learn about PyTorch’s features and capabilities</p>
-                </a>
-                -->
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Behavioral oneline experiment
+          </a>
+              <div class="version">
+                v1.0.0
               </div>
-            </div>
-          </li>
-
-          <li>
-            <a href="https://github.com/mpariente/asteroid">Github</a>
-          </li>
-        </ul>
-      </div>
-
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
-    </div>
-
-  </div>
-</div>
-
-
-<body class="pytorch-body">
-
-   
-
-    
-
-    <div class="table-of-contents-link-wrapper">
-      <span>Table of Contents</span>
-      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
-    </div>
-
-    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
-      <div class="pytorch-side-scroll">
-        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          <div class="pytorch-left-menu-search">
-            
-
-            
-              
-              
-                <div class="version">
-                  v1.0.0
-                </div>
-              
-            
-
-            
-
-
-  
-
-
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-            
-          </div>
-
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">A tour of Behavioral online experiment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A tour of Behavioral online experiment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-concepts">Main concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notion-of-template">Notion of template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#experiments">Experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#experiment-process">Experiment process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#page-creation">Page creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#associate-styles-and-javascript">Associate styles and Javascript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#page-data-access-into-template">Page data access into template</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#session">Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-progress-principle">Session Progress principle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-representation-of-a-sessionprogress">The representation of a SessionProgress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-of-data-access-from-pages">Summary of data access from pages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-sessionprogress">Custom SessionProgress</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-method">Start method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-method">Next method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#progress-method">Progress method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end-method">End method</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usages.html">Advanced usages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <div class="pytorch-container">
-      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
-        <div class="pytorch-breadcrumbs-wrapper">
-          
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Behavioral oneline experiment</a>
+      </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="pytorch-breadcrumbs">
-    
-      <li>
-        <a href="index.html">
-          
-            Docs
-          
-        </a> &gt;
-      </li>
-
-        
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>A tour of Behavioral online experiment</li>
-    
-    
-      <li class="pytorch-breadcrumbs-aside">
-        
-            
-            
+      <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/prise-3d/behavioral-online-study/blob/master/docs/source/documentations.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
+  <hr/>
 </div>
-        </div>
-
-        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
-          Shortcuts
-        </div>
-      </div>
-
-      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
-        <div class="pytorch-content-left">
-
-        
-          
-          <div class="rst-content">
-          
-            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
-             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
-              
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="a-tour-of-behavioral-online-experiment">
 <h1>A tour of Behavioral online experiment<a class="headerlink" href="#a-tour-of-behavioral-online-experiment" title="Permalink to this headline">¶</a></h1>
 <p>This documentation will allow you to get to know the framework and the administrator interface. It will detail the concepts and the idea behind the abstraction for the creation of online experiments.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It is highly recommended to read this documentation in parallel with the administrator interface (which is available at <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/admin</span></code>).</p>
+<p>It is highly recommended to read this documentation in parallel with the administrator interface (which is available at <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin</span></code>, more specifically for the management of experiments in <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments</span></code>).</p>
 </div>
 <p>In order to fully understand how the interface of the proposed application works, you can run it on example data.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp db.example.sqlite3 db.sqlite3
@@ -267,1118 +119,8 @@ password: adminuser
 <div class="section" id="main-concepts">
 <h2>Main concepts<a class="headerlink" href="#main-concepts" title="Permalink to this headline">¶</a></h2>
 <p>This is a main overview of the important components of the framework:</p>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated by graphviz version 2.43.0 (0)
- -->
-
-<!-- Title: model_graph Pages: 1 -->
-
-<svg
-   width="620pt"
-   height="292pt"
-   viewBox="0 0 619.53172 292"
-   version="1.1"
-   id="svg607"
-   sodipodi:docname="overall.svg"
-   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs611" />
-  <sodipodi:namedview
-     id="namedview609"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:document-units="pt"
-     showgrid="false"
-     inkscape:zoom="0.77750001"
-     inkscape:cx="145.9807"
-     inkscape:cy="369.77491"
-     inkscape:window-width="1840"
-     inkscape:window-height="1016"
-     inkscape:window-x="80"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="node6" />
-  <g
-     id="graph0"
-     class="graph"
-     transform="translate(4,573)">
-    <title
-       id="title2">model_graph</title>
-    <!-- django_contrib_sessions_models_Session -->
-    <!-- experiments_models_Experiment -->
-    <g
-       id="node2"
-       class="node"
-       transform="translate(-44.665739,-152.57069)">
-      <title
-         id="title61">experiments_models_Experiment</title>
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="71.5,-148 71.5,-169 241.5,-169 241.5,-148 "
-         id="polygon65"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="116.5"
-         y="-157"
-         font-family="Roboto"
-         font-size="8px"
-         id="text67">   </text>
-      <text
-         text-anchor="start"
-         x="126.5"
-         y="-157"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text69">   Experiment    </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text71">   </text>
-      <text
-         text-anchor="start"
-         x="83.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text73">id</text>
-      <text
-         text-anchor="start"
-         x="90.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text75">   </text>
-      <text
-         text-anchor="start"
-         x="162.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text77">   </text>
-      <text
-         text-anchor="start"
-         x="172.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text79">AutoField</text>
-      <text
-         text-anchor="start"
-         x="207.5"
-         y="-140.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text81">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-127.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text83">   </text>
-      <text
-         text-anchor="start"
-         x="229.5"
-         y="-127.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text93">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-114.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text95">   </text>
-      <text
-         text-anchor="start"
-         x="229.5"
-         y="-114.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text105">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-101.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text107">   </text>
-      <text
-         text-anchor="start"
-         x="229.5"
-         y="-101.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text117">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-88.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text119">   </text>
-      <text
-         text-anchor="start"
-         x="229.5"
-         y="-88.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text129">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-75.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text131">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-62.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text143">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-49.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text155">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-36.599998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text167">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-23.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text179">   </text>
-      <text
-         text-anchor="start"
-         x="73.5"
-         y="-10.6"
-         font-family="Roboto"
-         font-size="8px"
-         id="text191">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="70.5,-170 242.5,-170 242.5,-4 70.5,-4 "
-         id="polygon203"
-         transform="matrix(1,0,0,0.21636903,0,-133.21727)" />
-    </g>
-    <!-- experiments_models_Session -->
-    <g
-       id="node3"
-       class="node"
-       transform="translate(-44.665739,-67.070694)">
-      <title
-         id="title206">experiments_models_Session</title>
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="69.5,-341 69.5,-362 244.5,-362 244.5,-341 "
-         id="polygon210"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="124.5"
-         y="-350"
-         font-family="Roboto"
-         font-size="8px"
-         id="text212">   </text>
-      <text
-         text-anchor="start"
-         x="134.5"
-         y="-350"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text214">   Session    </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text216">   </text>
-      <text
-         text-anchor="start"
-         x="81.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text218">id</text>
-      <text
-         text-anchor="start"
-         x="88.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text220">   </text>
-      <text
-         text-anchor="start"
-         x="165.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text222">   </text>
-      <text
-         text-anchor="start"
-         x="175.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text224">AutoField</text>
-      <text
-         text-anchor="start"
-         x="210.5"
-         y="-333.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text226">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text228">   </text>
-      <text
-         text-anchor="start"
-         x="81.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text230">experiment</text>
-      <text
-         text-anchor="start"
-         x="123.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text232">   </text>
-      <text
-         text-anchor="start"
-         x="165.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text234">   </text>
-      <text
-         text-anchor="start"
-         x="175.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text236">ForeignKey (id)</text>
-      <text
-         text-anchor="start"
-         x="232.5"
-         y="-320.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text238">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-307.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text240">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text252">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-281.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text264">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-268.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text276">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text288">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text300">   </text>
-      <text
-         text-anchor="start"
-         x="71.5"
-         y="-315.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text312">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="68,-363 245,-363 245,-223 68,-223 "
-         id="polygon324"
-         transform="matrix(1,0,0,0.3432839,0,-238.38794)" />
-    </g>
-    <!-- experiments_models_Session&#45;&gt;experiments_models_Experiment -->
-    <g
-       id="edge1"
-       class="edge"
-       transform="translate(-44.665739,-152.57069)">
-      <title
-         id="title327">experiments_models_Session-&gt;experiments_models_Experiment</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 156.5,-210.68 c 0,12.02 0,24.44 0,36.55"
-         id="path329" />
-      <circle
-         fill="#000000"
-         stroke="#000000"
-         cx="156.5"
-         cy="-214.92999"
-         id="ellipse331"
-         r="4" />
-      <text
-         text-anchor="middle"
-         x="199"
-         y="-194.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text333">experiment (sessions)</text>
-    </g>
-    <!-- experiments_models_Participant -->
-    <g
-       id="node4"
-       class="node"
-       transform="translate(-44.665739,-67.070694)">
-      <title
-         id="title336">experiments_models_Participant</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="279.5,-262 279.5,-324 423.5,-324 423.5,-262 "
-         id="polygon338" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="280.5,-302 280.5,-323 422.5,-323 422.5,-302 "
-         id="polygon340"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="311.5"
-         y="-311"
-         font-family="Roboto"
-         font-size="8px"
-         id="text342">   </text>
-      <text
-         text-anchor="start"
-         x="321.5"
-         y="-311"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text344">   Participant    </text>
-      <text
-         text-anchor="start"
-         x="282.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text346">   </text>
-      <text
-         text-anchor="start"
-         x="292.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text348">id</text>
-      <text
-         text-anchor="start"
-         x="299.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text350">   </text>
-      <text
-         text-anchor="start"
-         x="347.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text352">   </text>
-      <text
-         text-anchor="start"
-         x="357.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text354">UUIDField</text>
-      <text
-         text-anchor="start"
-         x="394.5"
-         y="-294.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text356">   </text>
-      <text
-         text-anchor="start"
-         x="282.5"
-         y="-281.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text358">   </text>
-      <text
-         text-anchor="start"
-         x="333.5"
-         y="-281.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text362">   </text>
-      <text
-         text-anchor="start"
-         x="347.5"
-         y="-281.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text364">   </text>
-      <text
-         text-anchor="start"
-         x="410.5"
-         y="-281.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text368">   </text>
-      <text
-         text-anchor="start"
-         x="282.5"
-         y="-268.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text370">   </text>
-      <text
-         text-anchor="start"
-         x="313.5"
-         y="-268.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text374">   </text>
-      <text
-         text-anchor="start"
-         x="347.5"
-         y="-268.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text376">   </text>
-      <text
-         text-anchor="start"
-         x="393.5"
-         y="-268.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text380">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="279.5,-324 423.5,-324 423.5,-262 279.5,-262 "
-         id="polygon382"
-         transform="matrix(1.0018321,0,0,0.54095816,-0.64399672,-148.86147)" />
-    </g>
-    <!-- experiments_models_SessionProgress -->
-    <g
-       id="node5"
-       class="node"
-       transform="translate(-44.665739,-2.5706938)">
-      <title
-         id="title385">experiments_models_SessionProgress</title>
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="362.5,-563.5 362.5,-533.5 190.5,-533.5 190.5,-563.5 "
-         id="polygon389"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="227.5"
-         y="-551.5"
-         font-family="Roboto"
-         font-size="8px"
-         id="text391">   </text>
-      <text
-         text-anchor="start"
-         x="237.5"
-         y="-551.5"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text393">   SessionProgress</text>
-      <text
-         text-anchor="start"
-         x="257.5"
-         y="-541.5"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="10px"
-         fill="#ffffff"
-         id="text397">(Abstract)</text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text401">   </text>
-      <text
-         text-anchor="start"
-         x="202.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text403">id</text>
-      <text
-         text-anchor="start"
-         x="209.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text405">   </text>
-      <text
-         text-anchor="start"
-         x="283.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text407">   </text>
-      <text
-         text-anchor="start"
-         x="293.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text409">AutoField</text>
-      <text
-         text-anchor="start"
-         x="328.5"
-         y="-526.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text411">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text413">   </text>
-      <text
-         text-anchor="start"
-         x="202.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text415">participant</text>
-      <text
-         text-anchor="start"
-         x="243.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text417">   </text>
-      <text
-         text-anchor="start"
-         x="283.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text419">   </text>
-      <text
-         text-anchor="start"
-         x="293.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text421">ForeignKey (id)</text>
-      <text
-         text-anchor="start"
-         x="350.5"
-         y="-513.09998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text423">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-500.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text425">   </text>
-      <text
-         text-anchor="start"
-         x="269.5"
-         y="-500.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text429">   </text>
-      <text
-         text-anchor="start"
-         x="283.5"
-         y="-500.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text431">   </text>
-      <text
-         text-anchor="start"
-         x="349.5"
-         y="-500.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text435">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-487.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text437">   </text>
-      <text
-         text-anchor="start"
-         x="202.5"
-         y="-499.10001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text439">session</text>
-      <text
-         text-anchor="start"
-         x="230.5"
-         y="-502.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text441">   </text>
-      <text
-         text-anchor="start"
-         x="283.5"
-         y="-502.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text443">   </text>
-      <text
-         text-anchor="start"
-         x="293.5"
-         y="-499.10001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text445">ForeignKey (id)</text>
-      <text
-         text-anchor="start"
-         x="350.5"
-         y="-502.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text447">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-474.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text449">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-461.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text461">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-448.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text473">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-435.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text485">   </text>
-      <text
-         text-anchor="start"
-         x="192.5"
-         y="-422.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text497">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="363.5,-416 189.5,-416 189.5,-565 363.5,-565 "
-         id="polygon509"
-         transform="matrix(1,0,0,0.50129098,0,-281.7706)" />
-    </g>
-    <!-- experiments_models_SessionProgress&#45;&gt;experiments_models_Session -->
-    <g
-       id="edge2"
-       class="edge"
-       transform="translate(-44.665739,-67.070694)">
-      <title
-         id="title512">experiments_models_SessionProgress-&gt;experiments_models_Session</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 224.64,-405.01 c -7.7,12.55 -15.59,25.4 -23.14,37.69"
-         id="path514" />
-      <circle
-         fill="#000000"
-         stroke="#000000"
-         cx="226.81"
-         cy="-408.54001"
-         id="ellipse516"
-         r="4" />
-      <text
-         text-anchor="middle"
-         x="257.5"
-         y="-387.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text518">session (progresses)</text>
-    </g>
-    <!-- experiments_models_SessionProgress&#45;&gt;experiments_models_Participant -->
-    <g
-       id="edge3"
-       class="edge"
-       transform="translate(-44.665739,-67.070694)">
-      <title
-         id="title521">experiments_models_SessionProgress-&gt;experiments_models_Participant</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 309.15,-404.4 c 10.32,26.92 21.15,55.14 29.27,76.31"
-         id="path523" />
-      <circle
-         fill="#000000"
-         stroke="#000000"
-         cx="307.67999"
-         cy="-408.22"
-         id="ellipse525"
-         r="4" />
-      <text
-         text-anchor="middle"
-         x="361.5"
-         y="-387.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text527">participant (progresses)</text>
-    </g>
-    <!-- experiments_models_SessionStep -->
-    <g
-       id="node6"
-       class="node"
-       transform="translate(-44.665739,-2.5706938)">
-      <title
-         id="title530">experiments_models_SessionStep</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="398,-446.5 398,-534.5 573,-534.5 573,-446.5 "
-         id="polygon532"
-         transform="translate(74.561772,13.547371)" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="399.5,-512.5 399.5,-533.5 572.5,-533.5 572.5,-512.5 "
-         id="polygon534"
-         transform="translate(74.561772,13.547371)"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="517.56177"
-         y="-507.95264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text536">   </text>
-      <text
-         text-anchor="start"
-         x="527.56177"
-         y="-507.95264"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text538">   SessionStep    </text>
-      <text
-         text-anchor="start"
-         x="476.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text540">   </text>
-      <text
-         text-anchor="start"
-         x="486.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text542">id</text>
-      <text
-         text-anchor="start"
-         x="493.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text544">   </text>
-      <text
-         text-anchor="start"
-         x="552.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text546">   </text>
-      <text
-         text-anchor="start"
-         x="562.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text548">UUIDField</text>
-      <text
-         text-anchor="start"
-         x="599.06177"
-         y="-491.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text550">   </text>
-      <text
-         text-anchor="start"
-         x="476.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text552">   </text>
-      <text
-         text-anchor="start"
-         x="486.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text554">progress_type</text>
-      <text
-         text-anchor="start"
-         x="538.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text556">   </text>
-      <text
-         text-anchor="start"
-         x="552.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text558">   </text>
-      <text
-         text-anchor="start"
-         x="562.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="8px"
-         id="text560">ForeignKey (id)</text>
-      <text
-         text-anchor="start"
-         x="619.06177"
-         y="-478.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text562">   </text>
-      <text
-         text-anchor="start"
-         x="476.06177"
-         y="-465.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text564">   </text>
-      <text
-         text-anchor="start"
-         x="527.06177"
-         y="-465.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text568">   </text>
-      <text
-         text-anchor="start"
-         x="552.06177"
-         y="-465.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text570">   </text>
-      <text
-         text-anchor="start"
-         x="615.06177"
-         y="-465.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text574">   </text>
-      <text
-         text-anchor="start"
-         x="476.06177"
-         y="-452.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text576">   </text>
-      <text
-         text-anchor="start"
-         x="502.06177"
-         y="-452.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text580">   </text>
-      <text
-         text-anchor="start"
-         x="552.06177"
-         y="-452.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text582">   </text>
-      <text
-         text-anchor="start"
-         x="601.06177"
-         y="-452.55264"
-         font-family="Roboto"
-         font-size="8px"
-         id="text586">   </text>
-      <text
-         text-anchor="start"
-         x="401.5"
-         y="-453.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text588">   </text>
-      <text
-         text-anchor="start"
-         x="455.5"
-         y="-453.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text592">   </text>
-      <text
-         text-anchor="start"
-         x="477.5"
-         y="-453.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text594">   </text>
-      <text
-         text-anchor="start"
-         x="560.5"
-         y="-453.10001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text598">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="573,-534.5 573,-446.5 398,-446.5 398,-534.5 "
-         id="polygon600"
-         transform="matrix(1.0013202,0,0,0.56539006,73.920798,-218.86717)" />
-    </g>
-    <!-- \n\n\n -->
-    <g
-       id="node7"
-       class="node">
-      <title
-         id="title603">\n\n\n</title>
-    </g>
-    <g
-       id="edge3-6"
-       class="edge"
-       transform="translate(73.680346,-136.85951)">
-      <title
-         id="title521-7">experiments_models_SessionProgress-&gt;experiments_models_Participant</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 262.78695,-377.62589 c 27.25549,9.39827 55.83465,19.24146 77.27124,26.629"
-         id="path523-5" />
-      <circle
-         fill="#000000"
-         stroke="#000000"
-         cx="456.72455"
-         cy="-45.246769"
-         id="ellipse525-3"
-         r="4"
-         transform="rotate(-50)" />
-      <text
-         text-anchor="middle"
-         x="315.10657"
-         y="-376.6228"
-         font-family="Roboto"
-         font-size="8px"
-         id="text527-5">steps (progress)</text>
-    </g>
-  </g>
-</svg>
-<p>Here is more detail for each of the principal components:</p>
+<a class="reference internal image-reference" href="_images/overall.png"><img alt="_images/overall.png" class="align-center" src="_images/overall.png" style="width: 80%;" /></a>
+<p>Here a description of each principal components:</p>
 <ul class="simple">
 <li><p><strong>Experiment:</strong> represents the architecture of the experiment with the associated pages (more details will be provided later), a JSON configuration of the experiment (path to data for example), a description and an availability status;</p></li>
 <li><p><strong>Session:</strong> an experience can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);</p></li>
@@ -1390,7 +132,7 @@ password: adminuser
 <h2>Notion of template<a class="headerlink" href="#notion-of-template" title="Permalink to this headline">¶</a></h2>
 <p>First, we need to take a look at a very important concept of Django: the notion of <code class="docutils literal notranslate"><span class="pre">template</span></code>. A <strong>template</strong> is an html page with a particular way of displaying data sent from the Django server. This is a common way in order to display data to the client in Django.</p>
 <p>The following figure describe the process:</p>
-<a class="reference internal image-reference" href="_images/server_template.png"><img alt="_images/server_template.png" class="align-center" src="_images/server_template.png" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="_images/server_template.png"><img alt="_images/server_template.png" class="align-center" src="_images/server_template.png" style="width: 80%;" /></a>
 <p>Here is an example of how Django works:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">render_template_with_data</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1420,2203 +162,39 @@ password: adminuser
 <div class="section" id="experiments">
 <h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
 <p>The introduction to templates is important because we have mentioned in the main concepts that an experiment is composed of pages.</p>
-<div class="section" id="page-description">
-<h3>Page description<a class="headerlink" href="#page-description" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="experiment-process">
+<h3>Experiment process<a class="headerlink" href="#experiment-process" title="Permalink to this headline">¶</a></h3>
 <p>Indeed, an experiment is composed of 4 pages:</p>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated by graphviz version 2.43.0 (0)
- -->
-
-<!-- Title: model_graph Pages: 1 -->
-
-<svg
-   width="661pt"
-   height="306pt"
-   viewBox="0 0 661 306"
-   version="1.1"
-   id="svg591"
-   sodipodi:docname="pages.svg"
-   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs595" />
-  <sodipodi:namedview
-     id="namedview593"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:document-units="pt"
-     showgrid="false"
-     inkscape:zoom="0.88927598"
-     inkscape:cx="322.1722"
-     inkscape:cy="229.96236"
-     inkscape:window-width="1840"
-     inkscape:window-height="1016"
-     inkscape:window-x="80"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="node4" />
-  <g
-     id="graph0"
-     class="graph"
-     transform="translate(4,302)">
-    <title
-       id="title2">model_graph</title>
-    <polygon
-       fill="#ffffff"
-       stroke="transparent"
-       points="-4,4 -4,-302 770,-302 770,4 "
-       id="polygon4"
-       transform="matrix(0.8603584,0,0,1,2.497008,0)" />
-    <!-- experiments_models_Page -->
-    <g
-       id="node1"
-       class="node"
-       transform="translate(-30)">
-      <title
-         id="title6">experiments_models_Page</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="422,-105 422,-4 272,-4 272,-105 "
-         id="polygon8" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="421,-103.5 421,-82.5 273,-82.5 273,-103.5 "
-         id="polygon10"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="321"
-         y="-91.5"
-         font-family="Roboto"
-         font-size="8px"
-         id="text12">   </text>
-      <text
-         text-anchor="start"
-         x="331"
-         y="-91.5"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text14">   Page    </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text16">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text18">content</text>
-      <text
-         text-anchor="start"
-         x="313"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text20">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text22">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text24">JSONField</text>
-      <text
-         text-anchor="start"
-         x="389"
-         y="-75.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text26">   </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text28">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text30">created_on</text>
-      <text
-         text-anchor="start"
-         x="326"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text32">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text34">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text36">DateTimeField</text>
-      <text
-         text-anchor="start"
-         x="403"
-         y="-62.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text38">   </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text40">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text42">javascripts</text>
-      <text
-         text-anchor="start"
-         x="326"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text44">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text46">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text48">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="409"
-         y="-49.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text50">   </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text52">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text54">name</text>
-      <text
-         text-anchor="start"
-         x="306"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text56">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text58">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text60">CharField</text>
-      <text
-         text-anchor="start"
-         x="386"
-         y="-36.099998"
-         font-family="Roboto"
-         font-size="8px"
-         id="text62">   </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text64">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text66">styles</text>
-      <text
-         text-anchor="start"
-         x="307"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text68">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text70">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text72">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="409"
-         y="-23.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text74">   </text>
-      <text
-         text-anchor="start"
-         x="275"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text76">   </text>
-      <text
-         text-anchor="start"
-         x="285"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text78">title</text>
-      <text
-         text-anchor="start"
-         x="299"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text80">   </text>
-      <text
-         text-anchor="start"
-         x="340"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text82">   </text>
-      <text
-         text-anchor="start"
-         x="350"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text84">CharField</text>
-      <text
-         text-anchor="start"
-         x="386"
-         y="-10.1"
-         font-family="Roboto"
-         font-size="8px"
-         id="text86">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="422,-105 422,-4 272,-4 272,-105 "
-         id="polygon88" />
-    </g>
-    <!-- experiments_models_ExamplePage -->
-    <g
-       id="node2"
-       class="node"
-       transform="translate(165)">
-      <title
-         id="title91">experiments_models_ExamplePage</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="152,-294 152,-158 8,-158 8,-294 "
-         id="polygon93" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="151,-293 151,-263 9,-263 9,-293 "
-         id="polygon95"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="39"
-         y="-281"
-         font-family="Roboto"
-         font-size="8px"
-         id="text97">   </text>
-      <text
-         text-anchor="start"
-         x="49"
-         y="-281"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text99">   ExamplePage</text>
-      <text
-         text-anchor="start"
-         x="58.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text101">&lt;</text>
-      <text
-         text-anchor="start"
-         x="64.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="10px"
-         fill="#ffffff"
-         id="text103">Page</text>
-      <text
-         text-anchor="start"
-         x="86.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text105">&gt;    </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text107">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text109">id</text>
-      <text
-         text-anchor="start"
-         x="28"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text111">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text113">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text115">AutoField</text>
-      <text
-         text-anchor="start"
-         x="118"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text117">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text119">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text121">content</text>
-      <text
-         text-anchor="start"
-         x="47"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text123">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text125">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text127">JSONField</text>
-      <text
-         text-anchor="start"
-         x="120"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text129">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text131">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text133">created_on</text>
-      <text
-         text-anchor="start"
-         x="59"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text135">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text137">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text139">DateTimeField</text>
-      <text
-         text-anchor="start"
-         x="134"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text141">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text143">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text145">javascripts</text>
-      <text
-         text-anchor="start"
-         x="59"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text147">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text149">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text151">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="139"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text153">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text155">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text157">name</text>
-      <text
-         text-anchor="start"
-         x="41"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text159">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text161">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text163">CharField</text>
-      <text
-         text-anchor="start"
-         x="118"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text165">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text167">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text169">styles</text>
-      <text
-         text-anchor="start"
-         x="41"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text171">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text173">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text175">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="139"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text177">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text179">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text181"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">template</text>
-      <text
-         text-anchor="start"
-         x="53"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text183">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text185">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text187"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">CharField</text>
-      <text
-         text-anchor="start"
-         x="119"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text189">   </text>
-      <text
-         text-anchor="start"
-         x="11"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text191">   </text>
-      <text
-         text-anchor="start"
-         x="21"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text193">title</text>
-      <text
-         text-anchor="start"
-         x="34"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text195">   </text>
-      <text
-         text-anchor="start"
-         x="73"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text197">   </text>
-      <text
-         text-anchor="start"
-         x="83"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text199">CharField</text>
-      <text
-         text-anchor="start"
-         x="118"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text201">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="152,-294 152,-158 8,-158 8,-294 "
-         id="polygon203" />
-    </g>
-    <!-- experiments_models_ExamplePage&#45;&gt;experiments_models_Page -->
-    <g
-       id="edge1"
-       class="edge"
-       transform="translate(-30)">
-      <title
-         id="title206">experiments_models_ExamplePage-&gt;experiments_models_Page</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 160.07,-160.13 c 2.99,2.1 5.97,4.15 8.93,6.13 27.02,18.07 57.62,35.88 85.73,51.28"
-         id="path208" />
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="263.77,-97.81 253.31,-99.51 256.65,-105.66 "
-         id="polygon210" />
-      <text
-         text-anchor="middle"
-         x="213.5"
-         y="-129.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text212" />
-    </g>
-    <!-- experiments_models_MainPage -->
-    <g
-       id="node3"
-       class="node"
-       transform="translate(160.5)">
-      <title
-         id="title215">experiments_models_MainPage</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="186,-294 330,-294 330,-158 186,-158 "
-         id="polygon217" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="187,-293 329,-293 329,-263 187,-263 "
-         id="polygon219"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="225.5"
-         y="-281"
-         font-family="Roboto"
-         font-size="8px"
-         id="text221">   </text>
-      <text
-         text-anchor="start"
-         x="235.5"
-         y="-281"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text223">   MainPage</text>
-      <text
-         text-anchor="start"
-         x="236.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text225">&lt;</text>
-      <text
-         text-anchor="start"
-         x="242.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="10px"
-         fill="#ffffff"
-         id="text227">Page</text>
-      <text
-         text-anchor="start"
-         x="264.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text229">&gt;    </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text231">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text233">id</text>
-      <text
-         text-anchor="start"
-         x="206"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text235">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text237">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text239">AutoField</text>
-      <text
-         text-anchor="start"
-         x="296"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text241">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text243">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text245">content</text>
-      <text
-         text-anchor="start"
-         x="225"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text247">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text249">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text251">JSONField</text>
-      <text
-         text-anchor="start"
-         x="298"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text253">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text255">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text257">created_on</text>
-      <text
-         text-anchor="start"
-         x="237"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text259">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text261">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text263">DateTimeField</text>
-      <text
-         text-anchor="start"
-         x="312"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text265">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text267">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text269">javascripts</text>
-      <text
-         text-anchor="start"
-         x="237"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text271">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text273">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text275">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="317"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text277">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text279">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text281">name</text>
-      <text
-         text-anchor="start"
-         x="219"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text283">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text285">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text287">CharField</text>
-      <text
-         text-anchor="start"
-         x="296"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text289">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text291">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text293">styles</text>
-      <text
-         text-anchor="start"
-         x="219"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text295">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text297">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text299">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="317"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text301">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text303">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text305"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">template</text>
-      <text
-         text-anchor="start"
-         x="231"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text307">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text309">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text311"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">CharField</text>
-      <text
-         text-anchor="start"
-         x="297"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text313">   </text>
-      <text
-         text-anchor="start"
-         x="189"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text315">   </text>
-      <text
-         text-anchor="start"
-         x="199"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text317">title</text>
-      <text
-         text-anchor="start"
-         x="212"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text319">   </text>
-      <text
-         text-anchor="start"
-         x="251"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text321">   </text>
-      <text
-         text-anchor="start"
-         x="261"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text323">CharField</text>
-      <text
-         text-anchor="start"
-         x="296"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text325">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="186,-294 330,-294 330,-158 186,-158 "
-         id="polygon327" />
-    </g>
-    <!-- experiments_models_MainPage&#45;&gt;experiments_models_Page -->
-    <g
-       id="edge2"
-       class="edge"
-       transform="translate(-30)">
-      <title
-         id="title330">experiments_models_MainPage-&gt;experiments_models_Page</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 295.49,-153.61 c 6.18,11.78 12.55,23.91 18.61,35.46"
-         id="path332" />
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="318.89,-109.04 311.14,-116.26 317.34,-119.52 "
-         id="polygon334" />
-      <text
-         text-anchor="middle"
-         x="309.5"
-         y="-129.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text336" />
-    </g>
-    <!-- experiments_models_InformationPage -->
-    <!-- experiments_models_InformationPage&#45;&gt;experiments_models_Page -->
-    <g
-       id="edge3"
-       class="edge"
-       transform="translate(-30)">
-      <title
-         id="title454">experiments_models_InformationPage-&gt;experiments_models_Page</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 398.51,-153.61 c -6.18,11.78 -12.55,23.91 -18.61,35.46"
-         id="path456" />
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="375.11,-109.04 376.66,-119.52 382.86,-116.26 "
-         id="polygon458" />
-      <text
-         text-anchor="middle"
-         x="390.5"
-         y="-129.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text460" />
-    </g>
-    <!-- experiments_models_EndPage -->
-    <g
-       id="node5"
-       class="node"
-       transform="translate(-30)">
-      <title
-         id="title463">experiments_models_EndPage</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="686,-294 686,-158 542,-158 542,-294 "
-         id="polygon465" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="685,-293 685,-263 543,-263 543,-293 "
-         id="polygon467"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="584.5"
-         y="-281"
-         font-family="Roboto"
-         font-size="8px"
-         id="text469">   </text>
-      <text
-         text-anchor="start"
-         x="594.5"
-         y="-281"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text471">   EndPage</text>
-      <text
-         text-anchor="start"
-         x="592.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text473">&lt;</text>
-      <text
-         text-anchor="start"
-         x="598.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="10px"
-         fill="#ffffff"
-         id="text475">Page</text>
-      <text
-         text-anchor="start"
-         x="620.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text477">&gt;    </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text479">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text481">id</text>
-      <text
-         text-anchor="start"
-         x="562"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text483">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text485">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text487">AutoField</text>
-      <text
-         text-anchor="start"
-         x="652"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text489">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text491">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text493">content</text>
-      <text
-         text-anchor="start"
-         x="581"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text495">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text497">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text499">JSONField</text>
-      <text
-         text-anchor="start"
-         x="654"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text501">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text503">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text505">created_on</text>
-      <text
-         text-anchor="start"
-         x="593"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text507">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text509">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text511">DateTimeField</text>
-      <text
-         text-anchor="start"
-         x="668"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text513">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text515">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text517">javascripts</text>
-      <text
-         text-anchor="start"
-         x="593"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text519">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text521">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text523">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="673"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text525">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text527">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text529">name</text>
-      <text
-         text-anchor="start"
-         x="575"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text531">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text533">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text535">CharField</text>
-      <text
-         text-anchor="start"
-         x="652"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text537">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text539">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text541">styles</text>
-      <text
-         text-anchor="start"
-         x="575"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text543">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text545">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text547">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="673"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text549">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text551">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text553"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">template</text>
-      <text
-         text-anchor="start"
-         x="587"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text555">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text557">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text559"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">CharField</text>
-      <text
-         text-anchor="start"
-         x="653"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text561">   </text>
-      <text
-         text-anchor="start"
-         x="545"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text563">   </text>
-      <text
-         text-anchor="start"
-         x="555"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text565">title</text>
-      <text
-         text-anchor="start"
-         x="568"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text567">   </text>
-      <text
-         text-anchor="start"
-         x="607"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text569">   </text>
-      <text
-         text-anchor="start"
-         x="617"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text571">CharField</text>
-      <text
-         text-anchor="start"
-         x="652"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text573">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="686,-294 686,-158 542,-158 542,-294 "
-         id="polygon575" />
-    </g>
-    <!-- experiments_models_EndPage&#45;&gt;experiments_models_Page -->
-    <g
-       id="edge4"
-       class="edge"
-       transform="translate(-30)">
-      <title
-         id="title578">experiments_models_EndPage-&gt;experiments_models_Page</title>
-      <path
-         fill="none"
-         stroke="#000000"
-         d="m 533.93,-160.13 c -2.99,2.1 -5.97,4.15 -8.93,6.13 -27.02,18.07 -57.62,35.88 -85.73,51.28"
-         id="path580" />
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="430.23,-97.81 437.35,-105.66 440.69,-99.51 "
-         id="polygon582" />
-      <text
-         text-anchor="middle"
-         x="494.5"
-         y="-129.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text584" />
-    </g>
-    <!-- \n\n\n -->
-    <g
-       id="node6"
-       class="node">
-      <title
-         id="title587">\n\n\n</title>
-    </g>
-    <g
-       id="node4"
-       class="node"
-       transform="translate(-363.2148,-0.16731)">
-      <title
-         id="title339">experiments_models_InformationPage</title>
-      <polygon
-         fill="#ffffff"
-         stroke="transparent"
-         points="364,-158 364,-294 508,-294 508,-158 "
-         id="polygon341" />
-      <polygon
-         fill="#1b563f"
-         stroke="transparent"
-         points="365,-263 365,-293 507,-293 507,-263 "
-         id="polygon343"
-         style="fill:#4c71dd;fill-opacity:1" />
-      <text
-         text-anchor="start"
-         x="387.5"
-         y="-281"
-         font-family="Roboto"
-         font-size="8px"
-         id="text345">   </text>
-      <text
-         text-anchor="start"
-         x="397.5"
-         y="-281"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text347">   InformationPage</text>
-      <text
-         text-anchor="start"
-         x="414.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text349">&lt;</text>
-      <text
-         text-anchor="start"
-         x="420.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="10px"
-         fill="#ffffff"
-         id="text351">Page</text>
-      <text
-         text-anchor="start"
-         x="442.5"
-         y="-271"
-         font-family="Roboto"
-         font-weight="bold"
-         font-size="10px"
-         fill="#ffffff"
-         id="text353">&gt;    </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text355">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text357">id</text>
-      <text
-         text-anchor="start"
-         x="384"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text359">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text361">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-255.60001"
-         font-family="Roboto"
-         font-weight="bold"
-         font-style="italic"
-         font-size="8px"
-         id="text363">AutoField</text>
-      <text
-         text-anchor="start"
-         x="474"
-         y="-255.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text365">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text367">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text369">content</text>
-      <text
-         text-anchor="start"
-         x="403"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text371">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text373">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-242.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text375">JSONField</text>
-      <text
-         text-anchor="start"
-         x="476"
-         y="-242.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text377">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text379">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text381">created_on</text>
-      <text
-         text-anchor="start"
-         x="415"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text383">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text385">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-229.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text387">DateTimeField</text>
-      <text
-         text-anchor="start"
-         x="490"
-         y="-229.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text389">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text391">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text393">javascripts</text>
-      <text
-         text-anchor="start"
-         x="415"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text395">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text397">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-216.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text399">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="495"
-         y="-216.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text401">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text403">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text405">name</text>
-      <text
-         text-anchor="start"
-         x="397"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text407">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text409">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-203.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text411">CharField</text>
-      <text
-         text-anchor="start"
-         x="474"
-         y="-203.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text413">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text415">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text417">styles</text>
-      <text
-         text-anchor="start"
-         x="397"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text419">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text421">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-190.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         fill="#7b7b7b"
-         id="text423">MultiSelectField</text>
-      <text
-         text-anchor="start"
-         x="495"
-         y="-190.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text425">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text427">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text429"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">template</text>
-      <text
-         text-anchor="start"
-         x="409"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text431">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text433">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text435"
-         style="fill:#d10000;fill-opacity:1;stroke:#d10000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">CharField</text>
-      <text
-         text-anchor="start"
-         x="475"
-         y="-177.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text437">   </text>
-      <text
-         text-anchor="start"
-         x="367"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text439">   </text>
-      <text
-         text-anchor="start"
-         x="377"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text441">title</text>
-      <text
-         text-anchor="start"
-         x="390"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text443">   </text>
-      <text
-         text-anchor="start"
-         x="429"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text445">   </text>
-      <text
-         text-anchor="start"
-         x="439"
-         y="-164.60001"
-         font-family="Roboto"
-         font-style="italic"
-         font-size="8px"
-         id="text447">CharField</text>
-      <text
-         text-anchor="start"
-         x="474"
-         y="-164.60001"
-         font-family="Roboto"
-         font-size="8px"
-         id="text449">   </text>
-      <polygon
-         fill="none"
-         stroke="#000000"
-         points="364,-158 364,-294 508,-294 508,-158 "
-         id="polygon451" />
-    </g>
-  </g>
-</svg>
+<a class="reference internal image-reference" href="_images/pages.png"><img alt="_images/pages.png" class="align-center" src="_images/pages.png" style="width: 95%;" /></a>
 <ul class="simple">
 <li><p><strong>The information page:</strong> it may be necessary to ask some information from the participant, or to inform him about certain aspects of the experience. This is what the hint page allows;</p></li>
 <li><p><strong>The example page:</strong> which provides instructions for a good understanding of the participating experience. It can be visible without going through the experience;</p></li>
 <li><p><strong>The main page:</strong> this is where the experience will unfold, it will receive the new stimulus at each step, and will ask the participant to respond accordingly;</p></li>
 <li><p><strong>The end page:</strong> when the SessionProgress instance determines the end of the participant’s experience session, the end page is proposed to the participant.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each page is composed of a name and a title, the name is used to identify the page on the admin interface side, the title is used on the client side.</p>
+</div>
 </div>
 <div class="section" id="page-creation">
 <h3>Page creation<a class="headerlink" href="#page-creation" title="Permalink to this headline">¶</a></h3>
-<p>It is possible to create a particular page from the administrator interface (<code class="docutils literal notranslate"><span class="pre">/admin</span></code>). Each page requires a particular template and can be selected at creation. Each variable entered in the page configuration can be displayed in a particular template.</p>
-<p>The folder <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages</span></code> contains all the Django templates currently available for pages. Each sub-folder: <code class="docutils literal notranslate"><span class="pre">end</span></code>, <code class="docutils literal notranslate"><span class="pre">examples</span></code>, <code class="docutils literal notranslate"><span class="pre">information</span></code>, <code class="docutils literal notranslate"><span class="pre">main</span></code> is associated with a particular type of page. This is how the <em>admin</em> interface provides you with only the possible templates.</p>
+<p>It is possible to create a particular page from the administrator interface (<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments</span></code>). Each page requires a particular template and can be selected at creation. Each variable entered in the page configuration can be displayed in a particular template.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>In order for an experiment to be created, it must be associated with each of the requested pages.</p>
+<p>In order for an experiment to be created, it must be associated with each of the requested pages (information, example, main and end).</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages</span></code> contains all the Django templates currently available for pages. Each sub-folder: <code class="docutils literal notranslate"><span class="pre">end</span></code>, <code class="docutils literal notranslate"><span class="pre">examples</span></code>, <code class="docutils literal notranslate"><span class="pre">information</span></code>, <code class="docutils literal notranslate"><span class="pre">main</span></code> is associated with a particular type of page. This is how the <em>admin</em> interface provides you with only the possible templates.</p>
+<p>The structure of a page template for Django is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s1">&#39;pages/page_base.html&#39;</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">static</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">apptags</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Your</span> <span class="n">specific</span> <span class="n">page</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3625,293 +203,410 @@ password: adminuser
 </div>
 <div class="section" id="associate-styles-and-javascript">
 <h3>Associate styles and Javascript<a class="headerlink" href="#associate-styles-and-javascript" title="Permalink to this headline">¶</a></h3>
-<p>ToDo…</p>
+<p>When you have access to the creation url to add a page (<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments/mainpage/add/</span></code>), it is possible to specify its content, its template, but also the style and javascript files that will be loaded for this page:</p>
+<a class="reference internal image-reference" href="_images/styles_and_javascripts.png"><img alt="_images/styles_and_javascripts.png" class="align-center" src="_images/styles_and_javascripts.png" style="width: 60%;" /></a>
+<p>In this way, as illustrated, it is possible to select several style and javascript files which will be loaded for the page.</p>
+<p>It is possible to add as many style scripts and javascripts as necessary in the folder: <code class="docutils literal notranslate"><span class="pre">static/experiment</span></code> of the project.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For a new style or javascript file to be taken into account in the administrator interface, the server must be restarted.</p>
 </div>
-<div class="section" id="base-template-of-page">
-<h3>Base template of Page<a class="headerlink" href="#base-template-of-page" title="Permalink to this headline">¶</a></h3>
-<p>ToDo…</p>
+</div>
+<div class="section" id="page-data-access-into-template">
+<h3>Page data access into template<a class="headerlink" href="#page-data-access-into-template" title="Permalink to this headline">¶</a></h3>
+<p>A JSON field is configurable when you create or modify your page. It allows to store some static data. This JSON configuration is accessible from your template thanks to the Django <code class="docutils literal notranslate"><span class="pre">page</span></code> object, and more specifically the <code class="docutils literal notranslate"><span class="pre">content</span></code> field of the <code class="docutils literal notranslate"><span class="pre">page</span></code> instance.</p>
+<p>This is a JSON configuration example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;My first example page&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;number_of_questions&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">&quot;expected_time&quot;</span><span class="p">:</span> <span class="mi">20</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>with its template data access:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% block content %}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;justify-content-center&quot;</span><span class="p">&gt;</span>
+
+        <span class="c">&lt;!-- Page Heading --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;py-2 text-center&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>{{page.content | from_json:&quot;description&quot;}}<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>
+            <span class="c">&lt;!-- Keep in this scope a new `params_obj` object which stores `params` JSON field data --&gt;</span>
+            {% with params_obj=page.content|from_json:&quot;params&quot; %}
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Number of questions: {{params_obj | from_json:&quot;number_of_questions&quot;}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Expected time: {{params_obj | from_json:&quot;expected_time&quot;}} minutes<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            {% endwidth %}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At the end of this tutorial, a summary of the data accessible by type of page will be provided.</p>
+</div>
 </div>
 </div>
 <div class="section" id="session">
 <h2>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
-<p>ToDo…</p>
+<p>As mentioned, the session is associated with an experiment, i.e. it remains associated with the 4 pages that compose the experiment. The main interest of the Session division is that an experiment can be carried out with different parameters (number of iterations, stopping time criteria) with different populations.</p>
+<p>When creating an experiment from the administrator interface (<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments/session/add/</span></code>), it is possible to associate it with the desired experiment, propose a specific configuration, an estimated duration and a very important item, the way the experiment progresses: a specific <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We’ll get into the details of SessionProgress model next.</p>
 </div>
-<div class="section" id="session-progress">
-<h2>Session Progress<a class="headerlink" href="#session-progress" title="Permalink to this headline">¶</a></h2>
-<p>ToDo…</p>
+<p>For now, let’s focus on the fact that the current configuration of our session is as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;max_iterations&quot;</span><span class="p">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We will use this configuration to specify that the participant will be confronted with a maximum of 20 stimili (i.e. 20 iterations).</p>
+</div>
+<div class="section" id="session-progress-principle">
+<h2>Session Progress principle<a class="headerlink" href="#session-progress-principle" title="Permalink to this headline">¶</a></h2>
+<p>For the moment, it is not possible to create our <code class="docutils literal notranslate"><span class="pre">Session</span></code>, as it lacks the essential component for the proper functioning of the planned experiment: a <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> model. There are a few examples of this model in the <code class="docutils literal notranslate"><span class="pre">experiments/experiments</span></code> folder, but here we will describe how it works.</p>
+<div class="section" id="the-representation-of-a-sessionprogress">
+<h3>The representation of a SessionProgress<a class="headerlink" href="#the-representation-of-a-sessionprogress" title="Permalink to this headline">¶</a></h3>
+<p>A SessionProgress is composed of 4 main methods as detailed below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SessionProgress</span><span class="p">():</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">participant_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Define and init some progress variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Define next step data object taking into account current step and answer</span>
+
+<span class="sd">        Return: JSON data object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Define the percent progress of the experiment</span>
+
+<span class="sd">        Return: float progress between [0, 100]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether it&#39;s the end or not of the experiment</span>
+
+<span class="sd">        Return: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>The figure below details where the methods of the SessionProgress instance are realized:</p>
+<a class="reference internal image-reference" href="_images/global_scheme.png"><img alt="_images/global_scheme.png" class="align-center" src="_images/global_scheme.png" style="width: 95%;" /></a>
+<p>Additional information is provided below to help you understand the proposed scheme:</p>
+<ul class="simple">
+<li><p>First, the specific instance of <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> is created when the experiment session is launched;</p></li>
+<li><p>Once the information page is validated by the participant, the <code class="docutils literal notranslate"><span class="pre">start</span></code> method is called to retrieve the entered information;</p></li>
+<li><p>The example page is then presented;</p></li>
+<li><p>Once the instructions have been validated, the first stimulus is proposed to the participant (first call of the method <code class="docutils literal notranslate"><span class="pre">next</span></code>);</p></li>
+<li><p>Then, as long as the <code class="docutils literal notranslate"><span class="pre">end</span></code> method does not determine that the experiment is finished, a new stimulus (obtained from a new call <code class="docutils literal notranslate"><span class="pre">next</span></code> method) is proposed to the participant on the main page of the experiment. The progress indicator of the experiment (<code class="docutils literal notranslate"><span class="pre">progress</span></code> method) is also transmitted to the template of the main page;</p></li>
+<li><p>Finally, if the <code class="docutils literal notranslate"><span class="pre">end</span></code> method specifies an end of experiment, the participant is redirected to the end of experiment page.</p></li>
+</ul>
+</div>
+<div class="section" id="summary-of-data-access-from-pages">
+<h3>Summary of data access from pages<a class="headerlink" href="#summary-of-data-access-from-pages" title="Permalink to this headline">¶</a></h3>
+<p>Before presenting a concrete example of an experiment implementation, let’s specify which variables are accessible on each of the 4 possible pages:</p>
+<ul>
+<li><p><strong>Information / Example / End page:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>page</strong>: the current information page instance;</p></li>
+<li><p><strong>experiment</strong>: the current selected experiment;</p></li>
+<li><p><strong>progress</strong>: the current SessionProgress instance;</p></li>
+<li><p><strong>session</strong>: the selected session.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Main page:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>page</strong>: the current information page instance;</p></li>
+<li><p><strong>experiment</strong>: the current selected experiment;</p></li>
+<li><p><strong>progress</strong>: the current SessionProgress instance;</p></li>
+<li><p><strong>session</strong>: the selected session;</p></li>
+<li><p><strong>progress_info</strong>: the computed progress percent from the <code class="docutils literal notranslate"><span class="pre">result</span></code> method of SessionProgress;</p></li>
+<li><p><strong>step</strong>: the specific SessionStep data (stimilus data).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="custom-sessionprogress">
+<h2>Custom SessionProgress<a class="headerlink" href="#custom-sessionprogress" title="Permalink to this headline">¶</a></h2>
+<p>Now that the concept of the progression of an experiment has been explained, let’s look technically at how each method works. We will create a class called <code class="docutils literal notranslate"><span class="pre">ClassicalSessionProgress</span></code> which inherits the attributes and behaviors of <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code>. In this new class, we will define the 4 necessary methods: start, next, progress and end.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">SessionProgress</span>
+
+<span class="k">class</span> <span class="nc">ClassicalSessionProgress</span><span class="p">(</span><span class="n">SessionProgress</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="section" id="start-method">
+<h3>Start method<a class="headerlink" href="#start-method" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with the following example of the information page:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- Page Heading --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>{{page.content|from_json:&quot;question&quot;}}<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row justify-content-md-center&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-xs-6 col-md-offset-3&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{% url &#39;experiments:load_example&#39; slug=experiment.slug session_id=session.id progress_id=progress.id %}&quot;</span><span class="p">&gt;</span>
+        {% csrf_token %}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-3&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;basic-select-glasses&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-label&quot;</span><span class="p">&gt;</span>Do you wear glasses?<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;basic-info-glasses&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;basic-select-glasses&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Default select example&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="na">selected</span><span class="p">&gt;</span>No<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>Yes<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-auto&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary mb-3&quot;</span><span class="p">&gt;</span>Start experiment<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">csrf_token</span> <span class="pre">%}</span></code>: avoid the CSRF vulnerability;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">url</span> <span class="pre">'experiments:load_example'</span> <span class="pre">...</span> <span class="pre">%}</span></code> enables to redirect to the example page with the three specific parameters (experiment, session and progress identifiers).</p></li>
+</ul>
+</div>
+<p>This information page contains a POST form and sends data about the participant (here the information of the wearing of glasses or not). The <code class="docutils literal notranslate"><span class="pre">start</span></code> method of SessionProgress retrieves a parameter that stores all this data.</p>
+<p>This data can be processed and saved in the JSON field <code class="docutils literal notranslate"><span class="pre">data</span></code> of the SessionProgress instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">participant_data</span><span class="p">):</span>
+
+    <span class="c1"># need to be initialized in order to start experiment</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># keep in memory number of iteration</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;participant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;glasses&#39;</span><span class="p">:</span> <span class="n">participant_data</span><span class="p">[</span><span class="s1">&#39;basic-info-glasses&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># always save state</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that in this example, we also initialize in the SessionProgress data an indicator of the number of iterations performed, initially set to 0.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Django uses a database to store information about the different models it manages. The <code class="docutils literal notranslate"><span class="pre">save</span></code> method, allows to specify a persistence of these data. It is important to use it at the end of the method.</p>
+</div>
+</div>
+<div class="section" id="next-method">
+<h3>Next method<a class="headerlink" href="#next-method" title="Permalink to this headline">¶</a></h3>
+<p>Once the SessionProgress instance is initialized, it is possible to predict which stimulus can be returned according to different criteria. Here, to simplify the example, we use a random stimuli.</p>
+<p>Let’s use a main page with the following response form at each step of the experiment:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;binary-answer-form&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-xs-6 col-md-offset-3&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{% url &#39;experiments:run_session&#39; slug=experiment.slug session_id=session.id progress_id=progress.id %}&quot;</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;binary-answer-time&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;binary-answer-value&quot;</span><span class="p">/&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-auto&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-danger btn-icon-split&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;icon text-white-50&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fas fa-times-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="p">&gt;</span>No identicals<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-auto&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-success btn-icon-split&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;icon text-white-50&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fas fa-check&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="p">&gt;</span>Identicals<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>As it stands, the response and time fields have no value. It is a preference, because we want to get the exact response time. For that, we rely on javascript which will capture the response time and transmit it before sending (this is a proposal, there may be others):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+    <span class="c1">// keep track of start step time (once document is loaded)</span>
+    <span class="nx">start_answer_time</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+    <span class="c1">// manage the current form in order to store answer and time</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;form[class=&quot;binary-answer-form&quot;]&#39;</span><span class="p">).</span><span class="nx">onsubmit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+        <span class="c1">// get answer from button</span>
+        <span class="kd">let</span> <span class="nx">answer_value</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+        <span class="c1">// Compute time and add it into form</span>
+        <span class="kd">let</span> <span class="nx">answer_time</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">start_answer_time</span>
+
+        <span class="c1">// set specific input values before sending data</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;binary-answer-time&quot;]&#39;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">answer_time</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;binary-answer-value&quot;]&#39;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">answer_value</span>
+
+        <span class="c1">// then submit form</span>
+        <span class="nx">form</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+        <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">next</span></code> method of SessionProgress is the most important, because it takes into account how the next stimilus will be presented, but also the update of the previous stimilus. The <code class="docutils literal notranslate"><span class="pre">step</span></code> and <code class="docutils literal notranslate"><span class="pre">answer</span></code> parameters provide this information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+
+    <span class="c1"># 1. update previous step depending of answer (if previous step exists)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">answer_time</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="s1">&#39;binary-answer-time&#39;</span><span class="p">]</span>
+        <span class="n">answer_value</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="s1">&#39;binary-answer-value&#39;</span><span class="p">]</span>
+
+        <span class="n">step</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;answer_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer_time</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;answer_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer_value</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># 2. process next step data (can be depending of answer)</span>
+
+    <span class="c1"># folder of images could also stored into experiment config</span>
+    <span class="n">cornel_box_path</span> <span class="o">=</span> <span class="s1">&#39;resources/images/cornel_box&#39;</span>
+    <span class="c1"># need to take care of static media folder</span>
+    <span class="n">images_path</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cornel_box_path</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">RELATIVE_STATIC_URL</span><span class="p">,</span> <span class="n">cornel_box_path</span><span class="p">))</span>
+            <span class="p">])</span>
+
+    <span class="c1"># right image always display reference</span>
+    <span class="c1"># prepare next step data</span>
+    <span class="n">step_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;left_image&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;{random.choice(images_path)}&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">500</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;right_image&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{images_path[-1]}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">500</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># increment iteration into progress data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># always save state</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">step_data</span>
+</pre></div>
+</div>
+<p>Let’s summarize what is done:</p>
+<ul class="simple">
+<li><p>A call to the <code class="docutils literal notranslate"><span class="pre">next</span></code> method has been made and stimulus data has been prepared. Only the data is prepared because there is no previous step and response (first call to the step method);</p></li>
+<li><p>The number of iteration is then increased by one;</p></li>
+<li><p>A form on the main page is available to answer the presented stimulus (here a binary answer);</p></li>
+<li><p>The use of Javascript allows to recover a reliable response time: time between the presentation of the stimulus and the response (click on a response button);</p></li>
+<li><p>The old state and the response information are passed to the <code class="docutils literal notranslate"><span class="pre">next</span></code> method. It is thus possible to update the responses obtained in the previous state (SessionStep);</p></li>
+<li><p>Finally, the new stimulus is prepared to transmit the information to the template and the current number of iteration is increment.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that just like the SessionProgress, a SessionStep has a JSON <code class="docutils literal notranslate"><span class="pre">data</span></code> field to store the iteration information (response information and presented data). Note that the next stimulus information, by default, is stored when the next SessionStep is created.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The path where the images are stored (<cite>static</cite> folder), must not be specified for the image to be loaded in the template. It should be used to retrieve information (<code class="docutils literal notranslate"><span class="pre">settings.RELATIVE_STATIC_URL</span></code>), but not specified in the data send.</p>
+</div>
+</div>
+<div class="section" id="progress-method">
+<h3>Progress method<a class="headerlink" href="#progress-method" title="Permalink to this headline">¶</a></h3>
+<p>The progress method is fairly simple, but provides a clear understanding of the relationship between the SessionProgress and its associated Session. The purpose of this method is to return an indicator of the percentage of progress of the experience:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+    <span class="c1"># access of session&#39;s config from current SessionProgress instance</span>
+    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">])</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">])</span>
+
+    <span class="c1"># return percent of session advancement</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">iteration</span> <span class="o">/</span> <span class="n">total_iterations</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>Since there is a relationship between our SessionProgress and the Session it is associated with, it is possible to retrieve the session configuration and therefore the <code class="docutils literal notranslate"><span class="pre">max_iterations</span></code> we defined earlier.</p>
+</div>
+<div class="section" id="end-method">
+<h3>End method<a class="headerlink" href="#end-method" title="Permalink to this headline">¶</a></h3>
+<p>As you have guessed, the ending method is not the most complicated as it is. We will check the number of iterations and specify if the experiment is finished or not:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">])</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">iteration</span> <span class="o">&gt;=</span> <span class="n">total_iterations</span>
+</pre></div>
+</div>
+<p>This is of course only an example, but it is totally possible to save a time when the SessionProgress is created (<code class="docutils literal notranslate"><span class="pre">start</span></code> method) and verify it. In this case, the duration of the experiment is not targeted on a number of iterations, but rather a temporal duration.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When the server starts, it will retrieve all the specific models of the <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> abstract model and propose them for the creation of a <code class="docutils literal notranslate"><span class="pre">Session</span></code>. For any new creation of <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> Model, the server must be restarted.</p>
+</div>
+</div>
 </div>
 </div>
 
 
-             </article>
-             
-            </div>
-            <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="usages.html" class="btn btn-neutral float-right" title="Advanced usages" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
-      
-      
-        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><img src="_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
-      
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usages.html" class="btn btn-neutral float-right" title="Advanced usages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
-  
-
-    <hr>
-
-  
+  <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2022, Jérôme BUISINE.
-
-    </p>
+    <p>&#169; Copyright 2022, Jérôme BUISINE.</p>
   </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
-          </div>
         </div>
-
-        <div class="pytorch-content-right" id="pytorch-content-right">
-          <div class="pytorch-right-menu" id="pytorch-right-menu">
-            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
-              <ul>
-<li><a class="reference internal" href="#">A tour of Behavioral online experiment</a><ul>
-<li><a class="reference internal" href="#main-concepts">Main concepts</a></li>
-<li><a class="reference internal" href="#notion-of-template">Notion of template</a></li>
-<li><a class="reference internal" href="#experiments">Experiments</a><ul>
-<li><a class="reference internal" href="#page-description">Page description</a></li>
-<li><a class="reference internal" href="#page-creation">Page creation</a></li>
-<li><a class="reference internal" href="#associate-styles-and-javascript">Associate styles and Javascript</a></li>
-<li><a class="reference internal" href="#base-template-of-page">Base template of Page</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#session">Session</a></li>
-<li><a class="reference internal" href="#session-progress">Session Progress</a></li>
-</ul>
-</li>
-</ul>
-
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-  
-
-
-  
-
-     
-       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
-         <script type="text/javascript" src="_static/js/custom.js"></script>
-     
-
-  
-
-  <script type="text/javascript" src="_static/js/vendor/popper.min.js"></script>
-  <script type="text/javascript" src="_static/js/vendor/bootstrap.min.js"></script>
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+      </div>
+    </section>
+  </div>
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script> 
 
-  <!-- Begin Footer -->
-
-  <div class="container-fluid" id="docs-tutorials-resources">
-    <div class="container">
-      <div class="row">
-        <!--
-        <div class="col-md-4 text-center">
-          <h2>Docs</h2>
-          <p>Access comprehensive developer documentation for PyTorch</p>
-          <a class="with-right-arrow" href="https://pytorch.org/docs/stable/index.html">View Docs</a>
-        </div>
-
-        <div class="col-md-4 text-center">
-          <h2>Tutorials</h2>
-          <p>Get in-depth tutorials for beginners and advanced developers</p>
-          <a class="with-right-arrow" href="https://pytorch.org/tutorials">View Tutorials</a>
-        </div>
-
-        <div class="col-md-4 text-center">
-          <h2>Resources</h2>
-          <p>Find development resources and get your questions answered</p>
-          <a class="with-right-arrow" href="https://pytorch.org/resources">View Resources</a>
-        </div>
-        -->
-      </div>
-    </div>
-  </div>
-
-
-  <!-- <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-logo-wrapper">
-        <a href="https://github.com/mpariente/asteroid" class="footer-logo"></a>
-      </div>
-
-      <div class="footer-links-wrapper">
-
-        <div class="footer-logo-col">
-          <img class="footer-logo-img" src="_static/images/dark_asteroid_logo.svg"/>
-        </div>
-
-        <div class="footer-links-col">
-          <ul>
-            <li class="list-title"><a href="https://github.com/mpariente/asteroid">Asteroid</a></li>
-            <li><a href="https://pytorch.org/get-started">Get Started</a></li>
-            <li><a href="https://pytorch.org/features">Features</a></li>
-            <li><a href="">Ecosystem</a></li>
-            <li><a href="https://pytorch.org/blog/">Blog</a></li>
-            <li><a href="https://pytorch.org/resources">Resources</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links-col">
-          <ul>
-            <li class="list-title"><a href="https://pytorch.org/support">Support</a></li>
-            <li><a href="https://pytorch.org/tutorials">Tutorials</a></li>
-            <li><a href="https://pytorch.org/docs/stable/index.html">Docs</a></li>
-            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
-            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
-            <li><a href="" target="_blank">Slack</a></li>
-            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links-col follow-us-col">
-          <ul>
-            <li class="list-title">Follow Us</li>
-            <li>
-              <div id="mc_embed_signup">
-                <form
-                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
-                  method="post"
-                  id="mc-embedded-subscribe-form"
-                  name="mc-embedded-subscribe-form"
-                  class="email-subscribe-form validate"
-                  target="_blank"
-                  novalidate>
-                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
-                    <div class="mc-field-group">
-                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
-                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
-                    </div>
-
-                    <div id="mce-responses" class="clear">
-                      <div class="response" id="mce-error-response" style="display:none"></div>
-                      <div class="response" id="mce-success-response" style="display:none"></div>
-                    </div>
-
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
-
-                    <div class="clear">
-                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-            </li>
-          </ul>
-
-          <div class="footer-social-icons">
-            <a href="" target="_blank" class="facebook"></a>
-            <a href="https://twitter.com" target="_blank" class="twitter"></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </footer> -->
-
-
-  <!-- End Footer -->
-
-  <!-- Begin Mobile Menu -->
-
-  <div class="mobile-main-menu">
-    <div class="container-fluid">
-      <div class="container">
-        <div class="mobile-main-menu-header-container">
-          <a class="header-logo" href="https://github.com/mpariente/asteroid" aria-label="PyTorch Lightning"></a>
-          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="mobile-main-menu-links-container">
-      <div class="main-menu">
-        <ul>
-          <li>
-            <a href="https://pytorch.org/get-started">Get Started</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/features">Features</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/blog/">Blog</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/tutorials">Tutorials</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/docs/stable/index.html">Docs</a>
-          </li>
-
-          <li>
-            <a href="https://pytorch.org/resources">Resources</a>
-          </li>
-
-          <li>
-            <a href="https://github.com/mpariente/asteroid">Github</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- End Mobile Menu -->
-
-  <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      mobileMenu.bind();
-      mobileTOC.bind();
-      pytorchAnchors.bind();
-      sideMenus.bind();
-      scrollToAnchor.bind();
-      highlightNavigation.bind();
-      mainMenuDropdown.bind();
-
-      // Add class to links that have code blocks, since we cannot create links in code blocks
-      $("article.pytorch-article a span.pre").each(function(e) {
-        $(this).closest("a").addClass("has-code");
-      });
-    })
-  </script>
 </body>
 </html>

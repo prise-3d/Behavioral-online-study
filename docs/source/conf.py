@@ -14,7 +14,6 @@
 #
 import os
 import sys
-import asteroid_sphinx_theme
 
 #sys.path.insert(0, os.path.abspath('../../experiments'))
 
@@ -111,7 +110,7 @@ pygments_style = 'default'
 #html_theme = 'sphinx_rtd_theme'
 #html_theme = 'divio_docs_theme'
 
-html_theme = 'asteroid_sphinx_theme' # use the theme in subdir 'theme'
+html_theme = 'sphinx_rtd_theme' # use the theme in subdir 'theme'
 # html_theme_path = ['.'] # make sphinx search for themes in current dir
 
 # Theme options are theme-specific and customize the look and feel of a theme

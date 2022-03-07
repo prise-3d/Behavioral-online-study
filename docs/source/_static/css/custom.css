@@ -67,26 +67,6 @@ table.colwidths-given colgroup :first-child {
     color: #4C71DD !important;
 }
 
-.article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
-    background-color: #4B70DD !important;
-}
-
-.article.pytorch-article .class em.property {
-    color: #404040 !important;
-}
-
-.article.pytorch-article .function dt em, article.pytorch-article .attribute dt em, article.pytorch-article .class .attribute dt em, article.pytorch-article .class dt em, article.pytorch-article .function dt .sig-paren, article.pytorch-article .attribute dt .sig-paren, article.pytorch-article .class dt .sig-paren {
-    color: #404040 !important;
-}
-
-.article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
-    color: #4C71DD !important;
-}
-
-.article.pytorch-article .function dt > code, article.pytorch-article .attribute dt > code, article.pytorch-article .class .attribute dt > code, article.pytorch-article .class dt > code {
-    color: #4C71DD !important;
-}
-
 .align-center {
     display: block;
     margin-left: auto;
@@ -99,4 +79,12 @@ table.colwidths-given colgroup :first-child {
 
 svg {
     width: 80%;
+}
+
+.wy-side-nav-search {
+    background-color: #4B70DD !important;    
+}
+
+.margin-bottom-50 {
+    margin-bottom: 50px !important;
 }

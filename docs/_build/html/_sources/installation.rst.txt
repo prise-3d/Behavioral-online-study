@@ -44,8 +44,9 @@ You can generate and replace the secret key param:
 
 .. code:: python
 
-   import uuid
-   str(uuid.uuid4())
+   from django.core.management.utils import get_random_secret_key
+   # print new random secret key
+   print(get_random_secret_key())
 
 
 .. caution:: 
@@ -58,10 +59,16 @@ Run the web application
 
 .. code:: bash
 
-   python manage.py runserver 8080
+   python manage.py runserver
 
 .. note::
-   the administrator interface is now available: ``http://127.0.0.1:8080/admin``
+   The administrator interface is now available: ``http://127.0.0.1:8000/admin``.
+
+Or on a specific port:
+
+.. code:: bash
+
+   python manage.py runserver 8080
 
 Using docker
 ~~~~~~~~~~~~~~~~
