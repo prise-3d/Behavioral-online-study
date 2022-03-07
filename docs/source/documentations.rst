@@ -456,6 +456,10 @@ The ``next`` method of SessionProgress is the most important, because it takes i
 
 .. code:: python
 
+    from django.conf import settings
+
+    ...
+
     def next(self, step, answer) -> dict:
        
         # 1. update previous step depending of answer (if previous step exists)
