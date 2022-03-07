@@ -16,7 +16,7 @@
 
     {% endfor %}
 
-    {% block customstylesheets %}
+    {% block custom_stylesheets %}
     {% endblock %}
 
 {% endblock %}
@@ -34,4 +34,8 @@
         <script src="{% static js_file %}"></script>
 
     {% endfor %}
+
+
+    {% block custom_javascripts %}
+    {% endblock %}
 {% endblock %}

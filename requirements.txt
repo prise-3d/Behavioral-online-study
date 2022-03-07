@@ -7,4 +7,4 @@ numpy
 Pillow
 docker-compose
 sphinx
-asteroid_sphinx_theme
+sphinx-rtd-theme

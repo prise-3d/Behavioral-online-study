@@ -61,7 +61,7 @@ Run the web application
    python manage.py runserver 8080
 
 .. note::
-   the administrator interface is now available: ``http://127.0.0.1:8080/admin``
+   The administrator interface is now available: ``http://127.0.0.1:8080/admin``.
 
 Using docker
 ~~~~~~~~~~~~~~~~

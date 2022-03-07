@@ -1,13 +1,14 @@
-Behavioral online experiment
-================================================
 
-.. image:: _static/dial_logo.png
-   :width: 50 px
+.. image:: _static/behavioral_logo.svg
+   :width: 60%
+   :class: margin-bottom-50
    :align: center
+
+
+
 
 What's **Behavioral online experiment** framework?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 This project is a framework for designing behavioral online experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.
 
