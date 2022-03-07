@@ -565,3 +565,10 @@ This is of course only an example, but it is totally possible to save a time whe
 
     When the server starts, it will retrieve all the specific models of the ``SessionProgress`` abstract model and propose them for the creation of a ``Session``. For any new creation of ``SessionProgress`` Model, the server must be restarted.
 
+
+Other examples
+~~~~~~~~~~~~~~
+
+Other examples of experiences are available within the project: examples_.
+
+.. _examples: https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments
