@@ -327,7 +327,7 @@ password: adminuser
 <h3>Summary of data access from pages<a class="headerlink" href="#summary-of-data-access-from-pages" title="Permalink to this headline">¶</a></h3>
 <p>Before presenting a concrete example of an experiment implementation, let’s specify which variables are accessible on each of the 4 possible pages:</p>
 <ul>
-<li><p><strong>Information / Example / End page:</strong></p>
+<li><p><strong>Information, Example, and End pages:</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>page</strong>: the current information page instance;</p></li>
@@ -561,10 +561,10 @@ password: adminuser
 </div>
 <div class="section" id="end-method">
 <h3>End method<a class="headerlink" href="#end-method" title="Permalink to this headline">¶</a></h3>
-<p>As you have guessed, the ending method is not the most complicated as it is. We will check the number of iterations and specify if the experiment is finished or not:</p>
+<p>As you have guessed, the <code class="docutils literal notranslate"><span class="pre">end</span></code> method is not the most complicated one. In this example, we will check the number of iterations and specify if the experiment is finished or not:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 
-    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">])</span>
+    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">])</span>
     <span class="n">iteration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">iteration</span> <span class="o">&gt;=</span> <span class="n">total_iterations</span>
