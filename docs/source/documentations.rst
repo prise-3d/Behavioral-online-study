@@ -293,7 +293,7 @@ Summary of data access from pages
 
 Before presenting a concrete example of an experiment implementation, let's specify which variables are accessible on each of the 4 possible pages:
 
-- **Information / Example / End page:**
+- **Information, Example, and End pages:**
 
     - **page**: the current information page instance;
     - **experiment**: the current selected experiment;
@@ -545,14 +545,14 @@ Since there is a relationship between our SessionProgress and the Session it is 
 End method
 ~~~~~~~~~~~
 
-As you have guessed, the ending method is not the most complicated as it is. We will check the number of iterations and specify if the experiment is finished or not:
+As you have guessed, the ``end`` method is not the most complicated one. In this example, we will check the number of iterations and specify if the experiment is finished or not:
 
 
 .. code:: python
 
     def end(self) -> bool:
 
-        total_iterations = int(self.session.config['iterations'])
+        total_iterations = int(self.session.config['max_iterations'])
         iteration = int(self.data['iteration'])
 
         return iteration >= total_iterations
