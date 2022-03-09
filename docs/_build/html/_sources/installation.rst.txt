@@ -57,9 +57,10 @@ Initialize the database with the following command:
 
 Then create the admin account:
 
-```bash
-bash create_admin.sh
-```
+.. code:: bash
+
+   bash create_admin.sh
+
 
 
 Run the web application
