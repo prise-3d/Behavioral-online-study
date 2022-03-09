@@ -12,6 +12,14 @@ With your python version (ideally python >= 3.7), you can the following required
    pip install -r requirements.txt
 
 
+You may need to install sqlite3 on your system. For Debian based system:
+
+.. code::
+
+   apt update
+   apt install sqlite3
+
+
 Configure server
 ~~~~~~~~~~~~~~~~
 
