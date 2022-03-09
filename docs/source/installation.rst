@@ -30,7 +30,6 @@ Add your own super user admin credentials:
    cp credentials.example.json credentials.json
    
 
-
 .. code-block:: json
 
    {
@@ -52,6 +51,12 @@ You can generate and replace the secret key param:
 .. caution:: 
 
    Django requires a secret key to securing signed data.
+
+Then create the admin account:
+
+```bash
+bash create_admin.sh
+```
 
 
 Run the web application
