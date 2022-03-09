@@ -44,14 +44,8 @@ You can generate and replace the secret key param:
 
    Django requires a secret key to securing signed data.
 
-Then create the admin account:
-
-```bash
-bash create_admin.sh
-```
-
-Models initialization
-~~~~~~~~~~~~~~~~~~~~
+Database initialization
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Initialize the database with the following command:
 
@@ -59,6 +53,13 @@ Initialize the database with the following command:
 
    python manage.py makemigrations
    python manage.py migrate
+
+
+Then create the admin account:
+
+```bash
+bash create_admin.sh
+```
 
 
 Run the web application
