@@ -12,14 +12,6 @@ With your python version (ideally python >= 3.7), you can the following required
    pip install -r requirements.txt
 
 
-Initialize the database with the following command:
-
-.. code:: bash
-
-   python manage.py makemigrations
-   python manage.py migrate
-
-
 Configure server
 ~~~~~~~~~~~~~~~~
 
@@ -57,6 +49,17 @@ Then create the admin account:
 ```bash
 bash create_admin.sh
 ```
+
+Models initialization
+~~~~~~~~~~~~~~~~~~~~
+
+Initialize the database with the following command:
+
+.. code:: bash
+
+   python manage.py makemigrations
+   python manage.py migrate
+
 
 Run the web application
 ~~~~~~~~~~~~~~~~~~~~~~~
