@@ -58,7 +58,6 @@ Then create the admin account:
 bash create_admin.sh
 ```
 
-
 Run the web application
 ~~~~~~~~~~~~~~~~~~~~~~~
 
