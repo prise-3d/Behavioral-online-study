@@ -45,6 +45,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-requirements">Install requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configure-server">Configure server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#models-initialization">Models initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-the-web-application">Run the web application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-docker">Using docker</a></li>
 </ul>
@@ -86,11 +87,6 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
 </pre></div>
 </div>
-<p>Initialize the database with the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
-python manage.py migrate
-</pre></div>
-</div>
 </div>
 <div class="section" id="configure-server">
 <h2>Configure server<a class="headerlink" href="#configure-server" title="Permalink to this headline">¶</a></h2>
@@ -120,6 +116,14 @@ python manage.py migrate
 <p><code class="docutils literal notranslate"><span class="pre">`bash</span>
 <span class="pre">bash</span> <span class="pre">create_admin.sh</span>
 <span class="pre">`</span></code></p>
+</div>
+<div class="section" id="models-initialization">
+<h2>Models initialization<a class="headerlink" href="#models-initialization" title="Permalink to this headline">¶</a></h2>
+<p>Initialize the database with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
+python manage.py migrate
+</pre></div>
+</div>
 </div>
 <div class="section" id="run-the-web-application">
 <h2>Run the web application<a class="headerlink" href="#run-the-web-application" title="Permalink to this headline">¶</a></h2>
