@@ -20,6 +20,11 @@ You may need to install sqlite3 on your system. For Debian based system:
    apt install sqlite3
 
 
+.. warning::
+
+   It may required a new Python install.
+
+
 Configure server
 ~~~~~~~~~~~~~~~~
 
@@ -69,6 +74,9 @@ Then create the admin account:
 
    bash create_admin.sh
 
+.. note::
+
+   if you got a confirmation message that your administrator account has been created, everything is going well for the moment!
 
 
 Run the web application
