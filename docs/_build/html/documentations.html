@@ -531,6 +531,27 @@ password: adminuser
     <span class="k">return</span> <span class="n">step_data</span>
 </pre></div>
 </div>
+<p>The data returned from the <code class="docutils literal notranslate"><span class="pre">next</span></code> method is then accessible in the main page from the <code class="docutils literal notranslate"><span class="pre">step.data</span></code> field:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row py-2 justify-content-md-center text-center&quot;</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Display images --&gt;</span>
+    {% with left_img=step.data|from_json:&quot;left_image&quot; %}
+
+        <span class="c">&lt;!-- Set same height to div in order to avoid buttons flickering.. --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-xl-5 col-md-5 mb-4&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;height: {{left_img|from_json:&#39;height&#39;}}px&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;experiment-image&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{% static left_img|from_json:&#39;src&#39; %}&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;{{left_img|from_json:&#39;width&#39;}}px&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;{{left_img|from_json:&#39;height&#39;}}px&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    {% endwith %}
+
+    {% with right_img=step.data|from_json:&quot;right_image&quot; %}
+
+        <span class="c">&lt;!-- Set same height to div in order to avoid buttons flickering.. --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-xl-5 col-md-5 mb-4&quot;</span>  <span class="na">style</span><span class="o">=</span><span class="s">&quot;height: {{right_img|from_json:&#39;height&#39;}}px&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;experiment-image&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{% static right_img|from_json:&#39;src&#39; %}&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;{{right_img|from_json:&#39;width&#39;}}px&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;{{right_img|from_json:&#39;height&#39;}}px&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    {% endwith %}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <p>Let’s summarize what is done:</p>
 <ul class="simple">
 <li><p>A call to the <code class="docutils literal notranslate"><span class="pre">next</span></code> method has been made and stimulus data has been prepared. Only the data is prepared because there is no previous step and response (first call to the step method);</p></li>

@@ -509,6 +509,28 @@ The ``next`` method of SessionProgress is the most important, because it takes i
 
         return step_data
 
+The data returned from the ``next`` method is then accessible in the main page from the ``step.data`` field:
+
+.. code:: html
+
+    <div class="row py-2 justify-content-md-center text-center">
+        <!-- Display images -->
+        {% with left_img=step.data|from_json:"left_image" %}
+
+            <!-- Set same height to div in order to avoid buttons flickering.. -->
+            <div class="col-xl-5 col-md-5 mb-4" style="height: {{left_img|from_json:'height'}}px">
+                <img class="experiment-image" src="{% static left_img|from_json:'src' %}" alt="" width="{{left_img|from_json:'width'}}px" height="{{left_img|from_json:'height'}}px"> 
+            </div>
+        {% endwith %}
+
+        {% with right_img=step.data|from_json:"right_image" %}
+            
+            <!-- Set same height to div in order to avoid buttons flickering.. -->
+            <div class="col-xl-5 col-md-5 mb-4"  style="height: {{right_img|from_json:'height'}}px">
+                <img class="experiment-image" src="{% static right_img|from_json:'src' %}" alt="" width="{{right_img|from_json:'width'}}px" height="{{right_img|from_json:'height'}}px"> 
+            </div>
+        {% endwith %}
+    </div>
 
 Let's summarize what is done:
 
