@@ -543,7 +543,7 @@ Let's summarize what is done:
 
 .. note::
 
-    Note that just like the SessionProgress, a SessionStep has a JSON ``data`` field to store the iteration information (response information and presented data). Note that the next stimulus information, by default, is stored when the next SessionStep is created.
+    Note that just like the SessionProgress, a SessionStep has a JSON ``data`` field to store the iteration information (response information and presented data). Note that the next stimulus information, by default, are stored when the next SessionStep is created.
 
 .. warning:: 
 
@@ -591,6 +591,14 @@ This is of course only an example, but it is totally possible to save a time whe
 .. warning::
 
     When the server starts, it will retrieve all the specific models of the ``SessionProgress`` abstract model and propose them for the creation of a ``Session``. For any new creation of ``SessionProgress`` Model, the server must be restarted.
+
+
+In order to update the new proposed model in database, you need to do migrations:
+
+.. code:: bash
+
+   python manage.py makemigrations
+   python manage.py migrate
 
 
 Other examples
