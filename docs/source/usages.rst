@@ -147,6 +147,6 @@ Then, in the ``webapp/settings.py``, you need to update:
 - RELATIVE_STATIC_URL which must point to the folder allowing access to resources from outside (apache2 or Nginx server). Example: ``../../www/html/static``.
 
 
-.. note:: warning
+.. warning::
 
     Each time a new style file, a javascript file, a new instance of SessionProgress and any type of external resource is added to the ``static`` folder, it is necessary to update and restart the server in production.

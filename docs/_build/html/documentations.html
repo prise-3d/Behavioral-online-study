@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Advanced usages" href="usages.html" />
+    <link rel="next" title="Create an experiment from scratch" href="example.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
@@ -69,6 +69,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Create an experiment from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usages.html">Advanced usages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
@@ -260,7 +261,7 @@ password: adminuser
 <div class="section" id="session">
 <h2>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned, the session is associated with an experiment, i.e. it remains associated with the 4 pages that compose the experiment. The main interest of the Session division is that an experiment can be carried out with different parameters (number of iterations, stopping time criteria) with different populations.</p>
-<p>When creating an experiment from the administrator interface (<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments/session/add/</span></code>), it is possible to associate it with the desired experiment, propose a specific configuration, an estimated duration and a very important item, the way the experiment progresses: a specific <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> model.</p>
+<p>When creating a session from the administrator interface (<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments/session/add/</span></code>), it is possible to associate it with the desired experiment, propose a specific configuration, an estimated duration and a very important item, the way the experiment progresses: a specific <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> model.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We’ll get into the details of SessionProgress model next.</p>
@@ -619,7 +620,7 @@ python manage.py migrate
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="usages.html" class="btn btn-neutral float-right" title="Advanced usages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="example.html" class="btn btn-neutral float-right" title="Create an experiment from scratch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

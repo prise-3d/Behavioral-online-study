@@ -24,6 +24,8 @@ Contents
 
    documentations
 
+   example
+
    usages
 
    contributing

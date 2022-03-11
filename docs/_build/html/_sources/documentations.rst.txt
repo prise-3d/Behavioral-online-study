@@ -213,7 +213,7 @@ Session
 
 As mentioned, the session is associated with an experiment, i.e. it remains associated with the 4 pages that compose the experiment. The main interest of the Session division is that an experiment can be carried out with different parameters (number of iterations, stopping time criteria) with different populations.
 
-When creating an experiment from the administrator interface (``http://127.0.0.1:8000/admin/experiments/session/add/``), it is possible to associate it with the desired experiment, propose a specific configuration, an estimated duration and a very important item, the way the experiment progresses: a specific ``SessionProgress`` model.
+When creating a session from the administrator interface (``http://127.0.0.1:8000/admin/experiments/session/add/``), it is possible to associate it with the desired experiment, propose a specific configuration, an estimated duration and a very important item, the way the experiment progresses: a specific ``SessionProgress`` model.
 
 .. note::
     We'll get into the details of SessionProgress model next.
