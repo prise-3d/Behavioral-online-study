@@ -34,7 +34,11 @@ def create_choice_field(template_path):
 
     # get all expected templates
     for template in sorted(os.listdir(template_path)):
-        template_file_path = os.path.join(template_path, template).replace(f'{templates_path}/', '')
+        if os.name == 'nt':
+            template_file_path = os.path.join(template_path, template).replace(f'{templates_path}\\', '')
+        else:
+            template_file_path = os.path.join(template_path, template).replace(f'{templates_path}/', '')
+
         templates_files.append((template_file_path, template_file_path))
 
     template = models.CharField(max_length=255, 
