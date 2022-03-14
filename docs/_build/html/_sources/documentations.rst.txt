@@ -15,6 +15,10 @@ In order to fully understand how the interface of the proposed application works
     cp db.example.sqlite3 db.sqlite3
 
 
+.. danger::
+
+    It will erase your default admin account.
+
 .. note::
     
     The website will now be composed of a set of example data.
@@ -38,7 +42,7 @@ This is a main overview of the important components of the framework:
 
 Here a description of each principal components:
 
-- **Experiment:** represents the architecture of the experiment with the associated pages (more details will be provided later), a JSON configuration of the experiment (path to data for example), a description and an availability status;
+- **Experiment:** represents the architecture of the experiment with the associated pages (more details will be provided later), a JSON configuration of the experiment (path to data for example), a description and an availability status. An experiment is composed of 4 specific pages;
 - **Session:** an experiment can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);
 - **SessionProgress:** is one of the most important entities, it is at the heart of the application's operation. It allows the link between a session and a participant. When a participant wants to perform an experiment through a session, a new SessionProgress instance is created. This instance will manage the exchanges with the user, transmit the next stimulus to the user and define the stop of the experiment according to the stop criteria specified in the session. A SessionProgress, contains several SessionSteps, which store the user's response for each new stimulus transmitted.
 - **Participant:** thanks to a unique identifier stored both on the client's browser and in the database, it is possible to know the status of the experiments performed by this participant.
@@ -46,6 +50,9 @@ Here a description of each principal components:
 .. note::
 
     Treating the participant in this way ensures the anonymization of the data.
+
+
+**Important note:** inside the django admin interface, you can manage some entities: Experiment, Session and Pages. Note that the SessionProgress entity need to be coded (this is the only part that requires Python code).
 
 With this insight, we will now go into more detail to understand how to create your own experiment
 
