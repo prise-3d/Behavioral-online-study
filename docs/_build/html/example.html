@@ -271,7 +271,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">SessionProgress</span>
 
 <span class="k">class</span> <span class="nc">PonzoSessionProgress</span><span class="p">(</span><span class="n">SessionProgress</span><span class="p">):</span>
-    <span class="k">pass</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -315,6 +315,7 @@
 <li><p>process the data for the new step (here we propose a random choice).</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 
 <span class="o">...</span>
@@ -394,9 +395,10 @@
     <span class="k">return</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="n">total_iterations</span>
 </pre></div>
 </div>
-<p>In order to update the new proposed model in database, you need to do migrations:</p>
+<p>In order to update the new proposed model in database, you need to <strong>stop</strong> the server and do migrations:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
 python manage.py migrate
+python manage.py runserver
 </pre></div>
 </div>
 <p>Congratulations! the way the experiment progress and ends is now coded!</p>
