@@ -64,7 +64,7 @@ Edit the ``credentials.json`` in order to configure your own admin account:
    {
       "username":"username",
       "email":"",
-      "password":"pass"
+      "password":"pass",
       "secret_key": "******"
    }
 
