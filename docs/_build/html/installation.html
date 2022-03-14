@@ -43,7 +43,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-requirements">Install requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configure-server">Configure server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#database-initialization">Database initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-the-web-application">Run the web application</a></li>
@@ -82,13 +82,13 @@
              
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="install-requirements">
-<h2>Install requirements<a class="headerlink" href="#install-requirements" title="Permalink to this headline">¶</a></h2>
-<p>Installing prerequisites</p>
+<p>Installing prerequisites:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-scm.com/">git</a></p></li>
 <li><p><a class="reference external" href="https://www.python.org/">Python</a> (&gt;= 3.7)</p></li>
 </ul>
+<div class="section" id="id1">
+<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>You need to clone this repository:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/prise-3d/behavioral-online-experiment.git
 </pre></div>
@@ -97,11 +97,13 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
 </pre></div>
 </div>
-<p>You may need to install sqlite3 on your system. For Debian based system:</p>
+<p>You may need to install sqlite3 on your system.</p>
+<p><strong>For linux based system:</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">update</span>
 <span class="n">apt</span> <span class="n">install</span> <span class="n">sqlite3</span>
 </pre></div>
 </div>
+<p><strong>For Windows:</strong> you may need to install following this this: <a class="reference external" href="https://sqlite.org/download.html">sqlite3</a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It may required a new Python install.</p>
@@ -113,6 +115,11 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp credentials.example.json credentials.json
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For Windows you may use the <code class="docutils literal notranslate"><span class="pre">copy</span></code> command.</p>
+</div>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">credentials.json</span></code> in order to configure your own admin account:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
    <span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -121,7 +128,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You can generate and replace the secret key param:</p>
+<p>You can generate and replace the secret key param using a Python interpreter:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.core.management.utils</span> <span class="kn">import</span> <span class="n">get_random_secret_key</span>
 <span class="c1"># print new random secret key</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">get_random_secret_key</span><span class="p">())</span>
