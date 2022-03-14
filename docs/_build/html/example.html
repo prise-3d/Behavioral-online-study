@@ -44,7 +44,14 @@
 <li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentations.html">A tour of Behavioral online experiment</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Create an experiment from scratch</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Create an experiment from scratch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-an-experiment-entity">1. Create an experiment entity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#information-page">1.1 Information Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-page">1.2 Example page</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usages.html">Advanced usages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
@@ -75,6 +82,49 @@
              
   <div class="section" id="create-an-experiment-from-scratch">
 <h1>Create an experiment from scratch<a class="headerlink" href="#create-an-experiment-from-scratch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-an-experiment-entity">
+<h2>1. Create an experiment entity<a class="headerlink" href="#create-an-experiment-entity" title="Permalink to this headline">¶</a></h2>
+<p>An experiment is composed of 4 pages : information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles.</p>
+<p>Here are the different creation steps:</p>
+<ul class="simple">
+<li><p>Create the 4 pages of the experiment: information, example, main and end.</p></li>
+<li><p>modify for each page (if necessary) an associated template : experiments/templates/pages</p></li>
+<li><p>Once a template is defined: create for each page, its entity in the admin interface with the desired template.</p></li>
+<li><p>Then, create the experiment from the 4 pages.</p></li>
+</ul>
+<p>For this, for the edition of the code, it is recommended to open the behavioral-online-experiment folder in folder mode (for example with Visual Studio Code or another code editor).</p>
+<p>We start on the web administrator interface: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/admin/experiments/</span></code>.</p>
+<div class="section" id="information-page">
+<h3>1.1 Information Page<a class="headerlink" href="#information-page" title="Permalink to this headline">¶</a></h3>
+<p>We will start by creating the page for entering information to the user. To do this:</p>
+<ul class="simple">
+<li><p>in the Django Administration interface, use the “+Add” of information;</p></li>
+<li><p>fill in the different fields of your page, like the name (Ponzon Illusion” and the title (ponzon_illusion). The name identifies the page in the administrator interface, the title will be used in the URL;</p></li>
+<li><p>Then you have to select the javascripts and styles files. For this example, we select only <code class="docutils literal notranslate"><span class="pre">toggle_sidebar.js</span></code> (the styles and javascript files are available in the project in the folder: <code class="docutils literal notranslate"><span class="pre">static/experiment</span></code>, but it is not necessary to modify them right away);</p></li>
+<li><p>A selection field allows to choose the template of our choice. By default, there is only one: <code class="docutils literal notranslate"><span class="pre">basic_information.html</span></code>, available in the <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/information</span></code> folder;</p></li>
+<li><p>A JSON field is also available, it allows to specify the content that will be available in the Django template. For this page, it will only contain a sentence inviting the user to enter a data form:</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Please fill the form below:&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is in this HTML template that the JSON field information will be displayed (this one uses only the question field):</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>...
+<span class="c">&lt;!-- Page Heading --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>{{page.content|from_json:&quot;question&quot;}}<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+...
+</pre></div>
+</div>
+<p>If you create your own templates, you can declare JSON fields that can be processed in the template.</p>
+<p>At the end click on <code class="docutils literal notranslate"><span class="pre">SAVE</span></code>.</p>
+</div>
+<div class="section" id="example-page">
+<h3>1.2 Example page<a class="headerlink" href="#example-page" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 </div>
 
 
