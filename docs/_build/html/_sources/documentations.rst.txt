@@ -323,7 +323,7 @@ Before presenting a concrete example of an experiment implementation, let's spec
 
 
 Custom SessionProgress
-============================
+======================
 
 Now that the concept of the progression of an experiment has been explained, let's look technically at how each method works. We will create a class called ``ClassicalSessionProgress`` which inherits the attributes and behaviors of ``SessionProgress``. In this new class, we will define the 4 necessary methods: start, next, progress and end.
 
@@ -468,6 +468,7 @@ The ``next`` method of SessionProgress is the most important, because it takes i
 
 .. code:: python
 
+    import os
     from django.conf import settings
 
     ...
@@ -611,6 +612,6 @@ In order to update the new proposed model in database, you need to do migrations
 Other examples
 ~~~~~~~~~~~~~~
 
-Other examples of experiments are available within the project: examples_.
+Other examples of ``SessionProgress`` are available within the project: examples_.
 
 .. _examples: https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments

@@ -55,9 +55,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-session-progress-class">2. Create a Session Progress class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-start-method">2.1. The start method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-method">2.2. Next method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#progress-method">2.3. Progress method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end-method">2.4. End method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-examples">1.5. Other examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-new-session">3. Create a new Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-your-session">4. Test your session</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usages.html">Advanced usages</a></li>
@@ -90,6 +95,7 @@
              
   <div class="section" id="create-an-experiment-from-scratch">
 <h1>Create an experiment from scratch<a class="headerlink" href="#create-an-experiment-from-scratch" title="Permalink to this headline">¶</a></h1>
+<p>The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page “A tour of behavioral online experiment” in the section in question.</p>
 <div class="section" id="create-an-experiment-entity">
 <h2>1. Create an experiment entity<a class="headerlink" href="#create-an-experiment-entity" title="Permalink to this headline">¶</a></h2>
 <p>An experiment is composed of 4 pages : information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles.</p>
@@ -108,6 +114,10 @@
 <p>We will start by creating the page for entering information to the user. To do this:</p>
 <ul class="simple">
 <li><p>in the Django Administration interface, use the <code class="docutils literal notranslate"><span class="pre">+Add</span></code> of information;</p></li>
+</ul>
+<p>You will now be redirected to this form:</p>
+<a class="reference internal image-reference" href="_images/page_form.png"><img alt="_images/page_form.png" class="align-center" src="_images/page_form.png" style="width: 80%;" /></a>
+<ul class="simple">
 <li><p>fill in the different fields of your page, like the name “Ponzon Illusion” and the title “ponzon_illusion”. The name identifies the page in the administrator interface, the title will be used in the URL;</p></li>
 <li><p>Then you have to select the javascripts and styles files. For this example, we select only <code class="docutils literal notranslate"><span class="pre">toggle_sidebar.js</span></code> (the styles and javascript files are available in the project in the folder: <code class="docutils literal notranslate"><span class="pre">static/experiment</span></code>, but it is not necessary to modify them right away);</p></li>
 <li><p>A selection field allows to choose the template of our choice. By default, there is only one: <code class="docutils literal notranslate"><span class="pre">basic_information.html</span></code>, available in the <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/information</span></code> folder;</p></li>
@@ -264,10 +274,21 @@
     <span class="k">pass</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A SessionProgress is also composed of a field <code class="docutils literal notranslate"><span class="pre">data</span></code> which is a JSON field. We can into this field store some participant information.</p>
+</div>
+<p>We will now define each required method for our new <code class="docutils literal notranslate"><span class="pre">PonzoSessionProgress</span></code>.</p>
 <div class="section" id="the-start-method">
 <h3>2.1. The start method<a class="headerlink" href="#the-start-method" title="Permalink to this headline">¶</a></h3>
-<p>The start method should be composed of:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">participant_data</span><span class="p">):</span>
+<p>The start method can be composed of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> field initialization;</p></li>
+<li><p>start indicator (here number of iteration);</p></li>
+<li><p>retrieve data from the information form (present in the information page);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save</span></code> call in order to save data instance inside the database.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">participant_data</span><span class="p">):</span>
 
     <span class="c1"># need to be initialized in order to start experiment</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -284,10 +305,134 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Note that in this example, we initialize in the SessionProgress data instance an indicator of the number of iterations performed, initially set to 0.</p>
+</div>
+<div class="section" id="next-method">
+<h3>2.2. Next method<a class="headerlink" href="#next-method" title="Permalink to this headline">¶</a></h3>
+<p>The start method should be composed of:</p>
+<ul class="simple">
+<li><p>management of previous step (if exists) and its retrieve data answer (see the answer form into the main page template);</p></li>
+<li><p>process the data for the new step (here we propose a random choice).</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+
+    <span class="c1"># 1. update previous step depending of answer (if previous step exists)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">answer_time</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="s1">&#39;binary-answer-time&#39;</span><span class="p">]</span>
+        <span class="n">answer_value</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="s1">&#39;binary-answer-value&#39;</span><span class="p">]</span>
+
+        <span class="n">step</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;answer_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer_time</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;answer_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">answer_value</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># 2. process next step data (can be depending of answer)</span>
+
+    <span class="c1"># folder of images could also stored into experiment config</span>
+    <span class="n">ponzo_path</span> <span class="o">=</span> <span class="s1">&#39;resources/images/ponzo&#39;</span>
+
+    <span class="c1"># need to take care of static media folder (static folder need to be removed)</span>
+    <span class="n">images_path</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ponzo_path</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">RELATIVE_STATIC_URL</span><span class="p">,</span> <span class="n">ponzo_path</span><span class="p">))</span>
+            <span class="p">])</span>
+
+    <span class="c1"># prepare next step data with random image path</span>
+    <span class="n">step_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;{random.choice(images_path)}&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">500</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 3. increment iteration into progress data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># always save state</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># return new step data</span>
+    <span class="k">return</span> <span class="n">step_data</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The data returned from the <code class="docutils literal notranslate"><span class="pre">next</span></code> method is then accessible in the main page template from the <code class="docutils literal notranslate"><span class="pre">step.data</span></code> field.</p>
+</div>
+</div>
+<div class="section" id="progress-method">
+<h3>2.3. Progress method<a class="headerlink" href="#progress-method" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> is always associated with a <code class="docutils literal notranslate"><span class="pre">Session</span></code>. We can access to this session and its configuration. Let’s assume that our session’s configuration will have a <code class="docutils literal notranslate"><span class="pre">max_iterations</span></code> indicator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+    <span class="c1"># access of session&#39;s config from current SessionProgress instance</span>
+    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">])</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">])</span>
+
+    <span class="c1"># return percent of session advancement</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">iteration</span> <span class="o">/</span> <span class="n">total_iterations</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using this method we can access to a progress percent indicator inside the main and end page using <code class="docutils literal notranslate"><span class="pre">progress_info</span></code>.</p>
+</div>
+</div>
+<div class="section" id="end-method">
+<h3>2.4. End method<a class="headerlink" href="#end-method" title="Permalink to this headline">¶</a></h3>
+<p>Based on the session’s configuration too, we can set a stopping criterion to the experiment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+    <span class="n">total_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;max_iterations&#39;</span><span class="p">])</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="n">total_iterations</span>
+</pre></div>
+</div>
+<p>In order to update the new proposed model in database, you need to do migrations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
+python manage.py migrate
+</pre></div>
+</div>
+<p>Congratulations! the way the experiment progress and ends is now coded!</p>
+</div>
+<div class="section" id="other-examples">
+<h3>1.5. Other examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">¶</a></h3>
+<p>Some other examples of <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> are available within the project: <a class="reference external" href="https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments">examples</a>.</p>
 </div>
 </div>
 <div class="section" id="create-a-new-session">
 <h2>3. Create a new Session<a class="headerlink" href="#create-a-new-session" title="Permalink to this headline">¶</a></h2>
+<p>Now that the progress entity is created, it is possible to associate it with a session. To do this, you can click on the <code class="docutils literal notranslate"><span class="pre">+Add</span></code> button in the administrator interface for adding a session.</p>
+<p>Let’s fill the required fields as:</p>
+<ul class="simple">
+<li><p>the title field to “Session 1”;</p></li>
+<li><p>the experiment field: choose the recently created “Ponzo experiment”;</p></li>
+<li><p>the estimated duration set to “00:05:00” (5 minutes);</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">SessionProgres</span></code> choice to “PonzoSessionProgress”;</p></li>
+<li><p>set the session as active and available;</p></li>
+</ul>
+<p>Then, the current configuration of our session is as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;max_iterations&quot;</span><span class="p">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We will use this configuration to specify that the participant will be confronted with a maximum of 20 stimili (i.e. 20 iterations).</p>
+</div>
+<div class="section" id="test-your-session">
+<h2>4. Test your session<a class="headerlink" href="#test-your-session" title="Permalink to this headline">¶</a></h2>
+<p>You can now access to <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/experiments/ponzo-experiment</span></code> and pass your new session. You can also download results of your session by clicking on the download icon.</p>
+<a class="reference internal image-reference" href="_images/ponzo_session_1.png"><img alt="_images/ponzo_session_1.png" class="align-center" src="_images/ponzo_session_1.png" style="width: 60%;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each downloaded results data are saved available in JSON format.</p>
+</div>
 </div>
 </div>
 

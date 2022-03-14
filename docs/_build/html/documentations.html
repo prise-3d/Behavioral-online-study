@@ -488,7 +488,8 @@ password: adminuser
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">next</span></code> method of SessionProgress is the most important, because it takes into account how the next stimilus will be presented, but also the update of the previous stimilus. The <code class="docutils literal notranslate"><span class="pre">step</span></code> and <code class="docutils literal notranslate"><span class="pre">answer</span></code> parameters provide this information:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 
 <span class="o">...</span>
 
@@ -615,7 +616,7 @@ python manage.py migrate
 </div>
 <div class="section" id="other-examples">
 <h3>Other examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">¶</a></h3>
-<p>Other examples of experiments are available within the project: <a class="reference external" href="https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments">examples</a>.</p>
+<p>Other examples of <code class="docutils literal notranslate"><span class="pre">SessionProgress</span></code> are available within the project: <a class="reference external" href="https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments">examples</a>.</p>
 </div>
 </div>
 </div>
