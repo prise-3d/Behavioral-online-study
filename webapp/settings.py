@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # TODO: generate new key if necessary into credentials.json
-with open('credentials.json', 'r') as f:
+with open('./credentials.json', 'r') as f:
     config_data = json.load(f)
 
 SECRET_KEY=config_data['secret_key']

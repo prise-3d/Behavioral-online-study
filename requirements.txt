@@ -5,6 +5,3 @@ django-json-widget
 django-polymorphic
 numpy
 Pillow
-docker-compose
-sphinx
-sphinx-rtd-theme

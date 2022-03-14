@@ -15,6 +15,7 @@ import_submodules(experiments)
 
 @admin.register(Experiment)
 class ExperimentAdmin(admin.ModelAdmin):
+    view_on_site = False
     
     def get_form(self, request, obj=None, **kwargs):
         form = super(ExperimentAdmin, self).get_form(request, obj, **kwargs)
@@ -50,6 +51,8 @@ class ExperimentAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
+    view_on_site = False
+
     list_display = ('name', 'experiment', 'active', 'available', 'created_on')
 
     def get_form(self, request, obj=None, **kwargs):
@@ -111,13 +114,10 @@ class SessionAdmin(admin.ModelAdmin):
         models.JSONField: {'widget': JSONEditorWidget},
     }
  
-@admin.register(Participant)
-class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_on')
-
-
 @admin.register(ExamplePage, InformationPage, MainPage, EndPage)
 class PageAdmin(admin.ModelAdmin):
+    view_on_site = False
+
     list_display = ('name', 'title', 'created_on')
 
     formfield_overrides = {
