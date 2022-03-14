@@ -124,3 +124,6 @@ class PageAdmin(admin.ModelAdmin):
         # fields.JSONField: {'widget': JSONEditorWidget}, # if django < 3.1
         models.JSONField: {'widget': JSONEditorWidget},
     }
+
+    fields = [ 'name', 'title', 'javascripts', 'styles', 'template', 'content' ]
+        

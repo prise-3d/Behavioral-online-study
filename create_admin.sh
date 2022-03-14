@@ -1,5 +1,4 @@
 #! /bin/bash
-
 username=$(cat credentials.json | python -c "import sys, json; print(json.load(sys.stdin)['username'])")
 password=$(cat credentials.json | python -c "import sys, json; print(json.load(sys.stdin)['password'])")
 email=$(cat credentials.json | python -c "import sys, json; print(json.load(sys.stdin)['email'])")
