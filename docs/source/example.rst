@@ -2,6 +2,8 @@
 Create an experiment from scratch
 =================================
 
+The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page "A tour of behavioral online experiment" in the section in question.
+
 1. Create an experiment entity
 ==============================
 
@@ -29,6 +31,12 @@ We start on the web administrator interface: ``http://127.0.0.1:8000/admin/exper
 We will start by creating the page for entering information to the user. To do this:
    
 - in the Django Administration interface, use the ``+Add`` of information;
+
+You will now be redirected to this form:
+
+.. image:: _static/documentation/page_form.png
+   :width: 80%
+   :align: center
 
 - fill in the different fields of your page, like the name "Ponzon Illusion" and the title "ponzon_illusion". The name identifies the page in the administrator interface, the title will be used in the URL;
 
@@ -220,12 +228,25 @@ In the ``experiments/experiments`` folder of the projet create a ``ponzo.py`` py
     class PonzoSessionProgress(SessionProgress):
         pass
 
+
+.. note::
+
+    A SessionProgress is also composed of a field ``data`` which is a JSON field. We can into this field store some participant information.
+
+
+We will now define each required method for our new ``PonzoSessionProgress``.
+
 2.1. The start method
 ~~~~~~~~~~~~~~~~~~~~~
 
-The start method should be composed of:
+The start method can be composed of:
 
-.. code::
+- ``data`` field initialization;
+- start indicator (here number of iteration);
+- retrieve data from the information form (present in the information page);
+- ``save`` call in order to save data instance inside the database.
+
+.. code:: python
 
     def start(self, participant_data):
 
@@ -243,5 +264,159 @@ The start method should be composed of:
         # always save state
         self.save()
 
+
+Note that in this example, we initialize in the SessionProgress data instance an indicator of the number of iterations performed, initially set to 0.
+
+2.2. Next method
+~~~~~~~~~~~~~~~~
+
+The start method should be composed of:
+
+- management of previous step (if exists) and its retrieve data answer (see the answer form into the main page template);
+- process the data for the new step (here we propose a random choice).
+
+.. code:: python
+
+    import os
+    from django.conf import settings
+
+    ...
+
+    def next(self, step, answer) -> dict:
+       
+        # 1. update previous step depending of answer (if previous step exists)
+        if step is not None:
+            answer_time = answer['binary-answer-time']
+            answer_value = answer['binary-answer-value']
+            
+            step.data['answer_time'] = answer_time
+            step.data['answer_value'] = answer_value
+            step.save()
+        
+        # 2. process next step data (can be depending of answer)
+
+        # folder of images could also stored into experiment config
+        ponzo_path = 'resources/images/ponzo'
+
+        # need to take care of static media folder (static folder need to be removed)
+        images_path = sorted([ 
+                    os.path.join(ponzo_path, img) 
+                    for img in os.listdir(os.path.join(settings.RELATIVE_STATIC_URL, ponzo_path)) 
+                ])
+
+        # prepare next step data with random image path
+        step_data = {
+            "image": {
+                "src": f"{random.choice(images_path)}",
+                "width": 500,
+                "height": 500
+            }
+        }
+
+        # 3. increment iteration into progress data
+        self.data['iteration'] += 1
+
+        # always save state
+        self.save()
+
+        # return new step data
+        return step_data
+
+.. note::
+
+    The data returned from the ``next`` method is then accessible in the main page template from the ``step.data`` field.
+
+
+2.3. Progress method
+~~~~~~~~~~~~~~~~~~~~
+
+A ``SessionProgress`` is always associated with a ``Session``. We can access to this session and its configuration. Let's assume that our session's configuration will have a ``max_iterations`` indicator:
+
+.. code:: python
+
+    def progress(self) -> float:
+        
+        # access of session's config from current SessionProgress instance
+        total_iterations = int(self.session.config['max_iterations'])
+        iteration = int(self.data['iteration'])
+
+        # return percent of session advancement
+        return (iteration / total_iterations) * 100
+
+
+.. note:: 
+
+    Using this method we can access to a progress percent indicator inside the main and end page using ``progress_info``.
+
+
+2.4. End method
+~~~~~~~~~~~~~~~
+
+Based on the session's configuration too, we can set a stopping criterion to the experiment:
+
+.. code:: python
+
+    def end(self) -> bool:
+
+        total_iterations = int(self.session.config['max_iterations'])
+        iteration = int(self.data['iteration'])
+
+        return iteration > total_iterations
+
+In order to update the new proposed model in database, you need to do migrations:
+
+.. code:: bash
+
+   python manage.py makemigrations
+   python manage.py migrate
+
+Congratulations! the way the experiment progress and ends is now coded!
+
+
+1.5. Other examples
+~~~~~~~~~~~~~~~~~~~
+
+Some other examples of ``SessionProgress`` are available within the project: examples_.
+
+.. _examples: https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments
+
 3. Create a new Session
 =======================
+
+Now that the progress entity is created, it is possible to associate it with a session. To do this, you can click on the ``+Add`` button in the administrator interface for adding a session.
+
+
+Let's fill the required fields as:
+
+- the title field to "Session 1";
+- the experiment field: choose the recently created "Ponzo experiment";
+- the estimated duration set to "00:05:00" (5 minutes);
+- the ``SessionProgres`` choice to "PonzoSessionProgress";
+- set the session as active and available;
+
+Then, the current configuration of our session is as follows:
+
+.. code:: json
+
+    {
+        "max_iterations": 20
+    }
+
+We will use this configuration to specify that the participant will be confronted with a maximum of 20 stimili (i.e. 20 iterations).
+
+
+4. Test your session
+====================
+
+You can now access to ``http://127.0.0.1:8000/experiments/ponzo-experiment`` and pass your new session. You can also download results of your session by clicking on the download icon.
+
+
+.. image:: _static/documentation/ponzo_session_1.png
+   :width: 60%
+   :align: center
+
+
+
+.. note::
+
+    Each downloaded results data are saved available in JSON format.

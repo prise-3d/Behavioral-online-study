@@ -19,6 +19,11 @@ from abc import abstractmethod
 
 # some parameters
 static_folder = settings.RELATIVE_STATIC_URL
+
+# take into account Windows backslash path
+if os.name == 'nt':
+    static_folder = static_folder.replace('/', '\\')
+
 module_name = 'experiments'
 pages_templates_path = os.path.join(module_name, 'templates', 'pages')
 

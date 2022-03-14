@@ -34,6 +34,7 @@ def create_choice_field(template_path):
 
     # get all expected templates
     for template in sorted(os.listdir(template_path)):
+        
         if os.name == 'nt':
             template_file_path = os.path.join(template_path, template).replace(f'{templates_path}\\', '')
         else:
