@@ -226,7 +226,7 @@ In the ``experiments/experiments`` folder of the projet create a ``ponzo.py`` py
     from ..models import SessionProgress
 
     class PonzoSessionProgress(SessionProgress):
-        pass
+        ...
 
 
 .. note::
@@ -247,7 +247,7 @@ The start method can be composed of:
 - ``save`` call in order to save data instance inside the database.
 
 .. code:: python
-
+    
     def start(self, participant_data):
 
         # need to be initialized in order to start experiment
@@ -278,6 +278,7 @@ The start method should be composed of:
 .. code:: python
 
     import os
+    import random
     from django.conf import settings
 
     ...
@@ -363,12 +364,13 @@ Based on the session's configuration too, we can set a stopping criterion to the
 
         return iteration > total_iterations
 
-In order to update the new proposed model in database, you need to do migrations:
+In order to update the new proposed model in database, you need to **stop** the server and do migrations:
 
 .. code:: bash
 
    python manage.py makemigrations
    python manage.py migrate
+   python manage.py runserver
 
 Congratulations! the way the experiment progress and ends is now coded!
 
