@@ -1,15 +1,13 @@
 Installation
 ============
 
-
-Install requirements
-~~~~~~~~~~~~~~~~~~~~
-
-Installing prerequisites
+Installing prerequisites:
 
 - git_
 - Python_ (>= 3.7)
 
+Installation
+~~~~~~~~~~~~
 
 You need to clone this repository:
 
@@ -26,14 +24,19 @@ With your python version (ideally python >= 3.7), you can the following required
    
    pip install -r requirements.txt
 
+You may need to install sqlite3 on your system. 
 
-You may need to install sqlite3 on your system. For Debian based system:
+**For linux based system:**
 
 .. code::
 
    apt update
    apt install sqlite3
 
+
+**For Windows:** you may need to install following this this: sqlite3_.
+
+.. _sqlite3: https://sqlite.org/download.html
 
 .. warning::
 
@@ -48,7 +51,13 @@ Add your own super user admin credentials:
 .. code:: bash
 
    cp credentials.example.json credentials.json
+
+.. warning::
+
+   For Windows you may use the ``copy`` command.
    
+
+Edit the ``credentials.json`` in order to configure your own admin account:
 
 .. code-block:: json
 
@@ -59,7 +68,7 @@ Add your own super user admin credentials:
       "secret_key": "******"
    }
 
-You can generate and replace the secret key param:
+You can generate and replace the secret key param using a Python interpreter:
 
 .. code:: python
 
