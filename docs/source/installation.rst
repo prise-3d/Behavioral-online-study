@@ -95,17 +95,23 @@ Initialize the database with the following command:
 Then create the admin account:
 
 **For Linux:**
+
 .. code:: bash
 
    bash create_admin.sh
+
 
 .. note::
 
    if you got a confirmation message that your administrator account has been created, everything is going well for the moment!
 
+
 **For Windows (without ``credentials.json``):**
 
+.. code:: bash
+
    python manage.py createsuperuser
+
 
 Run the web application
 ~~~~~~~~~~~~~~~~~~~~~~~
