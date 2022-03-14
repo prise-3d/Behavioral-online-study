@@ -28,9 +28,9 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.23838863"
-     inkscape:cx="576.78926"
-     inkscape:cy="731.998"
+     inkscape:zoom="0.73133436"
+     inkscape:cx="397.21913"
+     inkscape:cy="229.03341"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
@@ -112,7 +112,7 @@
     <rect
        style="fill:#5981f7;fill-opacity:1;stroke:#000000;stroke-width:0.282223;stroke-linejoin:bevel;stroke-opacity:1"
        id="rect1083"
-       width="22.074545"
+       width="22.075001"
        height="29.98164"
        x="49.827103"
        y="35.090534" />
@@ -136,19 +136,19 @@
          y="51.550472">Launch session</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.58611px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       style="font-size:4.05694px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
        x="61.107903"
        y="48.251919"
        id="text9277"><tspan
          sodipodi:role="line"
          id="tspan9275"
-         style="font-size:4.58611px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:4.05694px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
          x="61.107903"
-         y="48.251919">Indication</tspan><tspan
+         y="48.251919">Information</tspan><tspan
          sodipodi:role="line"
-         style="font-size:4.58611px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:4.05694px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
          x="61.107903"
-         y="53.984558"
+         y="53.323101"
          id="tspan9279">page</tspan></text>
     <rect
        style="fill:#5981f7;fill-opacity:1;stroke:#000000;stroke-width:0.282223;stroke-linejoin:bevel;stroke-opacity:1"

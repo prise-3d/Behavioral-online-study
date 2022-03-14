@@ -125,7 +125,7 @@ password: adminuser
 <p>Here a description of each principal components:</p>
 <ul class="simple">
 <li><p><strong>Experiment:</strong> represents the architecture of the experiment with the associated pages (more details will be provided later), a JSON configuration of the experiment (path to data for example), a description and an availability status;</p></li>
-<li><p><strong>Session:</strong> an experience can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);</p></li>
+<li><p><strong>Session:</strong> an experiment can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);</p></li>
 <li><p><strong>SessionProgress:</strong> is one of the most important entities, it is at the heart of the application’s operation. It allows the link between a session and a participant. When a participant wants to perform an experiment through a session, a new SessionProgress instance is created. This instance will manage the exchanges with the user, transmit the next stimulus to the user and define the stop of the experiment according to the stop criteria specified in the session. A SessionProgress, contains several SessionSteps, which store the user’s response for each new stimulus transmitted.</p></li>
 <li><p><strong>Participant:</strong> thanks to a unique identifier stored both on the client’s browser and in the database, it is possible to know the status of the experiments performed by this participant.</p></li>
 </ul>
@@ -133,7 +133,7 @@ password: adminuser
 <p class="admonition-title">Note</p>
 <p>Treating the participant in this way ensures the anonymization of the data.</p>
 </div>
-<p>With this insight, we will now go into more detail to understand how to create your own experience</p>
+<p>With this insight, we will now go into more detail to understand how to create your own experiment</p>
 </div>
 <div class="section" id="notion-of-template">
 <h2>Notion of template<a class="headerlink" href="#notion-of-template" title="Permalink to this headline">¶</a></h2>
@@ -174,10 +174,10 @@ password: adminuser
 <p>Indeed, an experiment is composed of 4 pages:</p>
 <a class="reference internal image-reference" href="_images/pages.png"><img alt="_images/pages.png" class="align-center" src="_images/pages.png" style="width: 95%;" /></a>
 <ul class="simple">
-<li><p><strong>The information page:</strong> it may be necessary to ask some information from the participant, or to inform him about certain aspects of the experience. This is what the hint page allows;</p></li>
-<li><p><strong>The example page:</strong> which provides instructions for a good understanding of the participating experience. It can be visible without going through the experience;</p></li>
-<li><p><strong>The main page:</strong> this is where the experience will unfold, it will receive the new stimulus at each step, and will ask the participant to respond accordingly;</p></li>
-<li><p><strong>The end page:</strong> when the SessionProgress instance determines the end of the participant’s experience session, the end page is proposed to the participant.</p></li>
+<li><p><strong>The information page:</strong> it may be necessary to ask some information from the participant, or to inform him about certain aspects of the experiment. This is what the hint page allows;</p></li>
+<li><p><strong>The example page:</strong> which provides instructions for a good understanding of the participating experiment. It can be visible without going through the experiment;</p></li>
+<li><p><strong>The main page:</strong> this is where the experiment will unfold, it will receive the new stimulus at each step, and will ask the participant to respond accordingly;</p></li>
+<li><p><strong>The end page:</strong> when the SessionProgress instance determines the end of the participant’s experiment session, the end page is proposed to the participant.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -573,7 +573,7 @@ password: adminuser
 </div>
 <div class="section" id="progress-method">
 <h3>Progress method<a class="headerlink" href="#progress-method" title="Permalink to this headline">¶</a></h3>
-<p>The progress method is fairly simple, but provides a clear understanding of the relationship between the SessionProgress and its associated Session. The purpose of this method is to return an indicator of the percentage of progress of the experience:</p>
+<p>The progress method is fairly simple, but provides a clear understanding of the relationship between the SessionProgress and its associated Session. The purpose of this method is to return an indicator of the percentage of progress of the experiment:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 
     <span class="c1"># access of session&#39;s config from current SessionProgress instance</span>
@@ -610,7 +610,7 @@ python manage.py migrate
 </div>
 <div class="section" id="other-examples">
 <h3>Other examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">¶</a></h3>
-<p>Other examples of experiences are available within the project: <a class="reference external" href="https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments">examples</a>.</p>
+<p>Other examples of experiments are available within the project: <a class="reference external" href="https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments">examples</a>.</p>
 </div>
 </div>
 </div>

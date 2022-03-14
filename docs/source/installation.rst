@@ -5,6 +5,14 @@ Installation
 Install requirements
 ~~~~~~~~~~~~~~~~~~~~
 
+You need to clone this repository (using git_):
+
+.. code:: bash
+
+   git clone https://github.com/prise-3d/behavioral-online-experiment.git
+
+.. _git: https://git-scm.com/
+
 With your python version (ideally python >= 3.7), you can the following required modules:
 
 .. code:: bash

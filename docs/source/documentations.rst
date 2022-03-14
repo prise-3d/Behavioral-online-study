@@ -39,7 +39,7 @@ This is a main overview of the important components of the framework:
 Here a description of each principal components:
 
 - **Experiment:** represents the architecture of the experiment with the associated pages (more details will be provided later), a JSON configuration of the experiment (path to data for example), a description and an availability status;
-- **Session:** an experience can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);
+- **Session:** an experiment can be attached to several sessions. Indeed, it can be wished that the experiment is available for different populations and/or that the stopping criterion of the experiment is different (time of the experiment). A JSON configuration is associated to a session and it also has an availability status (can also be active or not);
 - **SessionProgress:** is one of the most important entities, it is at the heart of the application's operation. It allows the link between a session and a participant. When a participant wants to perform an experiment through a session, a new SessionProgress instance is created. This instance will manage the exchanges with the user, transmit the next stimulus to the user and define the stop of the experiment according to the stop criteria specified in the session. A SessionProgress, contains several SessionSteps, which store the user's response for each new stimulus transmitted.
 - **Participant:** thanks to a unique identifier stored both on the client's browser and in the database, it is possible to know the status of the experiments performed by this participant.
 
@@ -47,7 +47,7 @@ Here a description of each principal components:
 
     Treating the participant in this way ensures the anonymization of the data.
 
-With this insight, we will now go into more detail to understand how to create your own experience
+With this insight, we will now go into more detail to understand how to create your own experiment
 
 Notion of template
 ==================
@@ -108,10 +108,10 @@ Indeed, an experiment is composed of 4 pages:
    :align: center
 
 
-- **The information page:** it may be necessary to ask some information from the participant, or to inform him about certain aspects of the experience. This is what the hint page allows;
-- **The example page:** which provides instructions for a good understanding of the participating experience. It can be visible without going through the experience;
-- **The main page:** this is where the experience will unfold, it will receive the new stimulus at each step, and will ask the participant to respond accordingly;
-- **The end page:** when the SessionProgress instance determines the end of the participant's experience session, the end page is proposed to the participant.
+- **The information page:** it may be necessary to ask some information from the participant, or to inform him about certain aspects of the experiment. This is what the hint page allows;
+- **The example page:** which provides instructions for a good understanding of the participating experiment. It can be visible without going through the experiment;
+- **The main page:** this is where the experiment will unfold, it will receive the new stimulus at each step, and will ask the participant to respond accordingly;
+- **The end page:** when the SessionProgress instance determines the end of the participant's experiment session, the end page is proposed to the participant.
 
 
 .. note::
@@ -552,7 +552,7 @@ Let's summarize what is done:
 Progress method
 ~~~~~~~~~~~~~~~
 
-The progress method is fairly simple, but provides a clear understanding of the relationship between the SessionProgress and its associated Session. The purpose of this method is to return an indicator of the percentage of progress of the experience:
+The progress method is fairly simple, but provides a clear understanding of the relationship between the SessionProgress and its associated Session. The purpose of this method is to return an indicator of the percentage of progress of the experiment:
 
 
 .. code:: python
@@ -604,6 +604,6 @@ In order to update the new proposed model in database, you need to do migrations
 Other examples
 ~~~~~~~~~~~~~~
 
-Other examples of experiences are available within the project: examples_.
+Other examples of experiments are available within the project: examples_.
 
 .. _examples: https://github.com/prise-3d/behavioral-online-experiment/tree/master/experiments/experiments
