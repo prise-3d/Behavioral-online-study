@@ -35,7 +35,7 @@ Main concepts
 
 This is a main overview of the important components of the framework:
 
-.. image:: _static/documentation/overall.png
+.. image:: _static/documentation/overall_explanation.png
    :width: 80%
    :align: center
 
