@@ -46,6 +46,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.coverage',
     'sphinx.ext.intersphinx',
+    'sphinx_copybutton'
     #'sphinx.ext.pngmath',
     #'autoapi.extension' 
 ]
