@@ -98,15 +98,15 @@
              
   <div class="section" id="create-an-experiment-from-scratch">
 <h1>Create an experiment from scratch<a class="headerlink" href="#create-an-experiment-from-scratch" title="Permalink to this headline">¶</a></h1>
-<p>The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page “A tour of behavioral online experiment” in the section in question.</p>
+<p>The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page <em>“A tour of behavioral online experiment”</em> in the section in question.</p>
 <div class="section" id="create-an-experiment-entity">
 <h2>1. Create an experiment entity<a class="headerlink" href="#create-an-experiment-entity" title="Permalink to this headline">¶</a></h2>
-<p>An experiment is composed of 4 pages : information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles.</p>
+<p>An experiment is composed of 4 pages: information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles.</p>
 <p>Here are the different creation steps:</p>
 <ul class="simple">
-<li><p>Create the 4 pages of the experiment: information, example, main and end.</p></li>
-<li><p>modify for each page (if necessary) an associated template : experiments/templates/pages</p></li>
-<li><p>Once a template is defined: create for each page, its entity in the admin interface with the desired template.</p></li>
+<li><p>Create the 4 pages of the experiment: information, example, main and end;</p></li>
+<li><p>modify for each page (if necessary) an associated template: <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages</span></code>;</p></li>
+<li><p>Once a template is defined: create for each page, its entity in the admin interface with the desired template;</p></li>
 <li><p>Then, create the experiment from the 4 pages.</p></li>
 </ul>
 <p>For this, for the edition of the code, it is recommended to open the behavioral-online-experiment folder in folder mode (for example with Visual Studio Code or another code editor).</p>
@@ -121,10 +121,10 @@
 <p>You will now be redirected to this form:</p>
 <a class="reference internal image-reference" href="_images/page_form.png"><img alt="_images/page_form.png" class="align-center" src="_images/page_form.png" style="width: 80%;" /></a>
 <ul class="simple">
-<li><p>fill in the different fields of your page, like the name “Ponzon Illusion” and the title “ponzon_illusion”. The name identifies the page in the administrator interface, the title will be used in the URL;</p></li>
-<li><p>Then you have to select the javascripts and styles files. For this example, we select only <code class="docutils literal notranslate"><span class="pre">toggle_sidebar.js</span></code> (the styles and javascript files are available in the project in the folder: <code class="docutils literal notranslate"><span class="pre">static/experiment</span></code>, but it is not necessary to modify them right away);</p></li>
-<li><p>A selection field allows to choose the template of our choice. By default, there is only one: <code class="docutils literal notranslate"><span class="pre">basic_information.html</span></code>, available in the <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/information</span></code> folder;</p></li>
-<li><p>A JSON field is also available, it allows to specify the content that will be available in the Django template. For this page, it will only contain a sentence inviting the user to enter a data form:</p></li>
+<li><p>fill in the different fields of your page, like the name <em>“Ponzon Illusion”</em> and the title <em>“ponzon_illusion”</em>. The name identifies the page in the administrator interface, the title will be used in the URL;</p></li>
+<li><p>then you have to select the javascripts and styles files. For this example, we select only <code class="docutils literal notranslate"><span class="pre">toggle_sidebar.js</span></code> (the styles and javascript files are available in the project in the folder: <code class="docutils literal notranslate"><span class="pre">static/experiment</span></code>, but it is not necessary to modify them right away);</p></li>
+<li><p>a selection field allows to choose the template of our choice. By default, there is only one: <code class="docutils literal notranslate"><span class="pre">basic_information.html</span></code>, available in the <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/information</span></code> folder;</p></li>
+<li><p>a JSON field is also available, it allows to specify the content that will be available in the Django template. For this page, it will only contain a sentence inviting the user to enter a data form:</p></li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Please fill the form below:&quot;</span>
@@ -147,8 +147,8 @@
 <h3>1.2. Example page<a class="headerlink" href="#example-page" title="Permalink to this headline">¶</a></h3>
 <p>In the admin interface use <code class="docutils literal notranslate"><span class="pre">+Add</span></code> for examples pages, we find the same information to fill in:</p>
 <ul class="simple">
-<li><p>the name field to “Ponzo Example”;</p></li>
-<li><p>the title field to “ponzo_example”;</p></li>
+<li><p>the name field to <em>“Ponzo Example”</em>;</p></li>
+<li><p>the title field to <em>“ponzo_example”</em>;</p></li>
 <li><p>the field Javascript: none selected;</p></li>
 <li><p>the field styles selecting: <code class="docutils literal notranslate"><span class="pre">hide_footer.css</span></code> and <code class="docutils literal notranslate"><span class="pre">hide_sidebar.css</span></code>;</p></li>
 <li><p>the template field: <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/examples/one_image.html</span></code>.</p></li>
@@ -172,8 +172,8 @@
 <h3>1.3. Main Page<a class="headerlink" href="#main-page" title="Permalink to this headline">¶</a></h3>
 <p>In the admin interface use <code class="docutils literal notranslate"><span class="pre">+Add</span></code> for mains pages, we find the same information to fill in:</p>
 <ul class="simple">
-<li><p>the name field to “Ponzo Main”;</p></li>
-<li><p>the title field to “ponzo_main”;</p></li>
+<li><p>the name field to <em>“Ponzo Main”</em>;</p></li>
+<li><p>the title field to <em>“ponzo_main”</em>;</p></li>
 <li><p>the field Javascript: <code class="docutils literal notranslate"><span class="pre">js/binary_buttons_answer.js</span></code>;</p></li>
 <li><p>the field styles selecting: <code class="docutils literal notranslate"><span class="pre">hide_footer.css</span></code> and <code class="docutils literal notranslate"><span class="pre">hide_sidebar.css</span></code>;</p></li>
 <li><p>the template field: <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/main/one_image_buttons.html</span></code>.</p></li>
@@ -194,8 +194,8 @@
 <h3>1.4. End Page<a class="headerlink" href="#end-page" title="Permalink to this headline">¶</a></h3>
 <p>In the admin interface use <code class="docutils literal notranslate"><span class="pre">+Add</span></code> for mains pages, we find the same information to fill in:</p>
 <ul class="simple">
-<li><p>the name field to “Ponzo End”;</p></li>
-<li><p>the title field to “ponzo_end”;</p></li>
+<li><p>the name field to <em>“Ponzo End”</em>;</p></li>
+<li><p>the title field to <em>“ponzo_end”</em>;</p></li>
 <li><p>the field Javascript: <code class="docutils literal notranslate"><span class="pre">toggle_sidebar.js</span></code>;</p></li>
 <li><p>the field styles selecting: none selected;</p></li>
 <li><p>the template field: <code class="docutils literal notranslate"><span class="pre">experiments/templates/pages/end/basic_end.html</span></code>.</p></li>
@@ -213,8 +213,8 @@
 <h3>1.5. Experiment creation<a class="headerlink" href="#experiment-creation" title="Permalink to this headline">¶</a></h3>
 <p>In the admin interface use <code class="docutils literal notranslate"><span class="pre">+Add</span></code> for experiments, you can fill in the different fields as below:</p>
 <ul class="simple">
-<li><p>the title field to “Ponzo experiment”;</p></li>
-<li><p>the name field to “Ponzo experiment”;</p></li>
+<li><p>the title field to <em>“Ponzo experiment”</em>;</p></li>
+<li><p>the name field to <em>“Ponzo experiment”</em>;</p></li>
 <li><p>for each page field, select the new associated created page;</p></li>
 <li><p>add the following description of the experiment:</p></li>
 </ul>
@@ -416,10 +416,10 @@ python manage.py runserver
 <p>Now that the progress entity is created, it is possible to associate it with a session. To do this, you can click on the <code class="docutils literal notranslate"><span class="pre">+Add</span></code> button in the administrator interface for adding a session.</p>
 <p>Let’s fill the required fields as:</p>
 <ul class="simple">
-<li><p>the title field to “Session 1”;</p></li>
-<li><p>the experiment field: choose the recently created “Ponzo experiment”;</p></li>
-<li><p>the estimated duration set to “00:05:00” (5 minutes);</p></li>
-<li><p>the <code class="docutils literal notranslate"><span class="pre">SessionProgres</span></code> choice to “PonzoSessionProgress”;</p></li>
+<li><p>the title field to <em>“Session 1”</em>;</p></li>
+<li><p>the experiment field: choose the recently created <em>“Ponzo experiment”</em>;</p></li>
+<li><p>the estimated duration set to <em>“00:05:00”</em> (5 minutes);</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">SessionProgres</span></code> choice to <em>“PonzoSessionProgress”</em>;</p></li>
 <li><p>set the session as active and available;</p></li>
 </ul>
 <p>Then, the current configuration of our session is as follows:</p>
@@ -436,7 +436,7 @@ python manage.py runserver
 <a class="reference internal image-reference" href="_images/ponzo_session_1.png"><img alt="_images/ponzo_session_1.png" class="align-center" src="_images/ponzo_session_1.png" style="width: 60%;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Each downloaded results data are saved available in JSON format.</p>
+<p>Each downloaded results data are saved and available in JSON format.</p>
 </div>
 </div>
 </div>
