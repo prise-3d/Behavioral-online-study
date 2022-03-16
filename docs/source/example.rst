@@ -2,18 +2,18 @@
 Create an experiment from scratch
 =================================
 
-The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page "A tour of behavioral online experiment" in the section in question.
+The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page *"A tour of behavioral online experiment"* in the section in question.
 
 1. Create an experiment entity
 ==============================
 
-An experiment is composed of 4 pages : information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles. 
+An experiment is composed of 4 pages: information, example, main and end. The administrator interface allows you to create each page, but it will be necessary for each page to associate Django template and CSS and Javascript styles. 
 
 Here are the different creation steps:
 
-- Create the 4 pages of the experiment: information, example, main and end.
-- modify for each page (if necessary) an associated template : experiments/templates/pages
-- Once a template is defined: create for each page, its entity in the admin interface with the desired template.
+- Create the 4 pages of the experiment: information, example, main and end;
+- modify for each page (if necessary) an associated template: ``experiments/templates/pages``;
+- Once a template is defined: create for each page, its entity in the admin interface with the desired template;
 - Then, create the experiment from the 4 pages.
 
 For this, for the edition of the code, it is recommended to open the behavioral-online-experiment folder in folder mode (for example with Visual Studio Code or another code editor).
@@ -38,13 +38,13 @@ You will now be redirected to this form:
    :width: 80%
    :align: center
 
-- fill in the different fields of your page, like the name "Ponzon Illusion" and the title "ponzon_illusion". The name identifies the page in the administrator interface, the title will be used in the URL;
+- fill in the different fields of your page, like the name *"Ponzon Illusion"* and the title *"ponzon_illusion"*. The name identifies the page in the administrator interface, the title will be used in the URL;
 
-- Then you have to select the javascripts and styles files. For this example, we select only ``toggle_sidebar.js`` (the styles and javascript files are available in the project in the folder: ``static/experiment``, but it is not necessary to modify them right away);
+- then you have to select the javascripts and styles files. For this example, we select only ``toggle_sidebar.js`` (the styles and javascript files are available in the project in the folder: ``static/experiment``, but it is not necessary to modify them right away);
 
-- A selection field allows to choose the template of our choice. By default, there is only one: ``basic_information.html``, available in the ``experiments/templates/pages/information`` folder; 
+- a selection field allows to choose the template of our choice. By default, there is only one: ``basic_information.html``, available in the ``experiments/templates/pages/information`` folder; 
 
-- A JSON field is also available, it allows to specify the content that will be available in the Django template. For this page, it will only contain a sentence inviting the user to enter a data form:
+- a JSON field is also available, it allows to specify the content that will be available in the Django template. For this page, it will only contain a sentence inviting the user to enter a data form:
 
 .. code:: json   
 
@@ -74,8 +74,8 @@ At the end click on ``SAVE``.
 
 In the admin interface use ``+Add`` for examples pages, we find the same information to fill in:
 
-- the name field to "Ponzo Example";
-- the title field to "ponzo_example"; 
+- the name field to *"Ponzo Example"*;
+- the title field to *"ponzo_example"*; 
 - the field Javascript: none selected;
 - the field styles selecting: ``hide_footer.css`` and ``hide_sidebar.css``;
 - the template field: ``experiments/templates/pages/examples/one_image.html``.
@@ -102,8 +102,8 @@ At the end click on ``SAVE``.
 
 In the admin interface use ``+Add`` for mains pages, we find the same information to fill in:
 
-- the name field to "Ponzo Main";
-- the title field to "ponzo_main"; 
+- the name field to *"Ponzo Main"*;
+- the title field to *"ponzo_main"*; 
 - the field Javascript: ``js/binary_buttons_answer.js``;
 - the field styles selecting: ``hide_footer.css`` and ``hide_sidebar.css``;
 - the template field: ``experiments/templates/pages/main/one_image_buttons.html``.
@@ -128,8 +128,8 @@ The JSON field to:
 
 In the admin interface use ``+Add`` for mains pages, we find the same information to fill in:
 
-- the name field to "Ponzo End";
-- the title field to "ponzo_end"; 
+- the name field to *"Ponzo End"*;
+- the title field to *"ponzo_end"*; 
 - the field Javascript: ``toggle_sidebar.js``;
 - the field styles selecting: none selected;
 - the template field: ``experiments/templates/pages/end/basic_end.html``.
@@ -151,8 +151,8 @@ Then click on ``SAVE`` button.
 
 In the admin interface use ``+Add`` for experiments, you can fill in the different fields as below:
 
-- the title field to "Ponzo experiment";
-- the name field to "Ponzo experiment";
+- the title field to *"Ponzo experiment"*;
+- the name field to *"Ponzo experiment"*;
 - for each page field, select the new associated created page;
 - add the following description of the experiment:
 
@@ -390,10 +390,10 @@ Now that the progress entity is created, it is possible to associate it with a s
 
 Let's fill the required fields as:
 
-- the title field to "Session 1";
-- the experiment field: choose the recently created "Ponzo experiment";
-- the estimated duration set to "00:05:00" (5 minutes);
-- the ``SessionProgres`` choice to "PonzoSessionProgress";
+- the title field to *"Session 1"*;
+- the experiment field: choose the recently created *"Ponzo experiment"*;
+- the estimated duration set to *"00:05:00"* (5 minutes);
+- the ``SessionProgres`` choice to *"PonzoSessionProgress"*;
 - set the session as active and available;
 
 Then, the current configuration of our session is as follows:
@@ -421,4 +421,4 @@ You can now access to ``http://127.0.0.1:8000/experiments/ponzo-experiment`` and
 
 .. note::
 
-    Each downloaded results data are saved available in JSON format.
+    Each downloaded results data are saved and available in JSON format.
