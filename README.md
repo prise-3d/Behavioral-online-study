@@ -5,7 +5,7 @@
 
 
 <p align="center">
-    <img src="https://github.com/prise-3d/PyBOLE/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="60%">
+    <img src="https://github.com/prise-3d/PyBOLE/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="40%">
 </p>
 
 ## Description
