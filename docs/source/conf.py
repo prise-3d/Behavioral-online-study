@@ -18,7 +18,7 @@ import sys
 #sys.path.insert(0, os.path.abspath('../../experiments'))
 
 # -- Project information -----------------------------------------------------
-project = 'Behavioral oneline experiment'
+project = 'PyBOLE'
 copyright = '2022, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
@@ -139,7 +139,7 @@ html_theme_options = {
 html_context = {
   'display_github': True,
   'github_user': 'prise-3d',
-  'github_repo': 'behavioral-online-study',
+  'github_repo': 'PyBOLE',
   'github_version': 'master/docs/source/'
 }
 
@@ -164,7 +164,7 @@ html_sidebars = {'**': ['fulltoc.html', 'relations.html', 'sourcelink.html', 'se
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'behavioral-online-studydoc'
+htmlhelp_basename = 'PyBOLEdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -190,7 +190,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'behavioral-online-study.tex', 'Behavioral online study Documentation',
+    (master_doc, 'PyBOLE.tex', 'PyBOLE Documentation',
      'Jérôme BUISINE', 'manual'),
 ]
 
@@ -200,7 +200,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'behavioral-online-study', 'Behavioral online study Documentation',
+    (master_doc, 'PyBOLE', 'PyBOLE Documentation',
      [author], 1)
 ]
 
@@ -211,8 +211,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'behavioral-online-study', 'Behavioral online study Documentation',
-     author, 'behavioral-online-study', 'Behavioral online study Framework',
+    (master_doc, 'PyBOLE', 'PyBOLE Documentation',
+     author, 'PyBOLE', 'PyBOLE Framework',
      'Miscellaneous'),
 ]
 
