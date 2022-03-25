@@ -1,11 +1,11 @@
-# Behavioral online experiment
+# PyBOLE: Python Behavioral OnLine experiment
 
-[![](https://img.shields.io/github/workflow/status/prise-3d/behavioral-online-experiment/Documentation)](https://github.com/prise-3d/behavioral-online-experiment/actions/workflows/python-resources.yml)
-[![GitHub](https://img.shields.io/github/license/prise-3d/behavioral-online-experiment?style=flat)](https://github.com/prise-3d/behavioral-online-experiment/blob/master/LICENCE)
+[![](https://img.shields.io/github/workflow/status/prise-3d/PyBOLE/Documentation)](https://github.com/prise-3d/PyBOLE/actions/workflows/python-resources.yml)
+[![GitHub](https://img.shields.io/github/license/prise-3d/PyBOLE?style=flat)](https://github.com/prise-3d/PyBOLE/blob/master/LICENCE)
 
 
 <p align="center">
-    <img src="https://github.com/prise-3d/behavioral-online-experiment/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="60%">
+    <img src="https://github.com/prise-3d/PyBOLE/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="60%">
 </p>
 
 ## Description

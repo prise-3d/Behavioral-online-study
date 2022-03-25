@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="436mm"
+   width="211mm"
    height="58mm"
-   viewBox="0 0 436 58"
+   viewBox="0 0 211 58"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
@@ -24,7 +24,7 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.52645966"
-     inkscape:cx="838.62077"
+     inkscape:cx="838.62076"
      inkscape:cy="-188.99834"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
@@ -54,15 +54,15 @@
        id="path2395" />
     <text
        xml:space="preserve"
-       style="font-size:28.2222px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:0.329769"
-       x="67.38707"
-       y="45.641163"
+       style="font-size:37.2226px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.348962;stroke-opacity:0.329769"
+       x="67.057114"
+       y="43.933899"
        id="text2608"><tspan
          sodipodi:role="line"
          id="tspan2606"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28.2222px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:0.329769"
-         x="67.38707"
-         y="45.641163">BEHAVIORAL EXPERIMENT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.2226px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:0.257088;stroke:#ffffff;stroke-width:0.348962;stroke-opacity:0.329769"
+         x="67.057114"
+         y="43.933899">PyBOLE</tspan></text>
     <path
        style="fill:#4e73df;fill-opacity:1;stroke:#4e73df;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 57.03942,20.482918 38.172318,1.612724 c 0,0 -0.80392,-1.06244499 -1.63455,-0.305556 -0.830636,0.756889 -4.178007,4.111685 -4.178007,4.111685 0,0 -0.45881,0.470369 0.14258,1.046173 0.60139,0.575804 1.18603,1.191786 1.18603,1.191786 0,0 0.10569,0.168189 -0.6326,0.859296 -0.73829,0.691106 -25.9321423,25.861877 -25.9321423,25.861877 0,0 -3.189537,3.198962 -3.657557,4.478135 -0.46803,1.279171 -1.38703,3.703018 -1.23923,6.000517 0.1478,2.297499 0.76123,4.304678 1.69171,5.564791 0.930477,1.260112 2.334817,3.234098 4.425697,4.183465 2.0908653,0.949365 3.5109743,1.465887 5.3279743,1.365907 1.816987,-0.09998 4.929317,-0.582303 5.926358,-1.136476 0.997037,-0.554175 2.967936,-2.241696 3.688326,-3.042503 0.72038,-0.800806 9.816424,-9.963009 9.816424,-9.963009 L 49.904262,24.996638 c 0,0 0.46645,-0.540168 1.06705,-0.01513 0.600591,0.525037 1.409217,1.652617 2.201787,0.831652 0.79257,-0.820963 4.109251,-4.23823 4.109251,-4.23823 0,0 0.533296,-0.386946 -0.24293,-1.092012 z"
@@ -79,14 +79,14 @@
        id="path2395-7" />
     <text
        xml:space="preserve"
-       style="font-size:28.2222px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:1"
-       x="66.409111"
-       y="45.193619"
+       style="font-size:37.2226px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.348962;stroke-opacity:1"
+       x="65.767273"
+       y="43.343628"
        id="text2608-5"><tspan
          sodipodi:role="line"
          id="tspan2606-3"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28.2222px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.264583;stroke-opacity:1"
-         x="66.409111"
-         y="45.193619">BEHAVIORAL EXPERIMENT</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.2226px;font-family:Nunito;-inkscape-font-specification:Nunito;fill:#4e73df;fill-opacity:1;stroke:#ffffff;stroke-width:0.348962;stroke-opacity:1"
+         x="65.767273"
+         y="43.343628">PyBOLE</tspan></text>
   </g>
 </svg>
