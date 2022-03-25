@@ -1,5 +1,5 @@
 ======================================
-A tour of Behavioral online experiment
+A tour of PyBOLE
 ======================================
 
 
