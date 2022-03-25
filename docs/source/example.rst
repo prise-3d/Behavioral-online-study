@@ -2,7 +2,7 @@
 Create an experiment from scratch
 =================================
 
-The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page *"A tour of behavioral online experiment"* in the section in question.
+The example presented allows you to create an experiment from scratch. However, for specific information needs, it may be necessary to refer to the page *"A tour of PyBOLE"* in the section in question.
 
 1. Create an experiment entity
 ==============================

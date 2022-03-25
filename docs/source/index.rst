@@ -7,7 +7,7 @@
 
 
 
-What's **Behavioral online experiment** framework?
+What's **PyBOLE** framework?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This project is a framework for designing behavioral online experiment. It proposes a common base for all experiments using the Django Python web framework. The use of Python allows to easily integrate libraries on the application server that can be used for the experiment.

@@ -114,14 +114,25 @@
      inkscape:document-units="pt"
      showgrid="false"
      inkscape:zoom="0.77750001"
-     inkscape:cx="491.96141"
-     inkscape:cy="368.48874"
+     inkscape:cx="651.44694"
+     inkscape:cy="134.40514"
      inkscape:window-width="1840"
      inkscape:window-height="1016"
      inkscape:window-x="80"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="node6" />
+     inkscape:current-layer="node6"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="378.62163,147.12651"
+       orientation="0,-1"
+       id="guide1835" />
+    <sodipodi:guide
+       position="252.35371,72.222684"
+       orientation="1,0"
+       id="guide1837" />
+  </sodipodi:namedview>
   <g
      id="graph0"
      class="graph"
@@ -211,7 +222,7 @@
            x="195.46518"
            y="-343.62363">Experiment</tspan></text>
       <rect
-         style="fill:#4c71dd;fill-opacity:1;stroke:#000000;stroke-width:1.134;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="fill:#369028;fill-opacity:1;stroke:#000000;stroke-width:1.134;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect5761-5"
          width="114.95002"
          height="51.694267"
@@ -229,7 +240,7 @@
            x="440.34949"
            y="-344.45044">Participant</tspan></text>
       <rect
-         style="fill:#4c71dd;fill-opacity:1;stroke:#000000;stroke-width:1.134;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="fill:#ce8b38;fill-opacity:1;stroke:#000000;stroke-width:1.134;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect5761-5-1"
          width="128.96657"
          height="51.627888"
