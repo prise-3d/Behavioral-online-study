@@ -14,7 +14,7 @@ This project is a framework for designing online behavioral experiment. It propo
 
 ## Documentation
 
-A complete documentation is available at [https://prise-3d.github.io/behavioral-online-experiment](https://prise-3d.github.io/behavioral-online-experiment/).
+A complete documentation is available at [https://prise-3d.github.io/PyBOLE](https://prise-3d.github.io/PyBOLE/).
 
 ## How to contribute ?
 
