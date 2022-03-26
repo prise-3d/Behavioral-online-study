@@ -1,4 +1,4 @@
-# PyBOLE: Python Behavioral OnLine experiment
+# PyBOLE: Python Behavioral OnLine Experiment
 
 [![](https://img.shields.io/github/workflow/status/prise-3d/PyBOLE/Documentation)](https://github.com/prise-3d/PyBOLE/actions/workflows/python-resources.yml)
 [![GitHub](https://img.shields.io/github/license/prise-3d/PyBOLE?style=flat)](https://github.com/prise-3d/PyBOLE/blob/master/LICENCE)
