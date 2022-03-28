@@ -106,7 +106,7 @@ Then create the admin account:
    if you got a confirmation message that your administrator account has been created, everything is going well for the moment!
 
 
-**For Windows (without ``credentials.json``):**
+**For Windows (without credentials.json):**
 
 .. code:: bash
 
