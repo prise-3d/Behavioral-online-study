@@ -2,7 +2,7 @@ How to contribute
 =====================================
 
 <p align="center">
-    <img src="https://github.com/prise-3d/behavioral-online-experiment/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="60%">
+    <img src="https://github.com/prise-3d/PyBOLE/blob/master/docs/source/_static/behavioral_logo.svg" alt="" width="60%">
 </p>
 
 
@@ -34,7 +34,7 @@ Thank you for taking the time to read this guide for the package's contribution.
 
 ## Submit an issue
 
-Do not hesitate to report bug or issue in [https://github.com/prise-3d/behavioral-online-experiment/issues](https://github.com/prise-3d/behavioral-online-experiment/issues) with the common template header:
+Do not hesitate to report bug or issue in [https://github.com/prise-3d/PyBOLE/issues](https://github.com/prise-3d/PyBOLE/issues) with the common template header:
 
 ```
 **Framework version:** X.X.X (see documentation)
@@ -47,7 +47,7 @@ Do not hesitate to report bug or issue in [https://github.com/prise-3d/behaviora
 
 ## Pull request
 
-If you have made changes to the project you have forked, you can submit a pull request in [https://github.com/prise-3d/behavioral-online-experiment/pulls](https://github.com/prise-3d/behavioral-online-experiment/pulls) in order to have your changes added inside new version of the `Macop` package. A [GitHub documentation](https://help.github.com/articles/about-pull-requests/) about pull requests is available if necessary.
+If you have made changes to the project you have forked, you can submit a pull request in [https://github.com/prise-3d/PyBOLE/pulls](https://github.com/prise-3d/PyBOLE/pulls) in order to have your changes added inside new version of the `Macop` package. A [GitHub documentation](https://help.github.com/articles/about-pull-requests/) about pull requests is available if necessary.
 
 To enhance the package, do not hesitate to fix bug or missing feature. To do that, just submit your pull request with this common template header:
 
@@ -66,7 +66,7 @@ Whatever the problem reported, I will thank you for your contribution to this pr
 
 ## Seek support
 
-If you have any problem with the use of the package, issue or pull request submission, do not hesitate to let a message to [https://github.com/prise-3d/behavioral-online-experiment/discussions](https://github.com/prise-3d/behavioral-online-experiment/discussions). Especially in the question and answer section. 
+If you have any problem with the use of the package, issue or pull request submission, do not hesitate to let a message to [https://github.com/prise-3d/PyBOLE/discussions](https://github.com/prise-3d/PyBOLE/discussions). Especially in the question and answer section. 
 
 You can also contact me at the following email address: `contact@jeromebuisine.fr`.
 
@@ -86,7 +86,7 @@ yapf -ir -vv experiments
 
 As you perhaps already saw, package contains multiples modules and submodules. It's really import to be well organized package and let it intuitive to access as possible to features.
 
-You can refer to the [documentation](https://prise-3d.github.io/behavioral-online-experiment) if necessary.
+You can refer to the [documentation](https://prise-3d.github.io/PyBOLE) if necessary.
 
 In order to facilitate the integration of new modules, do not hesitate to let me know the name it could have beforehand in your pull request.
 
