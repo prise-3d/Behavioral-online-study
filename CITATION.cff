@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Myrodia"
+  given-names: "Vasiliki"
+  orcid: "https://orcid.org/0000-0003-1531-091X"
+- family-names: "Buisine"
+  given-names: "Jérôme"
+  orcid: "https://orcid.org/0000-0001-6071-744X"
+- family-names: "Delepoulle"
+  given-names: "Samuel"
+  orcid: "https://orcid.org/0000-0002-8897-0858"
+- family-names: "Madelain"
+  given-names: "Laurent"
+  orcid: "https://orcid.org/0000-0002-7751-5817"
+title: "PyBOLE: Python Behavioral OnLine Experiment"
+version: 1.0.1
+date-released: 2023-03-30
+url: "https://github.com/prise-3d/PyBOLE"

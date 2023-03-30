@@ -5,8 +5,10 @@ from polymorphic.models import PolymorphicModel
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
-from django.contrib.auth.models import User
+
 from multiselectfield import MultiSelectField
+from multiselectfield.utils import get_max_length
+
 from django.urls import reverse
 from uuid import uuid4
 from datetime import timedelta
@@ -59,8 +61,10 @@ class Page(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, null=False)
     title = models.CharField(max_length=255)
-    javascripts = MultiSelectField(choices=javascript_files, null=True, blank=True)
-    styles = MultiSelectField(choices=css_files, null=True, blank=True)
+    javascripts = MultiSelectField(choices=javascript_files, null=True, blank=True, \
+                                max_length=get_max_length(javascript_files, None))
+    styles = MultiSelectField(choices=css_files, null=True, blank=True, \
+                            max_length=get_max_length(css_files, None))
     content = models.JSONField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     

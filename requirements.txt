@@ -1,7 +1,7 @@
-Django
-django-admin-interface
-django-multiselectfield
-django-json-widget
-django-polymorphic
-numpy
-Pillow
+Django==4.1.7
+django-admin-interface==0.24.2
+django-multiselectfield==0.1.12
+django-json-widget==1.1.1
+django-polymorphic==3.1.0
+numpy==1.24.2
+Pillow==9.4.0
